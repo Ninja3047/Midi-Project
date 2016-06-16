@@ -5,9 +5,9 @@ import javax.sound.midi.*;
 /**
  * A skeleton for MIDI playback
  */
-public class MidiViewImpl implements YourViewInterfaceHere {
-  private final Synthesizer synth;
-  private final Receiver receiver;
+public class MidiViewImpl implements ICompositionView {
+  private Synthesizer synth;
+  private Receiver receiver;
 
   public MidiViewImpl() {
     try {
