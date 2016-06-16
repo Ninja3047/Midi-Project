@@ -4,7 +4,17 @@ package cs3500.music.model;
  * Enum representing a Pitch
  */
 public enum Pitch {
-  C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B;
+  C(1), Csharp(2), D(3), Dsharp(4), E(5), F(6), Fsharp(7), G(8), Gsharp(9), A(10), Asharp(11), B(12);
+
+  int value;
+
+  Pitch(int val) {
+    this.value = val;
+  }
+
+  public int getValue() {
+    return this.value;
+  }
 
   @Override
   public String toString() {
