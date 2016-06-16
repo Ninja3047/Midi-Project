@@ -4,6 +4,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import cs3500.music.controller.Controller;
+
 /**
  * A skeleton Frame (i.e., a window) in Swing
  */
@@ -29,6 +31,11 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   @Override
   public Dimension getPreferredSize(){
     return new Dimension(100, 100);
+  }
+
+  @Override
+  public void display(Controller con) {
+
   }
 
 }

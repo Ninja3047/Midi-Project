@@ -2,6 +2,8 @@ package cs3500.music.view;
 
 import javax.sound.midi.*;
 
+import cs3500.music.controller.Controller;
+
 /**
  * A skeleton for MIDI playback
  */
@@ -61,5 +63,10 @@ public class MidiViewImpl implements MidiView {
     this.receiver.send(start, -1);
     this.receiver.send(stop, this.synth.getMicrosecondPosition() + 200000);
     this.receiver.close(); // Only call this once you're done playing *all* notes
+  }
+
+  @Override
+  public void display(Controller con) {
+
   }
 }
