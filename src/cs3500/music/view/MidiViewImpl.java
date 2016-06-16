@@ -5,18 +5,24 @@ import javax.sound.midi.*;
 /**
  * A skeleton for MIDI playback
  */
-public class MidiViewImpl implements ICompositionView {
-  private Synthesizer synth;
-  private Receiver receiver;
+public class MidiViewImpl implements MidiView {
+  private final Synthesizer synth;
+  private final Receiver receiver;
 
   public MidiViewImpl() {
+    Synthesizer synth;
+    Receiver receiver;
     try {
-      this.synth = MidiSystem.getSynthesizer();
-      this.receiver = synth.getReceiver();
-      this.synth.open();
+      synth = MidiSystem.getSynthesizer();
+      receiver = synth.getReceiver();
+      synth.open();
     } catch (MidiUnavailableException e) {
+      synth = null;
+      receiver = null;
       e.printStackTrace();
     }
+    this.synth = synth;
+    this.receiver = receiver;
   }
   /**
    * Relevant classes and methods from the javax.sound.midi library:

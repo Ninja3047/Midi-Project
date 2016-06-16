@@ -1,6 +1,7 @@
 package cs3500.music;
 
 import cs3500.music.view.GuiViewFrame;
+import cs3500.music.view.MidiView;
 import cs3500.music.view.MidiViewImpl;
 
 import java.io.IOException;
