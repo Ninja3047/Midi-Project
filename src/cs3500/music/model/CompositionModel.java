@@ -43,6 +43,7 @@ public class CompositionModel implements ICompositionModel<Note> {
     //Get the lowest and highest note
     Note high = this.notes.get(this.notes.size() - 1);
     Note low = this.notes.get(0);
+    low.setStart(0);
 
     //Info about dimensions
     int totalNotes = high.toInt() - low.toInt() + 1;
