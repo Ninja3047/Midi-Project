@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import cs3500.music.util.CompositionBuilder;
+
 /**
  * Class representing a MIDI editor using class Note
  */
@@ -13,7 +15,39 @@ public class CompositionModel implements ICompositionModel<Note> {
   private final List<Note> notes;
   private int tempo;
 
-  public CompositionModel() {
+  public static final class Builder implements CompositionBuilder<ICompositionModel<Note>> {
+    private final ICompositionModel<Note> model = new CompositionModel();
+
+    @Override
+    public CompositionBuilder<ICompositionModel<Note>> addNote(int start, int end, int instrument,
+                                                               int pitch, int volume) {
+      int curOctave = pitch / 12 - 1;
+      int pitchInt = pitch % 12 + 1;
+      Pitch curPitch = Pitch.C;
+      for (Pitch p : Pitch.values()) {
+        if (p.getValue() == pitchInt) {
+          curPitch = p;
+          break;
+        }
+      }
+      int curDuration = end - start;
+      this.model.overlayNotes(new Note(curPitch, curOctave, start, curDuration));
+      return this;
+    }
+
+    @Override
+    public CompositionBuilder<ICompositionModel<Note>> setTempo(int tempo) {
+      this.model.setTempo(tempo);
+      return this;
+    }
+
+    @Override
+    public ICompositionModel<Note> build() {
+      return this.model;
+    }
+  }
+
+  private CompositionModel() {
     this.notes = new ArrayList<Note>();
     this.tempo = 0;
   }

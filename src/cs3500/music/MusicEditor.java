@@ -7,7 +7,6 @@ import javax.sound.midi.InvalidMidiDataException;
 
 import cs3500.music.controller.Controller;
 import cs3500.music.controller.ControllerImpl;
-import cs3500.music.model.CompositionModel;
 import cs3500.music.view.View;
 import cs3500.music.view.ViewFactory;
 
@@ -15,7 +14,7 @@ import cs3500.music.view.ViewFactory;
 public class MusicEditor {
   public static void main(String[] args) throws IOException, InvalidMidiDataException {
     View view = ViewFactory.createView("midi");
-    Controller con = new ControllerImpl(new CompositionModel(), view);
-    con.start(new FileReader("df-ttfaf.txt"));
+    Controller con = new ControllerImpl(view);
+    con.start(new FileReader("mystery-1.txt"));
   }
 }

@@ -2,9 +2,9 @@ package cs3500.music.controller;
 
 import java.util.List;
 
+import cs3500.music.model.CompositionModel;
 import cs3500.music.model.ICompositionModel;
 import cs3500.music.model.Note;
-import cs3500.music.util.CompBuilderImpl;
 import cs3500.music.util.MusicReader;
 import cs3500.music.view.View;
 
@@ -17,17 +17,15 @@ public class ControllerImpl implements Controller {
 
   /**
    * Constructor
-   * @param m model to communicate with
    * @param v view to communicate with
    */
-  public ControllerImpl(ICompositionModel<Note> m, View v) {
-    this.curModel = m;
+  public ControllerImpl(View v) {
     this.curView = v;
   }
 
   @Override
   public void start(Readable rd) {
-    this.curModel = MusicReader.parseFile(rd, new CompBuilderImpl(this.curModel));
+    this.curModel = MusicReader.parseFile(rd, new CompositionModel.Builder());
     this.curView.display(this);
   }
 
