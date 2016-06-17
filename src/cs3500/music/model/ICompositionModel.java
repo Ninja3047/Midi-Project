@@ -71,4 +71,6 @@ public interface ICompositionModel<K> {
    * @return the notes represented as a string
    */
   String printNotes();
+
+  int getTempo();
 }

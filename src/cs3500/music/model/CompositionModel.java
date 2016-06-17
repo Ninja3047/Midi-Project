@@ -24,6 +24,11 @@ public class CompositionModel implements ICompositionModel<Note> {
   }
 
   @Override
+  public int getTempo() {
+    return this.tempo;
+  }
+
+  @Override
   public void overlayNotes(Note... newNotes) {
     Collections.addAll(this.notes, newNotes);
     Collections.sort(this.notes);

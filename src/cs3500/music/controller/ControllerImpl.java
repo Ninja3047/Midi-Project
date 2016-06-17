@@ -1,5 +1,7 @@
 package cs3500.music.controller;
 
+import java.util.List;
+
 import cs3500.music.model.ICompositionModel;
 import cs3500.music.model.Note;
 import cs3500.music.util.CompBuilderImpl;
@@ -32,5 +34,15 @@ public class ControllerImpl implements Controller {
   @Override
   public String getConsoleData() {
     return this.curModel.printNotes();
+  }
+
+  @Override
+  public List<Note> getNotes() {
+    return this.curModel.getAllNotes();
+  }
+
+  @Override
+  public int getTempo() {
+    return this.curModel.getTempo();
   }
 }

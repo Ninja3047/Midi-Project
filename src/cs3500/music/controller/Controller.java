@@ -1,5 +1,9 @@
 package cs3500.music.controller;
 
+import java.util.List;
+
+import cs3500.music.model.Note;
+
 /**
  * Interface that represents a Controller that interacts with the model & view
  */
@@ -16,5 +20,9 @@ public interface Controller {
    * @return the formatted list of notes
    */
   String getConsoleData();
+
+  List<Note> getNotes();
+
+  int getTempo();
 
 }
