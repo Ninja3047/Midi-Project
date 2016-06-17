@@ -14,6 +14,13 @@ public interface ICompositionModel<K> {
   void deleteNote(K n);
 
   /**
+   * Sets the model's tempo to the given tempo
+   *
+   * @param tempo the new tempo
+   */
+  void setTempo(int tempo);
+
+  /**
    * Overlays the given notes onto the existing notes
    *
    * @param n the notes to overlay

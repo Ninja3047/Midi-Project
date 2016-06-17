@@ -38,6 +38,7 @@ public class CompBuilderImpl implements CompositionBuilder<ICompositionModel<Not
 
   @Override
   public CompositionBuilder<ICompositionModel<Note>> setTempo(int tempo) {
+    this.model.setTempo(tempo);
     return this;
   }
 

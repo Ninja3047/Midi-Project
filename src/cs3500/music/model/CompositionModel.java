@@ -11,9 +11,16 @@ import java.util.NoSuchElementException;
  */
 public class CompositionModel implements ICompositionModel<Note> {
   private final List<Note> notes;
+  private int tempo;
 
   public CompositionModel() {
     this.notes = new ArrayList<Note>();
+    this.tempo = 0;
+  }
+
+  @Override
+  public void setTempo(int tempo) {
+    this.tempo = tempo;
   }
 
   @Override
