@@ -32,6 +32,7 @@ public class CompBuilderImpl implements CompositionBuilder<ICompositionModel<Not
       }
     }
     int curDuration = end - start;
+    System.out.println();
     this.model.overlayNotes(new Note(curPitch, curOctave, start, curDuration));
     return this;
   }

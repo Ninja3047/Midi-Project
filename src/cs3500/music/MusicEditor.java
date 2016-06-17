@@ -16,6 +16,6 @@ public class MusicEditor {
   public static void main(String[] args) throws IOException, InvalidMidiDataException {
     View view = ViewFactory.createView("midi");
     Controller con = new ControllerImpl(new CompositionModel(), view);
-    con.start(new FileReader("zoot-lw.txt"));
+    con.start(new FileReader("df-ttfaf.txt"));
   }
 }
