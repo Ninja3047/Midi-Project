@@ -5,24 +5,30 @@ import cs3500.music.model.Note;
 import cs3500.music.model.Pitch;
 
 /**
- * This might be an adapter, rename?
+ * Implements CompositionBuilder for CompositionModel
  */
-public class CompositionBuilderImpl implements CompositionBuilder<ICompositionModel<Note>> {
+public class CompBuilderImpl implements CompositionBuilder<ICompositionModel<Note>> {
   private final ICompositionModel<Note> model;
 
-  public CompositionBuilderImpl(ICompositionModel<Note> m) {
+  /**
+   * Constructor
+   * @param m the model to use
+   */
+  public CompBuilderImpl(ICompositionModel<Note> m) {
     this.model = m;
   }
 
   @Override
-  public CompositionBuilder<ICompositionModel<Note>> addNote(int start, int end, int instrument, int pitch, int volume) {
+  public CompositionBuilder<ICompositionModel<Note>> addNote(int start,
+                                                             int end, int instrument,
+                                                             int pitch, int volume) {
     int curOctave = pitch / 12 - 1;
     int pitchInt = pitch % 12 + 1;
     Pitch curPitch = Pitch.C;
     for (Pitch p : Pitch.values()) {
       if (p.getValue() == pitchInt) {
         curPitch = p;
-        //break;
+        break;
       }
     }
     int curDuration = end - start;
@@ -39,5 +45,4 @@ public class CompositionBuilderImpl implements CompositionBuilder<ICompositionMo
   public ICompositionModel<Note> build() {
     return this.model;
   }
-
 }

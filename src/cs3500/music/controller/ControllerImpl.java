@@ -2,7 +2,7 @@ package cs3500.music.controller;
 
 import cs3500.music.model.ICompositionModel;
 import cs3500.music.model.Note;
-import cs3500.music.util.CompositionBuilderImpl;
+import cs3500.music.util.CompBuilderImpl;
 import cs3500.music.util.MusicReader;
 import cs3500.music.view.View;
 
@@ -25,7 +25,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void start(Readable rd) {
-    this.curModel = MusicReader.parseFile(rd, new CompositionBuilderImpl(this.curModel));
+    this.curModel = MusicReader.parseFile(rd, new CompBuilderImpl(this.curModel));
     this.curView.display(this);
   }
 
