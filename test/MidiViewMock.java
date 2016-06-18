@@ -13,8 +13,10 @@ class MidiViewMock implements View {
   private List<Integer> ends;
   private List<Integer> pitches;
   private int tempo;
+  private Controller<Note> controller;
 
-  MidiViewMock() {
+  MidiViewMock(Controller<Note> controller) {
+    this.controller = controller;
     this.starts = new ArrayList<>();
     this.ends = new ArrayList<>();
     this.pitches = new ArrayList<>();
@@ -22,9 +24,9 @@ class MidiViewMock implements View {
   }
 
   @Override
-  public void display(Controller con) {
-    List<Note> notes = con.getNotes();
-    this.tempo = con.getTempo();
+  public void display() {
+    List<Note> notes = this.controller.getNotes();
+    this.tempo = this.controller.getTempo();
     this.createMidiTrack(notes);
   }
 

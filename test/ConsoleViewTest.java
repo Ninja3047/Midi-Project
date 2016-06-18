@@ -5,6 +5,10 @@ import java.io.FileReader;
 
 import cs3500.music.controller.Controller;
 import cs3500.music.controller.ControllerImpl;
+import cs3500.music.model.Composition;
+import cs3500.music.model.MusicComposition;
+import cs3500.music.model.Note;
+import cs3500.music.util.MusicReader;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,12 +16,17 @@ import static org.junit.Assert.assertEquals;
  * Class to test ConsoleView using ConsoleViewMock
  */
 public class ConsoleViewTest {
-  private ConsoleViewMock testView = new ConsoleViewMock();
-  private Controller c = new ControllerImpl(testView);
+  private Composition<Note> model = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
+          new MusicComposition.Builder());
+  private Controller c = new ControllerImpl(model);
+  private ConsoleViewMock testView = new ConsoleViewMock(c);
+
+  public ConsoleViewTest() throws FileNotFoundException {
+  }
 
   @Test
   public void testDisplay() throws FileNotFoundException {
-    c.start(new FileReader("mary-little-lamb.txt"));
+    testView.display();
     assertEquals("    E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4   E4   F4  F#4   G4 \n" +
                     " 0  X              X                                            X                 \n" +
                     " 1  |              |                                            |                 \n" +
