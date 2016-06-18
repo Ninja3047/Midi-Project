@@ -3,30 +3,31 @@ package cs3500.music.controller;
 import java.util.List;
 
 import cs3500.music.model.Composition;
-import cs3500.music.model.MusicComposition;
 import cs3500.music.model.Note;
-import cs3500.music.util.MusicReader;
 import cs3500.music.view.View;
 
 /**
  * Implementation of the controller interface
  */
 public class ControllerImpl implements Controller<Note> {
-  private Composition<Note> curModel;
-  private final View curView;
+  private final Composition<Note> curModel;
+  private View curView;
 
   /**
    * Constructor
-   * @param v view to communicate with
+   * @param m model to communicate with
    */
-  public ControllerImpl(View v) {
+  public ControllerImpl(Composition m) {
+    this.curModel = m;
+  }
+
+  public void setView(View v) {
     this.curView = v;
   }
 
   @Override
-  public void start(Readable rd) {
-    this.curModel = MusicReader.parseFile(rd, new MusicComposition.Builder());
-    this.curView.display(this);
+  public void start() {
+    this.curView.display();
   }
 
   @Override

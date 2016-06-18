@@ -51,7 +51,7 @@ public class MidiViewImpl implements MidiView {
 
   private void createMidiTrack(Track toPlay, List<Note> toAdd) throws InvalidMidiDataException {
     for (Note n : toAdd) {
-      int pitch = n.toInt() + 12;
+      int pitch = n.toInt();
       int noteEnd = n.getStart() + n.getDuration();
       MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, pitch, 64);
       MidiMessage end = new ShortMessage(ShortMessage.NOTE_OFF, pitch, 64);

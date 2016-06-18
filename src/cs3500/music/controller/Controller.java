@@ -9,9 +9,8 @@ public interface Controller<T> {
 
   /**
    * Starts the process
-   * @param rd where to get information
    */
-  void start(Readable rd);
+  void start();
 
   /**
    * Get notes from model
