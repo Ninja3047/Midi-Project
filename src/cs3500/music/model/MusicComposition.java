@@ -11,55 +11,23 @@ import cs3500.music.util.CompositionBuilder;
 /**
  * Class representing a MIDI editor using class Note
  */
-public class CompositionModel implements ICompositionModel<Note> {
+public class MusicComposition implements Composition<Note> {
   private final List<Note> notes;
   private int tempo;
 
-  public static final class Builder implements CompositionBuilder<ICompositionModel<Note>> {
-    private final ICompositionModel<Note> model = new CompositionModel();
-
-    @Override
-    public CompositionBuilder<ICompositionModel<Note>> addNote(int start, int end, int instrument,
-                                                               int pitch, int volume) {
-      int curOctave = pitch / 12 - 1;
-      int pitchInt = pitch % 12 + 1;
-      Pitch curPitch = Pitch.C;
-      for (Pitch p : Pitch.values()) {
-        if (p.getValue() == pitchInt) {
-          curPitch = p;
-          break;
-        }
-      }
-      int curDuration = end - start + 1;
-      this.model.overlayNotes(new Note(curPitch, curOctave, start, curDuration));
-      return this;
-    }
-
-    @Override
-    public CompositionBuilder<ICompositionModel<Note>> setTempo(int tempo) {
-      this.model.setTempo(tempo);
-      return this;
-    }
-
-    @Override
-    public ICompositionModel<Note> build() {
-      return this.model;
-    }
-  }
-
-  private CompositionModel() {
+  private MusicComposition() {
     this.notes = new ArrayList<Note>();
     this.tempo = 0;
   }
 
   @Override
-  public void setTempo(int tempo) {
-    this.tempo = tempo;
+  public int getTempo() {
+    return this.tempo;
   }
 
   @Override
-  public int getTempo() {
-    return this.tempo;
+  public void setTempo(int tempo) {
+    this.tempo = tempo;
   }
 
   @Override
@@ -82,13 +50,23 @@ public class CompositionModel implements ICompositionModel<Note> {
   }
 
   @Override
+  public Note getLowestNote() {
+    return new Note(this.notes.get(0));
+  }
+
+  @Override
+  public Note getHighestNote() {
+    return new Note(this.notes.get(this.notes.size() - 1));
+  }
+
+  @Override
   public String printNotes() {
     if (this.notes.size() == 0) {
       return "No notes";
     }
     //Get the lowest and highest note
-    Note high = this.notes.get(this.notes.size() - 1);
-    Note low = this.notes.get(0);
+    Note high = getHighestNote();
+    Note low = getLowestNote();
     low.setStart(0);
 
     //Info about dimensions
@@ -104,7 +82,7 @@ public class CompositionModel implements ICompositionModel<Note> {
 
     //Create the row of pitches
     for (int i = low.getCurOctave(); i <= high.getCurOctave(); i += 1) {
-      for (Pitch p : Pitch.values()) {
+      for (Note.Pitch p : Note.Pitch.values()) {
         Note curNote = new Note(p, i, 0, 1);
         //If note is within the low and high
         if (curNote.compareTo(low) >= 0 &&
@@ -211,5 +189,37 @@ public class CompositionModel implements ICompositionModel<Note> {
   @Override
   public List<Note> getAllNotes() {
     return new ArrayList<Note>(this.notes);
+  }
+
+  public static final class Builder implements CompositionBuilder<Composition<Note>> {
+    private final Composition<Note> model = new MusicComposition();
+
+    @Override
+    public CompositionBuilder<Composition<Note>> addNote(int start, int end, int instrument,
+                                                         int pitch, int volume) {
+      int curOctave = pitch / 12 - 1;
+      int pitchInt = pitch % 12 + 1;
+      Note.Pitch curPitch = Note.Pitch.C;
+      for (Note.Pitch p : Note.Pitch.values()) {
+        if (p.getValue() == pitchInt) {
+          curPitch = p;
+          break;
+        }
+      }
+      int curDuration = end - start + 1;
+      this.model.overlayNotes(new Note(curPitch, curOctave, start, curDuration));
+      return this;
+    }
+
+    @Override
+    public CompositionBuilder<Composition<Note>> setTempo(int tempo) {
+      this.model.setTempo(tempo);
+      return this;
+    }
+
+    @Override
+    public Composition<Note> build() {
+      return this.model;
+    }
   }
 }

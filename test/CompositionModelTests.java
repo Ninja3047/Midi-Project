@@ -5,10 +5,10 @@ import java.io.FileReader;
 import java.io.StringReader;
 import java.util.NoSuchElementException;
 
-import cs3500.music.model.CompositionModel;
-import cs3500.music.model.ICompositionModel;
+import cs3500.music.model.MusicComposition;
+import cs3500.music.model.Composition;
 import cs3500.music.model.Note;
-import cs3500.music.model.Pitch;
+import cs3500.music.model.Note.Pitch;
 import cs3500.music.util.MusicReader;
 
 import static org.junit.Assert.assertEquals;
@@ -18,18 +18,18 @@ import static org.junit.Assert.fail;
  * Class to test the model class
  */
 public class CompositionModelTests {
-  private ICompositionModel<Note> tester =
-          MusicReader.parseFile(new StringReader(""), new CompositionModel.Builder());
-  private Note n1 = new Note(Pitch.Csharp, 1, 0, 2);
+  private Composition<Note> tester =
+          MusicReader.parseFile(new StringReader(""), new MusicComposition.Builder());
+  private Note n1 = new Note(Pitch.CSHARP, 1, 0, 2);
   private Note n2 = new Note(Pitch.B, 1, 0, 3);
   private Note n3 = new Note(Pitch.A, 1, 2, 4);
   private Note n4 = new Note(Pitch.C, 2, 1, 13);
-  private Note n5 = new Note(Pitch.Csharp, 1, 3, 3);
+  private Note n5 = new Note(Pitch.CSHARP, 1, 3, 3);
 
   @Test
   public void testBuilder() throws FileNotFoundException {
-    ICompositionModel<Note> mary = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
-            new CompositionModel.Builder());
+    Composition<Note> mary = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
+            new MusicComposition.Builder());
     assertEquals(
             "    E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4   E4   F4  F#4   G4 \n" +
                     " 0  X              X                                            X                 \n" +

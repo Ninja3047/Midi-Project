@@ -1,24 +1,13 @@
 package cs3500.music.model;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Interface representing MIDI editors
  */
-public interface ICompositionModel<K> {
-  /**
-   * Deletes a note
-   *
-   * @param n the note to delete
-   */
-  void deleteNote(K n);
+public interface Composition<K> {
 
-  /**
-   * Sets the model's tempo to the given tempo
-   *
-   * @param tempo the new tempo
-   */
-  void setTempo(int tempo);
 
   /**
    * Overlays the given notes onto the existing notes
@@ -33,6 +22,27 @@ public interface ICompositionModel<K> {
    * @param n the notes to append
    */
   void appendNotes(K... n);
+
+  /**
+   * Deletes a note
+   *
+   * @param n the note to delete
+   */
+  void deleteNote(K n);
+
+  /**
+   * Gets the tempo of the composition in beats per minute
+   * @return a tempo
+   */
+  int getTempo();
+
+  /**
+   * Sets the tempo of the composition in beats per minute
+   *
+   * @param tempo a tempo
+   * @throws IllegalArgumentException if the tempo is less than one
+   */
+  void setTempo(int tempo) throws IllegalArgumentException;
 
   /**
    * Changes the duration of a note
@@ -66,11 +76,25 @@ public interface ICompositionModel<K> {
   List<K> getAllNotes();
 
   /**
+   * Returns the lowest note in the composition
+   *
+   * @return the lowest note
+   * @throws NoSuchElementException if there are no notes in the composition
+   */
+  K getLowestNote() throws NoSuchElementException;
+
+  /**
+   * Returns the highest note in the composition
+   *
+   * @return the highest note
+   * @throws NoSuchElementException if there are no notes in the composition
+   */
+  K getHighestNote() throws NoSuchElementException;
+
+  /**
    * Gets the notes printed out
    *
    * @return the notes represented as a string
    */
   String printNotes();
-
-  int getTempo();
 }
