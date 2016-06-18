@@ -14,21 +14,16 @@ import cs3500.music.util.CompositionBuilder;
  */
 public class MusicComposition implements Composition<Note> {
   private final List<Note> notes;
-  private int tempo;
+  private final int tempo;
 
-  private MusicComposition() {
-    this.notes = new ArrayList<Note>();
-    this.tempo = 0;
+  private MusicComposition(Builder b) {
+    this.notes = b.notes;
+    this.tempo = b.tempo;
   }
 
   @Override
   public int getTempo() {
     return this.tempo;
-  }
-
-  @Override
-  public void setTempo(int tempo) {
-    this.tempo = tempo;
   }
 
   @Override
@@ -126,7 +121,12 @@ public class MusicComposition implements Composition<Note> {
   }
 
   public static final class Builder implements CompositionBuilder<Composition<Note>> {
-    private final Composition<Note> model = new MusicComposition();
+    private final List<Note> notes;
+    private int tempo;
+
+    public Builder() {
+      this.notes = new ArrayList<>();
+    }
 
     @Override
     public CompositionBuilder<Composition<Note>> addNote(int start, int end, int instrument,
@@ -148,19 +148,19 @@ public class MusicComposition implements Composition<Note> {
         }
       }
       int curDuration = end - start;
-      this.model.overlayNotes(new Note(curPitch, curOctave, start, curDuration));
+      this.notes.add(new Note(curPitch, curOctave, start, curDuration));
       return this;
     }
 
     @Override
     public CompositionBuilder<Composition<Note>> setTempo(int tempo) {
-      this.model.setTempo(tempo);
+      this.tempo = tempo;
       return this;
     }
 
     @Override
     public Composition<Note> build() {
-      return this.model;
+      return new MusicComposition(this);
     }
   }
 }

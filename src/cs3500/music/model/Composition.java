@@ -37,14 +37,6 @@ public interface Composition<K> {
   int getTempo();
 
   /**
-   * Sets the tempo of the composition in beats per minute
-   *
-   * @param tempo a tempo
-   * @throws IllegalArgumentException if the tempo is less than one
-   */
-  void setTempo(int tempo) throws IllegalArgumentException;
-
-  /**
    * Changes the duration of a note
    *
    * @param n           the note to change
