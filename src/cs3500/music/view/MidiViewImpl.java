@@ -20,8 +20,10 @@ import cs3500.music.model.Note;
  */
 public class MidiViewImpl implements MidiView {
   private final Sequencer sequencer;
+  private final Controller<Note> controller;
 
-  public MidiViewImpl() {
+  public MidiViewImpl(Controller<Note> controller) {
+    this.controller = controller;
     Sequencer sequencer;
     try {
       sequencer = MidiSystem.getSequencer();
@@ -34,9 +36,9 @@ public class MidiViewImpl implements MidiView {
   }
 
   @Override
-  public void display(Controller con) {
-    List<Note> notes = con.getNotes();
-    int tempo = con.getTempo();
+  public void display() {
+    List<Note> notes = controller.getNotes();
+    int tempo = controller.getTempo();
     this.sequencer.setTempoInMPQ(tempo);
     try {
       Sequence forSequencer = new Sequence(Sequence.PPQ, 96);

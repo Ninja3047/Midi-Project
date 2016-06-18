@@ -2,6 +2,8 @@ package cs3500.music.controller;
 
 import java.util.List;
 
+import cs3500.music.view.View;
+
 /**
  * Interface that represents a Controller that interacts with the model & view
  */
@@ -45,4 +47,6 @@ public interface Controller<T> {
    * @return the number of beats
    */
   int getSize();
+
+  void setView(View v);
 }

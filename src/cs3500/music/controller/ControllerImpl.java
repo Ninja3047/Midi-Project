@@ -17,7 +17,7 @@ public class ControllerImpl implements Controller<Note> {
    * Constructor
    * @param m model to communicate with
    */
-  public ControllerImpl(Composition m) {
+  public ControllerImpl(Composition<Note> m) {
     this.curModel = m;
   }
 
