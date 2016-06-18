@@ -7,7 +7,7 @@ import cs3500.music.model.Note;
 /**
  * Interface that represents a Controller that interacts with the model & view
  */
-public interface Controller {
+public interface Controller<T> {
 
   /**
    * Starts the process
@@ -26,7 +26,21 @@ public interface Controller {
    *
    * @return the list of notes sorted by low to high pitch
    */
-  List<Note> getNotes();
+  List<T> getNotes();
+
+  /**
+   * Returns the lowest note from the model
+   *
+   * @return a note
+   */
+  T getLowestNote();
+
+  /**
+   * Return the highest note from the model
+   *
+   * @return a note
+   */
+  T getHighestNote();
 
   /**
    * Gets the tempo from the model

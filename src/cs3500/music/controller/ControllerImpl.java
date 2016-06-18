@@ -11,7 +11,7 @@ import cs3500.music.view.View;
 /**
  * Implementation of the controller interface
  */
-public class ControllerImpl implements Controller {
+public class ControllerImpl implements Controller<Note> {
   private Composition<Note> curModel;
   private final View curView;
 
@@ -37,6 +37,16 @@ public class ControllerImpl implements Controller {
   @Override
   public List<Note> getNotes() {
     return this.curModel.getAllNotes();
+  }
+
+  @Override
+  public Note getHighestNote() {
+    return this.curModel.getHighestNote();
+  }
+
+  @Override
+  public Note getLowestNote() {
+    return this.curModel.getLowestNote();
   }
 
   @Override
