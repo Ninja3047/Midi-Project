@@ -22,6 +22,15 @@ public interface Controller<T> {
   List<T> getNotes();
 
   /**
+   * Get the list of notes at the given beat from the model
+   *
+   * @param beat a beat
+   * @return the list of notes at the beat
+   * @throws IllegalArgumentException when the beat number is less than zero
+   */
+  List<T> getNotesAtBeat(int beat) throws IllegalArgumentException;
+
+  /**
    * Returns the lowest note from the model
    *
    * @return a note

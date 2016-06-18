@@ -36,6 +36,11 @@ public class ControllerImpl implements Controller<Note> {
   }
 
   @Override
+  public List<Note> getNotesAtBeat(int beat) {
+    return this.curModel.getNotesAtBeat(beat);
+  }
+
+  @Override
   public Note getHighestNote() {
     return this.curModel.getHighestNote();
   }

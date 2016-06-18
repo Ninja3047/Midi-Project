@@ -47,12 +47,14 @@ public class MusicComposition implements Composition<Note> {
 
   @Override
   public Note getLowestNote() {
-    return new Note(this.notes.get(0));
+    Collections.sort(notes);
+    return new Note(this.notes.get(this.notes.size() - 1));
   }
 
   @Override
   public Note getHighestNote() {
-    return new Note(this.notes.get(this.notes.size() - 1));
+    Collections.sort(notes);
+    return new Note(this.notes.get(0));
   }
 
   @Override
@@ -107,8 +109,7 @@ public class MusicComposition implements Composition<Note> {
     }
     ArrayList<Note> curNotes = new ArrayList<Note>();
     for (Note n : this.notes) {
-      if (n.getStart() == beatNum || (n.getStart() < beatNum &&
-              n.getStart() + n.getDuration() > beatNum)) {
+      if (n.getStart() == beatNum) {
         curNotes.add(n);
       }
     }
