@@ -38,6 +38,21 @@ public class Note implements Comparable<Note> {
     }
   }
 
+  /**
+   * Note utilities class
+   */
+  public static class Utils {
+    /**
+     * Converts the given octave and pitch
+     * @param p a pitch
+     * @param curOctave an octave
+     * @return the integer representation
+     */
+    public static int toInt(Pitch p, int curOctave) {
+      return curOctave * 12 + p.getValue();
+    }
+  }
+
   @Override
   public boolean equals(Object o) {
     if (!(o instanceof Note)) {
