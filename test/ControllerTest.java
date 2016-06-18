@@ -16,9 +16,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class ControllerTest {
 
-  View testView = new ConsoleViewMock();
-  Controller testCon = new ControllerImpl(testView);
-  String input = "tempo 200000\n" +
+  private View testView = new ConsoleViewMock();
+  private Controller testCon = new ControllerImpl(testView);
+  private String input = "tempo 200000\n" +
           "note 0 2 1 64 72\n" +
           "note 0 7 1 55 70\n" +
           "note 2 4 1 62 72\n" +

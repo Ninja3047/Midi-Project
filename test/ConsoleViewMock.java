@@ -13,7 +13,7 @@ class ConsoleViewMock implements View {
     this.consoleString = con.getConsoleData();
   }
 
-  public String getConsoleString() {
+  protected String getConsoleString() {
     return this.consoleString;
   }
 }

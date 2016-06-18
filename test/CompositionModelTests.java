@@ -26,11 +26,9 @@ public class CompositionModelTests {
   private Note n4 = new Note(Pitch.C, 2, 1, 13);
   private Note n5 = new Note(Pitch.Csharp, 1, 3, 3);
 
-  private ICompositionModel<Note> mary;
-
   @Test
   public void testBuilder() throws FileNotFoundException {
-    this.mary = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
+    ICompositionModel<Note> mary = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
             new CompositionModel.Builder());
     assertEquals(
             "    E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4   E4   F4  F#4   G4 \n" +

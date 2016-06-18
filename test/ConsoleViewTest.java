@@ -12,8 +12,8 @@ import static org.junit.Assert.assertEquals;
  * Class to test ConsoleView using ConsoleViewMock
  */
 public class ConsoleViewTest {
-  ConsoleViewMock testView = new ConsoleViewMock();
-  Controller c = new ControllerImpl(testView);
+  private ConsoleViewMock testView = new ConsoleViewMock();
+  private Controller c = new ControllerImpl(testView);
 
   @Test
   public void testDisplay() throws FileNotFoundException {
