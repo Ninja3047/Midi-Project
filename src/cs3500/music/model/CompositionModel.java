@@ -30,7 +30,7 @@ public class CompositionModel implements ICompositionModel<Note> {
           break;
         }
       }
-      int curDuration = end - start;
+      int curDuration = end - start + 1;
       this.model.overlayNotes(new Note(curPitch, curOctave, start, curDuration));
       return this;
     }

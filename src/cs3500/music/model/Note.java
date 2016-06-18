@@ -31,7 +31,7 @@ public class Note implements Comparable<Note> {
     } else {
       this.start = start;
     }
-    if (duration < 1) {
+    if (duration < 0) {
       throw new IllegalArgumentException("Illegal duration: " + duration);
     } else {
       this.duration = duration;

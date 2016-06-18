@@ -13,8 +13,8 @@ import cs3500.music.view.ViewFactory;
 
 public class MusicEditor {
   public static void main(String[] args) throws IOException, InvalidMidiDataException {
-    View view = ViewFactory.createView("midi");
+    View view = ViewFactory.createView("console");
     Controller con = new ControllerImpl(view);
-    con.start(new FileReader("mystery-1.txt"));
+    con.start(new FileReader("df-ttfaf.txt"));
   }
 }

@@ -27,10 +27,10 @@ public class ControllerTest {
   @Test
   public void testGetNotes() {
     testCon.start(new StringReader(input));
-    Note[] correct = {new Note(Pitch.G, 3, 0, 7),
-            new Note(Pitch.C, 4, 4, 2),
-            new Note(Pitch.D, 4, 2, 2),
-            new Note(Pitch.E, 4, 0, 2)};
+    Note[] correct = {new Note(Pitch.G, 3, 0, 8),
+            new Note(Pitch.C, 4, 4, 3),
+            new Note(Pitch.D, 4, 2, 3),
+            new Note(Pitch.E, 4, 0, 3)};
     assertArrayEquals(correct, this.testCon.getNotes().toArray());
   }
 
