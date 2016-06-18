@@ -1,7 +1,7 @@
 import org.junit.Test;
 
 import cs3500.music.model.Note;
-import cs3500.music.model.Pitch;
+import cs3500.music.model.Note.Pitch;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
