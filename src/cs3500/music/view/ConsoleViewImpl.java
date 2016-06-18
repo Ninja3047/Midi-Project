@@ -21,7 +21,8 @@ public class ConsoleViewImpl implements View {
 
   @Override
   public void display() {
-    this.printNotes(con.getNotes());
+    String formatNotes = this.printNotes(this.con.getNotes());
+    System.out.println(formatNotes);
   }
 
   /**
@@ -34,8 +35,8 @@ public class ConsoleViewImpl implements View {
       return "No notes";
     }
     //Get the lowest and highest note
-    Note high = toPrint.get(0);
-    Note low = toPrint.get(toPrint.size() - 1);
+    Note low = toPrint.get(0);
+    Note high = toPrint.get(toPrint.size() - 1);
 
     //Info about dimensions
     int totalNotes = high.toInt() - low.toInt() + 1;
@@ -50,7 +51,7 @@ public class ConsoleViewImpl implements View {
 
     //Create the row of pitches
     for (Octave o : Octave.values()) {
-      for (Note.Pitch p : Pitch.values()) {
+      for (Pitch p : Pitch.values()) {
         //If note is within the low and high
         if (Note.Utils.toInt(p, o) >= low.toInt() &&
                 Note.Utils.toInt(p, o) <= high.toInt()) {
@@ -82,9 +83,9 @@ public class ConsoleViewImpl implements View {
       output.setCharAt(totalLineChar * startRow + locInRow, 'X');
 
       for (int i = 1; i < n.getDuration(); i += 1) {
-        locInRow += totalLineChar;
-        if (output.charAt(locInRow) != 'X') {
-          output.setCharAt(locInRow, '|');
+        int curInRow = locInRow + (totalLineChar * (startRow + i));
+        if (output.charAt(curInRow) != 'X') {
+          output.setCharAt(curInRow, '|');
         }
       }
     }

@@ -64,6 +64,8 @@ public class Note implements Comparable<Note> {
       switch (this) {
         case C:
           return "C";
+        case CSHARP:
+          return "C#";
         case D:
           return "D";
         case DSHARP:
@@ -122,7 +124,7 @@ public class Note implements Comparable<Note> {
      * @return the integer representation
      */
     public static int toInt(Pitch p, Octave o) {
-      return o.getValue() * 12 + p.getValue();
+      return o.getValue() * 12 + p.getValue() + 12;
     }
 
     public static String toString(Pitch p, Octave o) {

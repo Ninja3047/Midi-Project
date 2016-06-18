@@ -17,10 +17,10 @@ import cs3500.music.view.ViewFactory;
 
 public class MusicEditor {
   public static void main(String[] args) throws IOException, InvalidMidiDataException {
-    Composition<Note> model = MusicReader.parseFile(new FileReader("df-ttfaf.txt"),
+    Composition<Note> model = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
             new MusicComposition.Builder());
     Controller con = new ControllerImpl(model);
-    View view = ViewFactory.createView("midi", con);
+    View view = ViewFactory.createView("console", con);
     con.setView(view);
     con.start();
   }

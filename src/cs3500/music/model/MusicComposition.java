@@ -131,8 +131,8 @@ public class MusicComposition implements Composition<Note> {
     @Override
     public CompositionBuilder<Composition<Note>> addNote(int start, int end, int instrument,
                                                          int pitch, int volume) {
-      int octaveInt = pitch / 12;
-      int pitchInt = pitch % 12 + 1;
+      int octaveInt = pitch / 12 - 1;
+      int pitchInt = pitch % 12;
       Pitch curPitch = Pitch.C;
       for (Note.Pitch p : Note.Pitch.values()) {
         if (p.getValue() == pitchInt) {
