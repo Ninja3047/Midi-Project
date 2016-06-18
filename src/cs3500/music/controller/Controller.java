@@ -21,8 +21,16 @@ public interface Controller {
    */
   String getConsoleData();
 
+  /**
+   * Get notes from model
+   *
+   * @return the list of notes sorted by low to high pitch
+   */
   List<Note> getNotes();
 
+  /**
+   * Gets the tempo from the model
+   * @return the tempo
+   */
   int getTempo();
-
 }

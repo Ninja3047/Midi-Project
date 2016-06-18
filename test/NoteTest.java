@@ -45,7 +45,7 @@ public class NoteTest {
       new Note(Pitch.A, 1, 1, -2);
       fail();
     } catch (IllegalArgumentException e) {
-      assertEquals("Illegal duration", e.getMessage());
+      assertEquals("Illegal duration: -2", e.getMessage());
     }
   }
 
