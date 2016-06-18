@@ -55,10 +55,10 @@ public class MidiViewImpl implements MidiView {
     for (Note n : toAdd) {
       int pitch = n.toInt();
       int noteEnd = n.getStart() + n.getDuration();
-      MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, pitch, 64);
-      MidiMessage end = new ShortMessage(ShortMessage.NOTE_OFF, pitch, 64);
-      toPlay.add(new MidiEvent(start, n.getStart() * 96));
-      toPlay.add(new MidiEvent(end, noteEnd * 96));
+      MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, 1, pitch, 64);
+      MidiMessage end = new ShortMessage(ShortMessage.NOTE_OFF, 1, pitch, 64);
+      toPlay.add(new MidiEvent(start, 96 * n.getStart()));
+      toPlay.add(new MidiEvent(end, 96 * noteEnd));
     }
   }
 }
