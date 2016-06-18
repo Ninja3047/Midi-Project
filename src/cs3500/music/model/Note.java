@@ -202,9 +202,7 @@ public class Note implements Comparable<Note> {
 
   @Override
   public int compareTo(Note n) {
-    if (this.curOctave == n.curOctave && this.curPitch == n.curPitch) {
-      return this.start - n.start;
-    } else if (this.curOctave == n.curOctave) {
+    if (this.curOctave == n.curOctave) {
       return this.curPitch.ordinal() - n.curPitch.ordinal();
     } else {
       return this.curOctave.getValue() - n.curOctave.getValue();
