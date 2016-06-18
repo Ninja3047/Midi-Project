@@ -1,14 +1,12 @@
 package cs3500.music.model;
 
-import cs3500.music.model.Note.Pitch;
-import cs3500.music.model.Note.Octave;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import cs3500.music.model.Note.Octave;
+import cs3500.music.model.Note.Pitch;
 import cs3500.music.util.CompositionBuilder;
 
 /**
@@ -43,7 +41,7 @@ public class MusicComposition implements Composition<Note> {
   public void appendNotes(Note... newNotes) {
     int newStart = 0;
     if (this.notes.size() != 0) {
-      newStart = this.getNumBeat() - 1;
+      newStart = this.getSize() - 1;
     }
     for (Note n : newNotes) {
       n.setStart(n.getStart() + newStart);
@@ -60,68 +58,6 @@ public class MusicComposition implements Composition<Note> {
   @Override
   public Note getHighestNote() {
     return new Note(this.notes.get(this.notes.size() - 1));
-  }
-
-  @Override
-  public String printNotes() {
-    if (this.notes.size() == 0) {
-      return "No notes";
-    }
-    //Get the lowest and highest note
-    Note high = getHighestNote();
-    Note low = getLowestNote();
-    low.setStart(0);
-
-    //Info about dimensions
-    int totalNotes = high.toInt() - low.toInt() + 1;
-    int numBeat = this.getNumBeat();
-    int numBeatDigits = Integer.toString(numBeat).length();
-
-    //Init output StringBuilder
-    char[] pad = new char[numBeatDigits];
-    Arrays.fill(pad, ' ');
-    StringBuilder output = new StringBuilder();
-    output.append(pad);
-
-    //Create the row of pitches
-    for (Octave o : Octave.values()) {
-      for (Pitch p : Pitch.values()) {
-        //If note is within the low and high
-        if (Note.Utils.toInt(p, o) >= low.toInt() &&
-                Note.Utils.toInt(p, o)<= high.toInt()) {
-          //Sets up spacing
-          StringBuilder textNote = new StringBuilder(Note.Utils.toString(p, o));
-          if (Note.Utils.toString(p, o).length() < 4) {
-            textNote.append(" ");
-          }
-          output.append(String.format("%5s", textNote.toString()));
-        }
-      }
-    }
-    output.append("\n");
-
-    //Sets up the table with spaces
-    char[] spaces = new char[totalNotes * 5];
-    Arrays.fill(spaces, ' ');
-    for (int i = 0; i < numBeat; i += 1) {
-      output.append(String.format("%" + numBeatDigits + "s", i));
-      output.append(spaces);
-      output.append("\n");
-    }
-
-    //Inserts the notes into location
-    for (Note n : this.notes) {
-      int totalLineChar = totalNotes * 5 + numBeatDigits + 1;
-      int startRow = (n.getStart() + 1);
-      int locInRow = (2 + numBeatDigits + (((n.toInt()) - low.toInt()) * 5));
-      output.setCharAt(totalLineChar * startRow + locInRow, 'X');
-
-      for (int i = 1; i < n.getDuration(); i += 1) {
-        output.setCharAt(locInRow + (totalLineChar * (i + startRow)), '|');
-      }
-    }
-
-    return output.toString();
   }
 
   @Override
@@ -157,12 +93,8 @@ public class MusicComposition implements Composition<Note> {
     Collections.sort(this.notes);
   }
 
-  /**
-   * Gets number of beats in the current piece
-   *
-   * @return the number of beats
-   */
-  private int getNumBeat() {
+  @Override
+  public int getSize() {
     int endBeat = 0;
     for (Note n : this.notes) {
       int curEndBeat = n.getStart() + n.getDuration();
@@ -199,7 +131,7 @@ public class MusicComposition implements Composition<Note> {
     @Override
     public CompositionBuilder<Composition<Note>> addNote(int start, int end, int instrument,
                                                          int pitch, int volume) {
-      int octaveInt = pitch / 12 - 1;
+      int octaveInt = pitch / 12;
       int pitchInt = pitch % 12 + 1;
       Pitch curPitch = Pitch.C;
       for (Note.Pitch p : Note.Pitch.values()) {
@@ -210,7 +142,7 @@ public class MusicComposition implements Composition<Note> {
       }
       Octave curOctave = Octave.ZERO;
       for (Octave o : Octave.values()) {
-        if (o.getValue() == pitchInt) {
+        if (o.getValue() == octaveInt) {
           curOctave = o;
           break;
         }

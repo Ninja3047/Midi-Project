@@ -92,9 +92,9 @@ public interface Composition<K> {
   K getHighestNote() throws NoSuchElementException;
 
   /**
-   * Gets the notes printed out
+   * Gets number of beats in the current piece
    *
-   * @return the notes represented as a string
+   * @return the number of beats
    */
-  String printNotes();
+  int getSize();
 }
