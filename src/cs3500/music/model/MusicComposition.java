@@ -147,7 +147,7 @@ public class MusicComposition implements Composition<Note> {
           break;
         }
       }
-      int curDuration = end - start + 1;
+      int curDuration = end - start;
       this.model.overlayNotes(new Note(curPitch, curOctave, start, curDuration));
       return this;
     }
