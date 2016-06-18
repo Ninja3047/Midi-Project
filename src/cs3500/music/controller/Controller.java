@@ -2,8 +2,6 @@ package cs3500.music.controller;
 
 import java.util.List;
 
-import cs3500.music.model.Note;
-
 /**
  * Interface that represents a Controller that interacts with the model & view
  */
@@ -14,12 +12,6 @@ public interface Controller<T> {
    * @param rd where to get information
    */
   void start(Readable rd);
-
-  /**
-   * Get the data relevant to console
-   * @return the formatted list of notes
-   */
-  String getConsoleData();
 
   /**
    * Get notes from model
@@ -47,4 +39,11 @@ public interface Controller<T> {
    * @return the tempo
    */
   int getTempo();
+
+  /**
+   * Gets number of beats in the current piece from the model
+   *
+   * @return the number of beats
+   */
+  int getSize();
 }

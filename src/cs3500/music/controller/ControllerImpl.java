@@ -2,8 +2,8 @@ package cs3500.music.controller;
 
 import java.util.List;
 
-import cs3500.music.model.MusicComposition;
 import cs3500.music.model.Composition;
+import cs3500.music.model.MusicComposition;
 import cs3500.music.model.Note;
 import cs3500.music.util.MusicReader;
 import cs3500.music.view.View;
@@ -30,11 +30,6 @@ public class ControllerImpl implements Controller<Note> {
   }
 
   @Override
-  public String getConsoleData() {
-    return this.curModel.printNotes();
-  }
-
-  @Override
   public List<Note> getNotes() {
     return this.curModel.getAllNotes();
   }
@@ -52,5 +47,10 @@ public class ControllerImpl implements Controller<Note> {
   @Override
   public int getTempo() {
     return this.curModel.getTempo();
+  }
+
+  @Override
+  public int getSize() {
+    return this.curModel.getSize();
   }
 }
