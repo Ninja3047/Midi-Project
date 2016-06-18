@@ -21,6 +21,20 @@ public class NoteTest {
   private Note n5 = new Note(Pitch.A, Octave.ONE, 1, 1);
 
   @Test
+  public void testUtilsToString() {
+    assertEquals("A1", Note.Utils.toString(Pitch.A, Octave.ONE));
+    assertEquals("A0", Note.Utils.toString(Pitch.A, Octave.ZERO));
+    assertEquals("C4", Note.Utils.toString(Pitch.C, Octave.FOUR));
+  }
+
+  @Test
+  public void testUtilsToInt() {
+    assertEquals(0, Note.Utils.toInt(Pitch.C, Octave.ZERO));
+    assertEquals(40, Note.Utils.toInt(Pitch.E, Octave.THREE));
+    assertEquals(127, Note.Utils.toInt(Pitch.G, Octave.TEN));
+  }
+
+  @Test
   public void testStart() {
     try {
       new Note(Pitch.A, Octave.ONE, -1, 1);
