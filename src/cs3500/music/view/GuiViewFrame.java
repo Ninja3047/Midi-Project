@@ -9,7 +9,7 @@ import cs3500.music.controller.Controller;
 /**
  * A skeleton Frame (i.e., a window) in Swing
  */
-public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
+public class GuiViewFrame extends javax.swing.JFrame implements View {
 
   private final JPanel displayPanel; // You may want to refine this to a subtype of JPanel
 
@@ -24,18 +24,12 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   }
 
   @Override
-  public void initialize(){
+  public void display(Controller c) {
     this.setVisible(true);
   }
 
   @Override
   public Dimension getPreferredSize(){
-    return new Dimension(100, 100);
+    return new Dimension(1330, 400);
   }
-
-  @Override
-  public void display(Controller con) {
-
-  }
-
 }

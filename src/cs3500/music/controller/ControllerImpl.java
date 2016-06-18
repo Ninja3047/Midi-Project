@@ -2,8 +2,8 @@ package cs3500.music.controller;
 
 import java.util.List;
 
-import cs3500.music.model.CompositionModel;
-import cs3500.music.model.ICompositionModel;
+import cs3500.music.model.MusicComposition;
+import cs3500.music.model.Composition;
 import cs3500.music.model.Note;
 import cs3500.music.util.MusicReader;
 import cs3500.music.view.View;
@@ -12,7 +12,7 @@ import cs3500.music.view.View;
  * Implementation of the controller interface
  */
 public class ControllerImpl implements Controller {
-  private ICompositionModel<Note> curModel;
+  private Composition<Note> curModel;
   private final View curView;
 
   /**
@@ -25,7 +25,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void start(Readable rd) {
-    this.curModel = MusicReader.parseFile(rd, new CompositionModel.Builder());
+    this.curModel = MusicReader.parseFile(rd, new MusicComposition.Builder());
     this.curView.display(this);
   }
 

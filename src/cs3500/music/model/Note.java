@@ -38,6 +38,79 @@ public class Note implements Comparable<Note> {
     }
   }
 
+  public Note(Note n) {
+    this.curPitch = n.curPitch;
+    this.curOctave = n.curOctave;
+    this.start = n.start;
+    this.duration = n.duration;
+  }
+
+  public enum Pitch {
+    C(0), CSHARP(1), D(2), DSHARP(3), E(4), F(5),
+    FSHARP(6), G(7), GSHARP(8), A(9), ASHARP(10), B(11);
+
+    private final int value;
+
+    Pitch(int value) {
+      this.value = value;
+    }
+
+    public int getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      switch (this) {
+        case C:
+          return "C";
+        case D:
+          return "D";
+        case DSHARP:
+          return "D#";
+        case E:
+          return "E";
+        case F:
+          return "F";
+        case FSHARP:
+          return "F#";
+        case G:
+          return "G";
+        case GSHARP:
+          return "G#";
+        case A:
+          return "A";
+        case ASHARP:
+          return "A#";
+        case B:
+          return "B";
+        default:
+          throw new IllegalArgumentException();
+      }
+    }
+  }
+
+  public enum Octave {
+    ZERO(0), ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5),
+    SIX(6), SEVEN(7), EIGHT(8), NINE(9), TEN(10);
+
+    private final int octave;
+
+    Octave(int octave) {
+      this.octave = octave;
+    }
+
+    public int getValue() {
+      return octave;
+    }
+
+    @Override
+    public String toString() {
+      return Integer.toString(octave);
+    }
+
+  }
+
   /**
    * Note utilities class
    */
