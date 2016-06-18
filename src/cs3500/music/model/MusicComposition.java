@@ -1,5 +1,8 @@
 package cs3500.music.model;
 
+import cs3500.music.model.Note.Pitch;
+import cs3500.music.model.Note.Octave;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -81,15 +84,14 @@ public class MusicComposition implements Composition<Note> {
     output.append(pad);
 
     //Create the row of pitches
-    for (int i = low.getCurOctave(); i <= high.getCurOctave(); i += 1) {
-      for (Note.Pitch p : Note.Pitch.values()) {
-        Note curNote = new Note(p, i, 0, 1);
+    for (Octave o : Octave.values()) {
+      for (Pitch p : Pitch.values()) {
         //If note is within the low and high
-        if (curNote.compareTo(low) >= 0 &&
-                curNote.compareTo(high) <= 0) {
+        if (Note.Utils.toInt(p, o) >= low.toInt() &&
+                Note.Utils.toInt(p, o)<= high.toInt()) {
           //Sets up spacing
-          StringBuilder textNote = new StringBuilder(curNote.toString());
-          if (curNote.toString().length() < 4) {
+          StringBuilder textNote = new StringBuilder(Note.Utils.toString(p, o));
+          if (Note.Utils.toString(p, o).length() < 4) {
             textNote.append(" ");
           }
           output.append(String.format("%5s", textNote.toString()));
@@ -197,12 +199,19 @@ public class MusicComposition implements Composition<Note> {
     @Override
     public CompositionBuilder<Composition<Note>> addNote(int start, int end, int instrument,
                                                          int pitch, int volume) {
-      int curOctave = pitch / 12 - 1;
+      int octaveInt = pitch / 12 - 1;
       int pitchInt = pitch % 12 + 1;
-      Note.Pitch curPitch = Note.Pitch.C;
+      Pitch curPitch = Pitch.C;
       for (Note.Pitch p : Note.Pitch.values()) {
         if (p.getValue() == pitchInt) {
           curPitch = p;
+          break;
+        }
+      }
+      Octave curOctave = Octave.ZERO;
+      for (Octave o : Octave.values()) {
+        if (o.getValue() == pitchInt) {
+          curOctave = o;
           break;
         }
       }

@@ -5,7 +5,8 @@ import java.io.StringReader;
 import cs3500.music.controller.Controller;
 import cs3500.music.controller.ControllerImpl;
 import cs3500.music.model.Note;
-import cs3500.music.model.Pitch;
+import cs3500.music.model.Note.Pitch;
+import cs3500.music.model.Note.Octave;
 import cs3500.music.view.View;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -27,10 +28,10 @@ public class ControllerTest {
   @Test
   public void testGetNotes() {
     testCon.start(new StringReader(input));
-    Note[] correct = {new Note(Pitch.G, 3, 0, 8),
-            new Note(Pitch.C, 4, 4, 3),
-            new Note(Pitch.D, 4, 2, 3),
-            new Note(Pitch.E, 4, 0, 3)};
+    Note[] correct = {new Note(Pitch.G, Octave.THREE, 0, 8),
+            new Note(Pitch.C, Octave.FOUR, 4, 3),
+            new Note(Pitch.D, Octave.FOUR, 2, 3),
+            new Note(Pitch.E, Octave.FOUR, 0, 3)};
     assertArrayEquals(correct, this.testCon.getNotes().toArray());
   }
 

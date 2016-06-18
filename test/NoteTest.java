@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import cs3500.music.model.Note;
 import cs3500.music.model.Note.Pitch;
+import cs3500.music.model.Note.Octave;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -13,26 +14,16 @@ import static org.junit.Assert.fail;
  * Class to test the Note class
  */
 public class NoteTest {
-  private Note n1 = new Note(Pitch.A, 1, 0, 1);
-  private Note n2 = new Note(Pitch.B, 1, 1, 3);
-  private Note n3 = new Note(Pitch.A, 2, 2, 2);
-  private Note n4 = new Note(Pitch.A, 1, 0, 1);
-  private Note n5 = new Note(Pitch.A, 1, 1, 1);
-
-  @Test
-  public void testOctave() {
-    try {
-      new Note(Pitch.A, 0, 0, 1);
-      fail();
-    } catch (IllegalArgumentException e) {
-      assertEquals("Illegal octave", e.getMessage());
-    }
-  }
+  private Note n1 = new Note(Pitch.A, Octave.ONE, 0, 1);
+  private Note n2 = new Note(Pitch.B, Octave.ONE, 1, 3);
+  private Note n3 = new Note(Pitch.A, Octave.TWO, 2, 2);
+  private Note n4 = new Note(Pitch.A, Octave.ONE, 0, 1);
+  private Note n5 = new Note(Pitch.A, Octave.ONE, 1, 1);
 
   @Test
   public void testStart() {
     try {
-      new Note(Pitch.A, 1, -1, 1);
+      new Note(Pitch.A, Octave.ONE, -1, 1);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Illegal start time", e.getMessage());
@@ -42,7 +33,7 @@ public class NoteTest {
   @Test
   public void testDuration() {
     try {
-      new Note(Pitch.A, 1, 1, -2);
+      new Note(Pitch.A, Octave.ONE, 1, -2);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Illegal duration: -2", e.getMessage());

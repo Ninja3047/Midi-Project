@@ -7,7 +7,7 @@ import java.util.Objects;
  */
 public class Note implements Comparable<Note> {
   private final Pitch curPitch;
-  private final int curOctave;
+  private final Octave curOctave;
   private int start;
   private int duration;
 
@@ -19,13 +19,9 @@ public class Note implements Comparable<Note> {
    * @param start     the starting beat
    * @param duration  the duration (in beats) of the note
    */
-  public Note(Pitch curPitch, int curOctave, int start, int duration) {
+  public Note(Pitch curPitch, Octave curOctave, int start, int duration) {
     this.curPitch = curPitch;
-    if (curOctave < 1) {
-      throw new IllegalArgumentException("Illegal octave");
-    } else {
-      this.curOctave = curOctave;
-    }
+    this.curOctave = curOctave;
     if (start < 0) {
       throw new IllegalArgumentException("Illegal start time");
     } else {
@@ -38,6 +34,10 @@ public class Note implements Comparable<Note> {
     }
   }
 
+  /**
+   * Creates a copy of a note given the note
+   * @param n a note
+   */
   public Note(Note n) {
     this.curPitch = n.curPitch;
     this.curOctave = n.curOctave;
@@ -118,11 +118,15 @@ public class Note implements Comparable<Note> {
     /**
      * Converts the given octave and pitch
      * @param p a pitch
-     * @param curOctave an octave
+     * @param o an octave
      * @return the integer representation
      */
-    public static int toInt(Pitch p, int curOctave) {
-      return curOctave * 12 + p.getValue();
+    public static int toInt(Pitch p, Octave o) {
+      return o.getValue() * 12 + p.getValue();
+    }
+
+    public static String toString(Pitch p, Octave o) {
+      return p.toString() + o.toString();
     }
   }
 
@@ -178,7 +182,7 @@ public class Note implements Comparable<Note> {
     return this.start;
   }
 
-  public int getCurOctave() {
+  public Octave getCurOctave() {
     return this.curOctave;
   }
 
@@ -193,7 +197,7 @@ public class Note implements Comparable<Note> {
    * @return the integer representation
    */
   public int toInt() {
-    return this.curOctave * 12 + this.curPitch.ordinal();
+    return this.curOctave.getValue() * 12 + this.curPitch.ordinal();
   }
 
   @Override
@@ -203,7 +207,7 @@ public class Note implements Comparable<Note> {
     } else if (this.curOctave == n.curOctave) {
       return this.curPitch.ordinal() - n.curPitch.ordinal();
     } else {
-      return this.curOctave - n.curOctave;
+      return this.curOctave.getValue() - n.curOctave.getValue();
     }
   }
 }

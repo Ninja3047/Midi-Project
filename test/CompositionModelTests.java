@@ -9,6 +9,7 @@ import cs3500.music.model.MusicComposition;
 import cs3500.music.model.Composition;
 import cs3500.music.model.Note;
 import cs3500.music.model.Note.Pitch;
+import cs3500.music.model.Note.Octave;
 import cs3500.music.util.MusicReader;
 
 import static org.junit.Assert.assertEquals;
@@ -20,11 +21,11 @@ import static org.junit.Assert.fail;
 public class CompositionModelTests {
   private Composition<Note> tester =
           MusicReader.parseFile(new StringReader(""), new MusicComposition.Builder());
-  private Note n1 = new Note(Pitch.CSHARP, 1, 0, 2);
-  private Note n2 = new Note(Pitch.B, 1, 0, 3);
-  private Note n3 = new Note(Pitch.A, 1, 2, 4);
-  private Note n4 = new Note(Pitch.C, 2, 1, 13);
-  private Note n5 = new Note(Pitch.CSHARP, 1, 3, 3);
+  private Note n1 = new Note(Pitch.CSHARP, Octave.ONE, 0, 2);
+  private Note n2 = new Note(Pitch.B, Octave.ONE, 0, 3);
+  private Note n3 = new Note(Pitch.A, Octave.ONE, 2, 4);
+  private Note n4 = new Note(Pitch.C, Octave.TWO, 1, 13);
+  private Note n5 = new Note(Pitch.CSHARP, Octave.TWO, 3, 3);
 
   @Test
   public void testBuilder() throws FileNotFoundException {
@@ -160,7 +161,7 @@ public class CompositionModelTests {
                     "17                                                         |  \n" +
                     "18                                                         |  \n",
             tester.printNotes());
-    tester.deleteNote(new Note(Pitch.C, 2, 6, 13));
+    tester.deleteNote(new Note(Pitch.C, Octave.TWO, 6, 13));
     assertEquals("  C#1   D1  D#1   E1   F1  F#1   G1  G#1   A1  A#1   B1 \n" +
                     "0  X                                                    \n" +
                     "1  |                                                    \n" +
