@@ -1,24 +1,25 @@
 package cs3500.music.view;
 
 import java.awt.*;
+
 import java.util.List;
 
 import javax.swing.*;
 
 import cs3500.music.controller.Controller;
-import cs3500.music.model.MusicNote;
-import cs3500.music.model.MusicNote.Octave;
-import cs3500.music.model.MusicNote.Pitch;
+import cs3500.music.model.Note;
+import cs3500.music.model.Note.Octave;
+import cs3500.music.model.Note.Pitch;
 
 /**
- * A dummy view that simply draws a string 
+ * Draws the composition
  */
 public class ConcreteGuiViewPanel extends JPanel {
   private static final int CELL_SIZE = 20;
   private static final int LEFT_OFFSET = 40;
-  private final Controller<MusicNote> controller;
+  private final Controller<Note> controller;
 
-  public ConcreteGuiViewPanel(Controller<MusicNote> controller) {
+  public ConcreteGuiViewPanel(Controller<Note> controller) {
     super();
     this.controller = controller;
     this.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
@@ -28,20 +29,10 @@ public class ConcreteGuiViewPanel extends JPanel {
   public void paintComponent(Graphics g){
     // Handle the default painting
     super.paintComponent(g);
-    // Look for more documentation about the Graphics class,
-    // and methods on it that may be useful
     drawMeasures(g, controller.getHighestNote(), controller.getLowestNote(), controller.getSize());
     for (int i = 0; i < controller.getSize() + 1; i++) {
       drawNotes(g, controller.getNotesAtBeat(i), controller.getHighestNote());
     }
-    /*drawMeasures(g, new MusicNote(Pitch.G, Octave.FOUR, 0, 0),
-                 new MusicNote(Pitch.E, Octave.THREE, 0, 0), 64);
-    drawNote(g, new MusicNote(Pitch.E, Octave.FOUR, 0, 3), MusicNote.Utils.toInt(Pitch.G, Octave.FOUR));
-    drawNote(g, new MusicNote(Pitch.G, Octave.FOUR, 0, 3), MusicNote.Utils.toInt(Pitch.G, Octave.FOUR));
-    drawNote(g, new MusicNote(Pitch.E, Octave.THREE, 0, 3), MusicNote.Utils.toInt(Pitch.G, Octave.FOUR));
-    drawNote(g, new MusicNote(Pitch.E, Octave.FOUR, 4, 3), MusicNote.Utils.toInt(Pitch.G, Octave.FOUR));
-    drawNote(g, new MusicNote(Pitch.G, Octave.FOUR, 10, 3), MusicNote.Utils.toInt(Pitch.G, Octave.FOUR));
-    drawNote(g, new MusicNote(Pitch.E, Octave.THREE, 12, 3), MusicNote.Utils.toInt(Pitch.G, Octave.FOUR));*/
   }
 
   /**
@@ -52,7 +43,7 @@ public class ConcreteGuiViewPanel extends JPanel {
    * @param lowPitch  lowest pitch to draw
    * @param lastBeat  last beat to draw
    */
-  private void drawMeasures(Graphics g, MusicNote highPitch, MusicNote lowPitch, int lastBeat) {
+  private void drawMeasures(Graphics g, Note highPitch, Note lowPitch, int lastBeat) {
     Graphics2D g2d = (Graphics2D) g;
 
     int pitches = highPitch.toInt() - lowPitch.toInt() + 1;
@@ -67,9 +58,9 @@ public class ConcreteGuiViewPanel extends JPanel {
 
     for (int o = os.length - 1; o >= 0; o--) {
       for (Pitch p : Pitch.values()) {
-        int note = MusicNote.Utils.toInt(p, os[o]);
+        int note = Note.Utils.toInt(p, os[o]);
         if (lowPitch.toInt() <= note && highPitch.toInt() >= note) {
-          g2d.drawString(MusicNote.Utils.toString(p, os[o]), 0,
+          g2d.drawString(Note.Utils.toString(p, os[o]), 0,
                   CELL_SIZE * (highPitch.toInt() - note + 1) + (int) getFont().getSize2D());
         }
       }
@@ -90,15 +81,24 @@ public class ConcreteGuiViewPanel extends JPanel {
   /**
    * Draws the given list of notes
    *
-   * @param highPitch highest pitch in the composition
+   * @param g         graphics
+   * @param notes     list of notes to draw
+   * @param highPitch highest pitch note in the composition
    */
-  private void drawNotes(Graphics g, List<MusicNote> notes, MusicNote highPitch) { // draw a list of notes
-    for (MusicNote n : notes) {
+  private void drawNotes(Graphics g, List<Note> notes, Note highPitch) {
+    for (Note n : notes) {
       drawNote(g, n, highPitch);
     }
   }
 
-  private void drawNote(Graphics g, MusicNote n, MusicNote highPitch) {
+  /**
+   * Draws the given note
+   *
+   * @param g         graphics
+   * @param n         list of notes to draw
+   * @param highPitch highest pitch note in the composition
+   */
+  private void drawNote(Graphics g, Note n, Note highPitch) {
     Graphics2D g2d = (Graphics2D) g;
     int pos = n.getStart() * CELL_SIZE;
     int pitch = highPitch.toInt() - n.toInt();
