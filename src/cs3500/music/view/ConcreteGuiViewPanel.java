@@ -28,10 +28,10 @@ public class ConcreteGuiViewPanel extends JPanel {
   public void paintComponent(Graphics g){
     // Handle the default painting
     super.paintComponent(g);
-    drawMeasures(g, controller.getHighestNote(), controller.getLowestNote(), controller.getSize());
     for (int i = 0; i < controller.getSize() + 1; i++) {
       drawNotes(g, controller.getNotesAtBeat(i), controller.getHighestNote());
     }
+    drawMeasures(g, controller.getHighestNote(), controller.getLowestNote(), controller.getSize());
   }
 
   /**
@@ -44,6 +44,9 @@ public class ConcreteGuiViewPanel extends JPanel {
    */
   private void drawMeasures(Graphics g, Note highPitch, Note lowPitch, int lastBeat) {
     Graphics2D g2d = (Graphics2D) g;
+
+    g2d.setColor(Color.BLACK);
+    g2d.setStroke(new BasicStroke(2));
 
     int pitches = highPitch.toInt() - lowPitch.toInt() + 1;
 
@@ -101,7 +104,7 @@ public class ConcreteGuiViewPanel extends JPanel {
     g2d.setColor(Color.BLACK);
     g2d.fillRect(pos + LEFT_OFFSET, pitch * CELL_SIZE + CELL_SIZE,
             CELL_SIZE, CELL_SIZE); // draw head
-    g2d.setColor(Color.GREEN);
+    g2d.setColor(Color.MAGENTA);
     for (int i = 1; i < n.getDuration(); i++) { // draw tail
       g2d.fillRect(pos + i * CELL_SIZE + LEFT_OFFSET, pitch * CELL_SIZE
               + CELL_SIZE, CELL_SIZE, CELL_SIZE);
