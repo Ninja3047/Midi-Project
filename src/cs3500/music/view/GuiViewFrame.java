@@ -34,6 +34,6 @@ public class GuiViewFrame extends javax.swing.JFrame implements View {
 
   @Override
   public Dimension getPreferredSize(){
-    return new Dimension(1333, 400);
+    return new Dimension(1333, 390);
   }
 }

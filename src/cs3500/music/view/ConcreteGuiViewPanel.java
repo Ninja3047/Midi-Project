@@ -55,17 +55,12 @@ public class ConcreteGuiViewPanel extends JPanel {
               LEFT_OFFSET + CELL_SIZE * lastBeat, CELL_SIZE * (i + 1));
     }
 
-    /*
-    for (int o = os.length - 1; o >= 0; o--) {
-      for (Pitch p : Pitch.values()) {
-        int note = Note.Utils.toInt(p, os[o]);
-        if (lowPitch.toInt() <= note && highPitch.toInt() >= note) {
-          g2d.drawString(Note.Utils.toString(p, os[o]), 0,
-                  CELL_SIZE * (highPitch.toInt() - note + 1) + (int) getFont().getSize2D());
-        }
-      }
+    List<String> range = controller.getNoteRange();
+
+    for (int i = 0; i < range.size(); i++) {
+      g2d.drawString(range.get(range.size() - i - 1), 0,
+              CELL_SIZE * (i + 1) + (int) getFont().getSize2D());
     }
-    */
 
     int measures = (int) Math.ceil(lastBeat / 4.0);
 
