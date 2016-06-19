@@ -53,8 +53,8 @@ public interface Composition<T> {
    *
    * @param beat a beat
    * @return the list of notes at the given beat
-   * @throws IndexOutOfBoundsException when beat is out of range (either less than 0 or greater than
-   *                                   the size of the composition)
+   * @throws IndexOutOfBoundsException when beat is out of range (either less than 0 or greater
+   *                                   than the size of the composition)
    */
   List<T> getNotes(Integer beat) throws IndexOutOfBoundsException;
 

@@ -20,8 +20,9 @@ import javax.sound.midi.Transmitter;
  * Mock of a Sequencer
  */
 public class MockSequencer implements Sequencer {
-  Sequence seq;
+  private Sequence seq;
 
+  @Override
   public void setSequence(Sequence seq) {
     this.seq = seq;
   }
@@ -45,7 +46,7 @@ public class MockSequencer implements Sequencer {
         command = "PROGRAM_CHANGE";
       }
       int pitch = sm.getData1();
-      sb.append(time + " " + command + " " + pitch + "\n");
+      sb.append(time).append(" ").append(command).append(" ").append(pitch).append("\n");
     }
     return sb.toString();
   }
@@ -221,12 +222,14 @@ public class MockSequencer implements Sequencer {
   }
 
   @Override
-  public int[] addControllerEventListener(ControllerEventListener controllerEventListener, int[] ints) {
+  public int[] addControllerEventListener(ControllerEventListener controllerEventListener, int[]
+          ints) {
     return new int[0];
   }
 
   @Override
-  public int[] removeControllerEventListener(ControllerEventListener controllerEventListener, int[] ints) {
+  public int[] removeControllerEventListener(ControllerEventListener controllerEventListener,
+                                             int[] ints) {
     return new int[0];
   }
 

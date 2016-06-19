@@ -113,8 +113,12 @@ public class ConcreteGuiViewPanel extends JPanel {
 
   @Override
   public Dimension getPreferredSize() {
-    return new Dimension((controller.getSize() + 3) * CELL_SIZE,
-            CELL_SIZE * (controller.getHighestNote().toInt()
-                    - controller.getLowestNote().toInt() + 3));
+    if (controller.getSize() > 0) {
+      return new Dimension((controller.getSize() + 3) * CELL_SIZE,
+              CELL_SIZE * (controller.getHighestNote().toInt()
+                      - controller.getLowestNote().toInt() + 3));
+    } else {
+      return super.getPreferredSize();
+    }
   }
 }

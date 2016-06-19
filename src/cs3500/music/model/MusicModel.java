@@ -131,7 +131,8 @@ public class MusicModel implements Model<Note> {
         }
       }
       int curDuration = end - start;
-      this.notes.addNote(new MusicNote(curPitch, curOctave, start, curDuration, instrument, pitch), start);
+      this.notes.addNote(new MusicNote(curPitch, curOctave, start, curDuration, instrument,
+              pitch), start);
       return this;
     }
 

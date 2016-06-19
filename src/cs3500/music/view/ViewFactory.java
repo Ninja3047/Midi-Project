@@ -14,7 +14,8 @@ public class ViewFactory {
    * @return returns the correct view object based on the given parameter
    * @throws IllegalArgumentException when the view is not one of "console", "visual" or "midi"
    */
-  public static View createView(String view, Controller<Note> con) throws IllegalArgumentException {
+  public static View createView(String view, Controller<Note> con) throws
+          IllegalArgumentException {
     switch (view) {
       case "console":
         return new ConsoleView(con);
