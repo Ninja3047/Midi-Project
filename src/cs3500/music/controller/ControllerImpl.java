@@ -2,7 +2,7 @@ package cs3500.music.controller;
 
 import java.util.List;
 
-import cs3500.music.model.Composition;
+import cs3500.music.model.MusicModel;
 import cs3500.music.model.Note;
 import cs3500.music.view.View;
 
@@ -10,14 +10,14 @@ import cs3500.music.view.View;
  * Implementation of the controller interface
  */
 public class ControllerImpl implements Controller<Note> {
-  private final Composition<Note> curModel;
+  private final MusicModel<Note> curModel;
   private View curView;
 
   /**
    * Constructor
    * @param m model to communicate with
    */
-  public ControllerImpl(Composition<Note> m) {
+  public ControllerImpl(MusicModel<Note> m) {
     this.curModel = m;
   }
 

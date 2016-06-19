@@ -1,7 +1,7 @@
 import java.io.StringReader;
 
-import cs3500.music.model.Composition;
-import cs3500.music.model.MusicComposition;
+import cs3500.music.model.MusicModel;
+import cs3500.music.model.MusicModelComposition;
 import cs3500.music.model.Note;
 import cs3500.music.model.Note.Octave;
 import cs3500.music.model.Note.Pitch;
@@ -11,8 +11,8 @@ import cs3500.music.util.MusicReader;
  * Class to test the model class
  */
 public class CompositionModelTests {
-  private Composition<Note> tester =
-          MusicReader.parseFile(new StringReader(""), new MusicComposition.Builder());
+  private MusicModel<Note> tester =
+          MusicReader.parseFile(new StringReader(""), new MusicModelComposition.Builder());
   private Note n1 = new Note(Pitch.CSHARP, Octave.ONE, 0, 2);
   private Note n2 = new Note(Pitch.B, Octave.ONE, 0, 3);
   private Note n3 = new Note(Pitch.A, Octave.ONE, 2, 4);
@@ -21,8 +21,8 @@ public class CompositionModelTests {
   /*
   @Test
   public void testBuilder() throws FileNotFoundException {
-    Composition<Note> mary = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
-            new MusicComposition.Builder());
+    MusicModel<Note> mary = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
+            new MusicMusicModel.Builder());
     assertEquals(
             "    E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4   E4   F4  F#4   G4 \n" +
                     " 0  X              X                                            X                 \n" +

@@ -4,89 +4,87 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Interface representing MIDI editors
+ * Represents a composition of notes
  */
-public interface Composition<K> {
-
-
+public interface Composition<T> {
   /**
-   * Overlays the given notes onto the existing notes
+   * Adds the given note to the given beat to the composition
    *
-   * @param n the notes to overlay
+   * @param t    a note
+   * @param beat a positive beat number
+   * @throws IndexOutOfBoundsException when the beat number is invalid
    */
-  void overlayNotes(K... n);
+  void addNote(T t, int beat) throws IndexOutOfBoundsException;
 
   /**
-   * Adds the given notes to the end of the existing notes
+   * Changes a given note at the given beat
    *
-   * @param n the notes to append
+   * @param beat a beat
+   * @param t    a note to change
+   * @param t1   the note to change to
+   * @throws IndexOutOfBoundsException if the beat is out of range (either less than 0 or greater
+   *                                   than the size of the composition)
+   * @throws NoSuchElementException    if the note to change was not found
    */
-  void appendNotes(K... n);
+  void setNote(int beat, T t, T t1)
+          throws IndexOutOfBoundsException, NoSuchElementException;
 
   /**
-   * Deletes a note
+   * Removes the given note at the given beat
    *
-   * @param n the note to delete
+   * @param t    a note
+   * @param beat a beat
+   * @return the note removed
+   * @throws IndexOutOfBoundsException if the beat number is out of range (either less than 0 or
+   *                                   greater than the size of the composition)
+   * @throws NoSuchElementException    if given note at the given beat was not found
    */
-  void deleteNote(K n);
+  T removeNote(T t, int beat) throws IndexOutOfBoundsException, NoSuchElementException;
 
   /**
-   * Gets the tempo of the composition in beats per minute
-   * @return a tempo
+   * Returns the last note location
+   * @return the last note location
    */
-  int getTempo();
+  int getLastNoteBeat();
 
   /**
-   * Changes the duration of a note
-   *
-   * @param n           the note to change
-   * @param newDuration the new duration of the note
+   * Returns a list of notes that start at the given beat
+   * @param beat a beat
+   * @return the list of notes at the given beat
+   * @throws IndexOutOfBoundsException when beat is out of range (either less than 0 or greater
+   * than
+   *                                   the size of the composition)
    */
-  void resizeNote(K n, int newDuration);
+  List<T> getNotes(Integer beat) throws IndexOutOfBoundsException;
 
   /**
-   * Moves the given note
-   *
-   * @param n        the note to move
-   * @param newStart the new start point of the note
+   * Returns the size of the composition
+   * @return composition size
    */
-  void moveNote(K n, int newStart);
+  int size();
 
   /**
-   * Returns the beats at the given number
-   *
-   * @param beatNum the number to return the notes at
-   * @return the notes at that beat
-   */
-  List<K> getNotesAtBeat(int beatNum);
-
-  /**
-   * Gets every note in model
-   *
-   * @return the list of all notes
-   */
-  List<K> getAllNotes();
-
-  /**
-   * Returns the lowest note in the composition
-   *
+   * Returns the lowest note of this composition
    * @return the lowest note
-   * @throws NoSuchElementException if there are no notes in the composition
    */
-  K getLowestNote() throws NoSuchElementException;
+  T getLowestNote();
 
   /**
-   * Returns the highest note in the composition
+   * Returns the highest note of this composition
    *
    * @return the highest note
-   * @throws NoSuchElementException if there are no notes in the composition
    */
-  K getHighestNote() throws NoSuchElementException;
+  T getHighestNote();
 
   /**
-   * Gets number of beats in the current piece
-   *
-   * @return the number of beats
+   * Combines the given composition with this one
+   * @param c a composition
    */
-  int getSize();
+  void combineComposition(Composition<T> c);
+
+  /**
+   * Appends the given composition to the end of this one
+   * @param c a composition
+   */
+  void appendComposition(Composition<T> c);
 }

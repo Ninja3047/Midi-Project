@@ -1,9 +1,6 @@
 package cs3500.music.view;
 
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Color;
+import java.awt.*;
 
 import java.util.List;
 
@@ -114,5 +111,12 @@ public class ConcreteGuiViewPanel extends JPanel {
       g2d.fillRect(pos + i * CELL_SIZE + LEFT_OFFSET, pitch * CELL_SIZE
               + CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
+  }
+
+  @Override
+  public Dimension getPreferredSize() {
+    return new Dimension((controller.getSize() + 3) * CELL_SIZE,
+            CELL_SIZE * (controller.getHighestNote().toInt()
+                    - controller.getLowestNote().toInt() + 3));
   }
 }
