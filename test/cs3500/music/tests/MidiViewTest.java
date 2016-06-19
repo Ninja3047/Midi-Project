@@ -33,7 +33,7 @@ public class MidiViewTest {
   public void testMidiData() {
     con.setView(testView);
     testView.display();
-    assertEquals("Tempo: 200000.0" +
+    assertEquals("Tempo: 200000.0\n" +
             "0 PROGRAM_CHANGE 1\n" +
             "0 NOTE_ON 64\n" +
             "0 NOTE_ON 55\n" +

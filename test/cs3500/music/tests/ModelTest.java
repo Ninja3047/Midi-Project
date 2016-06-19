@@ -94,7 +94,14 @@ public class ModelTest {
             new MusicNote(Pitch.B, Octave.ONE, 0, 3)};
     assertArrayEquals(expected2, tester.getAllNotes().toArray());
 
+    tester.appendNotes(n3);
+    MusicNote[] expected3 = {new MusicNote(Pitch.CSHARP, Octave.ONE, 0, 2),
+            new MusicNote(Pitch.B, Octave.ONE, 0, 3), new MusicNote(Pitch.A, Octave.ONE, 5, 4)};
+    assertArrayEquals(expected3, tester.getAllNotes().toArray());
+
     tester.deleteNote(new MusicNote(Pitch.CSHARP, Octave.ONE, 0, 2));
+    tester.deleteNote(new MusicNote(Pitch.B, Octave.ONE, 0, 3));
+    tester.deleteNote(new MusicNote(Pitch.A, Octave.ONE, 5, 4));
     assertArrayEquals(new MusicNote[0], tester.getAllNotes().toArray());
   }
 
