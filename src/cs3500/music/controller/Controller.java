@@ -15,6 +15,13 @@ public interface Controller<T> {
   void start();
 
   /**
+   * Set the view of the controller to the given view
+   *
+   * @param v a view
+   */
+  void setView(View v);
+
+  /**
    * Get notes from model
    *
    * @return the list of notes sorted by low to high pitch
@@ -45,6 +52,14 @@ public interface Controller<T> {
   T getHighestNote();
 
   /**
+   * Returns a list of strings representing the range of the notes of the model The order of the
+   * string is lowest note to highest note
+   *
+   * @return a list of strings representing the range of notes used in the model
+   */
+  List<String> getNoteRange();
+
+  /**
    * Gets the tempo from the model
    * @return the tempo
    */
@@ -56,6 +71,4 @@ public interface Controller<T> {
    * @return the number of beats
    */
   int getSize();
-
-  void setView(View v);
 }

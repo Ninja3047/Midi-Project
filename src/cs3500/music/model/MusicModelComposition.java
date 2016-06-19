@@ -8,10 +8,10 @@ import cs3500.music.model.MusicNote.Pitch;
 import cs3500.music.util.CompositionBuilder;
 
 /**
- * Class representing a MIDI editor using class MusicNote
+ * Class representing a MIDI editor using class Note
  */
-public class MusicModelComposition implements MusicModel<MusicNote> {
-  private final Composition<MusicNote> notes;
+public class MusicModelComposition implements MusicModel<Note> {
+  private final Composition<Note> notes;
   private final int tempo;
 
   private MusicModelComposition(Builder b) {
@@ -25,32 +25,46 @@ public class MusicModelComposition implements MusicModel<MusicNote> {
   }
 
   @Override
-  public void addNote(MusicNote n) {
+  public void addNote(Note n) {
     notes.addNote(n, n.getStart());
   }
 
   @Override
-  public void overlayNotes(Composition<MusicNote> n) {
+  public void overlayNotes(Composition<Note> n) {
     notes.combineComposition(n);
   }
 
   @Override
-  public void appendNotes(Composition<MusicNote> n) {
+  public void appendNotes(Composition<Note> n) {
     notes.appendComposition(n);
   }
 
   @Override
-  public MusicNote getLowestNote() {
+  public Note getLowestNote() {
     return notes.getLowestNote();
   }
 
   @Override
-  public MusicNote getHighestNote() {
+  public Note getHighestNote() {
     return notes.getHighestNote();
   }
 
   @Override
-  public void deleteNote(MusicNote n) {
+  public List<String> getNoteRange() {
+    List<String> range = new ArrayList<>();
+    for (Octave o : Octave.values()) {
+      for (Pitch p : Pitch.values()) {
+        int note = MusicNote.Utils.toInt(p, o);
+        if (getLowestNote().toInt() <= note && getHighestNote().toInt() >= note) {
+          range.add(MusicNote.Utils.toString(p, o));
+        }
+      }
+    }
+    return range;
+  }
+
+  @Override
+  public void deleteNote(Note n) {
     notes.removeNote(n, n.getStart());
   }
 
@@ -58,9 +72,9 @@ public class MusicModelComposition implements MusicModel<MusicNote> {
   public int getSize() {
     int lnb = notes.getLastNoteBeat();
     if (notes.getNotes(lnb).size() > 0) {
-      List<MusicNote> lastNotes = notes.getNotes(lnb);
+      List<Note> lastNotes = notes.getNotes(lnb);
       int longestDuration = 0;
-      for (MusicNote n : lastNotes) {
+      for (Note n : lastNotes) {
         if (longestDuration < n.getDuration()) {
           longestDuration = n.getDuration();
         }
@@ -73,21 +87,21 @@ public class MusicModelComposition implements MusicModel<MusicNote> {
   }
 
   @Override
-  public List<MusicNote> getNotesAtBeat(int beatNum) {
+  public List<Note> getNotesAtBeat(int beatNum) {
     return notes.getNotes(beatNum);
   }
 
   @Override
-  public List<MusicNote> getAllNotes() {
-    List<MusicNote> allnotes = new ArrayList<>();
+  public List<Note> getAllNotes() {
+    List<Note> allnotes = new ArrayList<>();
     for (int i = 0; i < notes.getLastNoteBeat() + 1; i++) {
       allnotes.addAll(notes.getNotes(i));
     }
     return allnotes;
   }
 
-  public static final class Builder implements CompositionBuilder<MusicModel<MusicNote>> {
-    private final Composition<MusicNote> notes;
+  public static final class Builder implements CompositionBuilder<MusicModel<Note>> {
+    private final Composition<Note> notes;
     private int tempo;
 
     public Builder() {
@@ -96,12 +110,12 @@ public class MusicModelComposition implements MusicModel<MusicNote> {
     }
 
     @Override
-    public CompositionBuilder<MusicModel<MusicNote>> addNote(int start, int end, int instrument,
-                                                             int pitch, int volume) {
+    public CompositionBuilder<MusicModel<Note>> addNote(int start, int end, int instrument,
+                                                        int pitch, int volume) {
       int octaveInt = pitch / 12 - 1;
       int pitchInt = pitch % 12;
       Pitch curPitch = Pitch.C;
-      for (MusicNote.Pitch p : MusicNote.Pitch.values()) {
+      for (Pitch p : Pitch.values()) {
         if (p.getValue() == pitchInt) {
           curPitch = p;
           break;
@@ -120,13 +134,13 @@ public class MusicModelComposition implements MusicModel<MusicNote> {
     }
 
     @Override
-    public CompositionBuilder<MusicModel<MusicNote>> setTempo(int tempo) {
+    public CompositionBuilder<MusicModel<Note>> setTempo(int tempo) {
       this.tempo = tempo;
       return this;
     }
 
     @Override
-    public MusicModel<MusicNote> build() {
+    public MusicModel<Note> build() {
       return new MusicModelComposition(this);
     }
   }

@@ -59,20 +59,28 @@ public interface MusicModel<K> {
   List<K> getAllNotes();
 
   /**
-   * Returns the lowest note in the composition
+   * Returns the lowest note in the model
    *
    * @return the lowest note
-   * @throws NoSuchElementException if there are no notes in the composition
+   * @throws NoSuchElementException if there are no notes in the model
    */
   K getLowestNote() throws NoSuchElementException;
 
   /**
-   * Returns the highest note in the composition
+   * Returns the highest note in the model
    *
    * @return the highest note
-   * @throws NoSuchElementException if there are no notes in the composition
+   * @throws NoSuchElementException if there are no notes in the model
    */
   K getHighestNote() throws NoSuchElementException;
+
+  /**
+   * Returns a list of strings representing the range of the notes of the model The order of the
+   * string is lowest note to highest note
+   *
+   * @return a list of strings representing the range of notes used in the model
+   */
+  List<String> getNoteRange();
 
   /**
    * Gets number of beats in the current piece

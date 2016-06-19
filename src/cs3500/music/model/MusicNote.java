@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Class representing a note
  */
-public class MusicNote implements Comparable<MusicNote>, Note {
+public class MusicNote implements Comparable<Note>, Note {
   private final Pitch curPitch;
   private final Octave curOctave;
   private int start;
@@ -235,7 +235,7 @@ public class MusicNote implements Comparable<MusicNote>, Note {
   }
 
   @Override
-  public int compareTo(MusicNote n) {
+  public int compareTo(Note n) {
     return n.toInt() - this.toInt();
   }
 }
