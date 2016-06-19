@@ -22,5 +22,5 @@ model.  It gets the relevant information from the controller and then
 the controller, changing the implementation of a specific View will not
 require any changes to the controller.
 
-The model, controller, and view are completely seperated from each other, so
+The model, controller, and view are completely separated from each other, so
 changes to any of the parts are easy to make.
