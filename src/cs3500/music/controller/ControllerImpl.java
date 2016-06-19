@@ -22,6 +22,7 @@ public class ControllerImpl implements Controller<Note> {
     this.curModel = m;
   }
 
+  @Override
   public void setView(View v) {
     this.curView = v;
   }

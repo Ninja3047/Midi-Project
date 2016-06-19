@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Represents a composition of notes
+ * Represents a general composition
  */
 public interface Composition<T> {
   /**

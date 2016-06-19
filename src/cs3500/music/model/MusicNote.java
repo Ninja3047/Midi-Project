@@ -16,28 +16,12 @@ public class MusicNote implements Comparable<Note>, Note {
   /**
    * MusicNote constructor
    *
-   * @param curPitch  the pitch of the note
-   * @param curOctave the octave of the note
-   * @param start     the starting beat
-   * @param duration  the duration (in beats) of the note
+   * @param curPitch   the pitch of the note
+   * @param curOctave  the octave of the note
+   * @param start      the starting beat
+   * @param duration   the duration (in beats) of the note
+   * @param instrument the instrument of the note
    */
-  public MusicNote(Pitch curPitch, Octave curOctave, int start, int duration) {
-    this.curPitch = curPitch;
-    this.curOctave = curOctave;
-    if (start < 0) {
-      throw new IllegalArgumentException("Illegal start time");
-    } else {
-      this.start = start;
-    }
-    if (duration < 0) {
-      throw new IllegalArgumentException("Illegal duration: " + duration);
-    } else {
-      this.duration = duration;
-    }
-    this.instrument = 1;
-    this.volume = 64;
-  }
-
   public MusicNote(Pitch curPitch, Octave curOctave, int start, int duration, int instrument,
                    int volume) {
     this.curPitch = curPitch;
@@ -65,15 +49,24 @@ public class MusicNote implements Comparable<Note>, Note {
   }
 
   /**
+   * MusicNote constructor
+   *
+   * @param curPitch  the pitch of the note
+   * @param curOctave the octave of the note
+   * @param start     the starting beat
+   * @param duration  the duration (in beats) of the note
+   */
+  public MusicNote(Pitch curPitch, Octave curOctave, int start, int duration) {
+    this(curPitch, curOctave, start, duration, 1, 64);
+  }
+
+  /**
    * Creates a copy of a note given the note
    *
    * @param n a note
    */
   public MusicNote(MusicNote n) {
-    this.curPitch = n.curPitch;
-    this.curOctave = n.curOctave;
-    this.start = n.start;
-    this.duration = n.duration;
+    this(n.curPitch, n.curOctave, n.start, n.duration);
   }
 
   @Override
@@ -143,7 +136,7 @@ public class MusicNote implements Comparable<Note>, Note {
 
   @Override
   public int toInt() {
-    return this.curOctave.getValue() * 12 + this.curPitch.ordinal() + 12;
+    return this.curOctave.getValue() * 12 + this.curPitch.getValue() + 12;
   }
 
   @Override
@@ -151,6 +144,9 @@ public class MusicNote implements Comparable<Note>, Note {
     return n.toInt() - this.toInt();
   }
 
+  /**
+   * Represents the pitch for a note
+   */
   public enum Pitch {
     C(0), CSHARP(1), D(2), DSHARP(3), E(4), F(5),
     FSHARP(6), G(7), GSHARP(8), A(9), ASHARP(10), B(11);
@@ -161,6 +157,10 @@ public class MusicNote implements Comparable<Note>, Note {
       this.value = value;
     }
 
+    /**
+     * Returns the value of the pitch, with C being 0
+     * @return the value of the pitch
+     */
     public int getValue() {
       return value;
     }
@@ -198,9 +198,12 @@ public class MusicNote implements Comparable<Note>, Note {
     }
   }
 
+  /**
+   * Represents an octave of a note
+   */
   public enum Octave {
-    ZERO(0), ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5),
-    SIX(6), SEVEN(7), EIGHT(8), NINE(9), TEN(10);
+    MINUSONE(-1), ZERO(0), ONE(1), TWO(2), THREE(3), FOUR(4),
+    FIVE(5), SIX(6), SEVEN(7), EIGHT(8), NINE(9), TEN(10);
 
     private final int octave;
 
@@ -208,6 +211,10 @@ public class MusicNote implements Comparable<Note>, Note {
       this.octave = octave;
     }
 
+    /**
+     * Returns the value of this octave
+     * @return the value
+     */
     public int getValue() {
       return octave;
     }
@@ -234,6 +241,12 @@ public class MusicNote implements Comparable<Note>, Note {
       return o.getValue() * 12 + p.getValue() + 12;
     }
 
+    /**
+     * Returns the string representation of the given pitch and octave
+     * @param p a pitch
+     * @param o an octave
+     * @return the integer representation
+     */
     public static String toString(Pitch p, Octave o) {
       return p.toString() + o.toString();
     }

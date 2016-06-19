@@ -30,13 +30,23 @@ public class MusicModel implements Model<Note> {
   }
 
   @Override
-  public void overlayNotes(Composition<Note> n) {
-    notes.combineComposition(n);
+  public void overlayNotes(Note... n) {
+    Composition<Note> c = new MusicComposition();
+    for (Note t : n) {
+      c.addNote(t, t.getStart());
+    }
+
+    this.notes.combineComposition(c);
   }
 
   @Override
-  public void appendNotes(Composition<Note> n) {
-    notes.appendComposition(n);
+  public void appendNotes(Note... n) {
+    Composition<Note> c = new MusicComposition();
+    for (Note t : n) {
+      c.addNote(t, t.getStart());
+    }
+
+    this.notes.appendComposition(c);
   }
 
   @Override
@@ -102,10 +112,16 @@ public class MusicModel implements Model<Note> {
     return allnotes;
   }
 
+  /**
+   * Builds the Music Model
+   */
   public static final class Builder implements CompositionBuilder<Model<Note>> {
     private final Composition<Note> notes;
     private int tempo;
 
+    /**
+     * Constructs a Builder for the Music Model
+     */
     public Builder() {
       this.notes = new MusicComposition();
       this.tempo = 0;

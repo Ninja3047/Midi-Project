@@ -8,7 +8,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
- * Abstract composition class
+ * Represents an abstract general composition
  */
 public abstract class AbstractComposition<T> implements Composition<T> {
   private final SortedMap<T, List<Integer>> composition;

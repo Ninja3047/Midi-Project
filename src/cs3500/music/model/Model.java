@@ -20,14 +20,14 @@ public interface Model<K> {
    *
    * @param n the notes to overlay
    */
-  void overlayNotes(Composition<K> n);
+  void overlayNotes(Note... n);
 
   /**
    * Adds the given notes to the end of the existing notes
    *
    * @param n the notes to append
    */
-  void appendNotes(Composition<K> n);
+  void appendNotes(Note... n);
 
   /**
    * Deletes a note

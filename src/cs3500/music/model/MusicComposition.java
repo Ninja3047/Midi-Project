@@ -1,7 +1,7 @@
 package cs3500.music.model;
 
 /**
- * Music Composition representation
+ * Represents a composition of notes
  */
 public final class MusicComposition extends AbstractComposition<Note> {
 
