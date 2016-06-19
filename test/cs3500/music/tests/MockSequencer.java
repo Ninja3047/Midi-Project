@@ -41,6 +41,8 @@ public class MockSequencer implements Sequencer {
       String command = "NOTE_OFF";
       if (sm.getCommand() == ShortMessage.NOTE_ON) {
         command = "NOTE_ON";
+      } else if (sm.getCommand() == ShortMessage.PROGRAM_CHANGE) {
+        command = "PROGRAM_CHANGE";
       }
       int pitch = sm.getData1();
       sb.append(time + " " + command + " " + pitch + "\n");
