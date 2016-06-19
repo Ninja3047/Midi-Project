@@ -36,6 +36,12 @@ public class MidiViewImpl implements MidiView {
     this.sequencer = sequencer;
   }
 
+  /**
+   * Constructor for explicit sequencer
+   *
+   * @param controller controller to interact with
+   * @param seq        the sequencer to use
+   */
   public MidiViewImpl(Controller<Note> controller, Sequencer seq) {
     this.controller = controller;
     this.sequencer = seq;
@@ -59,14 +65,15 @@ public class MidiViewImpl implements MidiView {
 
   private void createMidiTrack(Track toPlay, List<Note> toAdd) throws InvalidMidiDataException {
     HashMap<Integer, Integer> instruments = new HashMap<>();
-    int i = 0;
+    int instChannel = 0;
     for (Note n : toAdd) {
       int curInstrument = n.getInstrument();
       if (!(instruments.containsKey(curInstrument))) {
-        instruments.put(curInstrument, i);
-        MidiMessage iMessage = new ShortMessage(ShortMessage.PROGRAM_CHANGE, i, curInstrument, 0);
+        instruments.put(curInstrument, instChannel);
+        MidiMessage iMessage = new ShortMessage(ShortMessage.PROGRAM_CHANGE,
+                instChannel, curInstrument, 0);
         toPlay.add(new MidiEvent(iMessage, 0));
-        i += 1;
+        instChannel += 1;
       }
       int pitch = n.toInt();
       int noteEnd = n.getStart() + n.getDuration();
