@@ -35,6 +35,11 @@ public class MidiViewImpl implements MidiView {
     this.sequencer = sequencer;
   }
 
+  public MidiViewImpl(Controller<Note> controller, Sequencer seq) {
+    this.controller = controller;
+    this.sequencer = seq;
+  }
+
   @Override
   public void display() {
     List<Note> notes = controller.getNotes();
