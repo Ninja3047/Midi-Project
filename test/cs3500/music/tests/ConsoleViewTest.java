@@ -7,8 +7,8 @@ import java.io.FileReader;
 
 import cs3500.music.controller.Controller;
 import cs3500.music.controller.ControllerImpl;
+import cs3500.music.model.Model;
 import cs3500.music.model.MusicModel;
-import cs3500.music.model.MusicModelComposition;
 import cs3500.music.model.Note;
 import cs3500.music.util.MusicReader;
 import cs3500.music.view.ConsoleView;
@@ -19,8 +19,8 @@ import static org.junit.Assert.assertEquals;
  * Class to test ConsoleView using ConsoleViewMock
  */
 public class ConsoleViewTest {
-  private MusicModel<Note> model = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
-          new MusicModelComposition.Builder());
+  private Model<Note> model = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
+          new MusicModel.Builder());
   private Controller c = new ControllerImpl(model);
   private StringBuilder sb = new StringBuilder();
   private ConsoleView testView = new ConsoleView(c, sb);

@@ -6,8 +6,8 @@ import java.io.StringReader;
 
 import cs3500.music.controller.Controller;
 import cs3500.music.controller.ControllerImpl;
+import cs3500.music.model.Model;
 import cs3500.music.model.MusicModel;
-import cs3500.music.model.MusicModelComposition;
 import cs3500.music.model.Note;
 import cs3500.music.util.MusicReader;
 import cs3500.music.view.MidiView;
@@ -19,12 +19,12 @@ import static org.junit.Assert.assertEquals;
  */
 public class MidiViewTest {
 
-  MusicModel<Note> model = MusicReader.parseFile(new StringReader("tempo 200000\n" +
+  Model<Note> model = MusicReader.parseFile(new StringReader("tempo 200000\n" +
                   "note 0 2 1 64 72\n" +
                   "note 0 7 1 55 70\n" +
                   "note 2 4 1 62 72\n" +
                   "note 4 6 1 60 71"),
-          new MusicModelComposition.Builder());
+          new MusicModel.Builder());
   Controller<Note> con = new ControllerImpl(model);
   MockSequencer mock = new MockSequencer();
   MidiView testView = new MidiView(con, mock);

@@ -9,10 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import cs3500.music.model.Composition;
-import cs3500.music.model.MusicComposition;
+import cs3500.music.model.Model;
 import cs3500.music.model.MusicModel;
-import cs3500.music.model.MusicModelComposition;
 import cs3500.music.model.MusicNote;
 import cs3500.music.model.MusicNote.Octave;
 import cs3500.music.model.MusicNote.Pitch;
@@ -26,17 +24,17 @@ import static org.junit.Assert.fail;
 /**
  * Class to test the model class
  */
-public class MusicModelTest {
-  private MusicModel<Note> tester =
-          MusicReader.parseFile(new StringReader(""), new MusicModelComposition.Builder());
+public class ModelTest {
+  private Model<Note> tester =
+          MusicReader.parseFile(new StringReader(""), new MusicModel.Builder());
   private Note n1 = new MusicNote(Pitch.CSHARP, Octave.ONE, 0, 2);
 
-  private MusicModel<Note> advancedTester =
+  private Model<Note> advancedTester =
           MusicReader.parseFile(new StringReader("tempo 200000\n" +
                   "note 0 2 1 64 72\n" +
                   "note 0 7 1 55 70\n" +
                   "note 2 4 1 62 72\n" +
-                  "note 4 6 1 60 71"), new MusicModelComposition.Builder());
+                  "note 4 6 1 60 71"), new MusicModel.Builder());
 
   @Test
   public void testBuilder() throws FileNotFoundException {
