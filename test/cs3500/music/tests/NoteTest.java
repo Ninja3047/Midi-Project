@@ -21,6 +21,19 @@ public class NoteTest {
   private MusicNote n3 = new MusicNote(Pitch.A, Octave.TWO, 2, 2);
   private MusicNote n4 = new MusicNote(Pitch.A, Octave.ONE, 0, 1);
   private MusicNote n5 = new MusicNote(Pitch.A, Octave.ONE, 1, 1);
+  private MusicNote n6 = new MusicNote(Pitch.A, Octave.EIGHT, 1, 1, 45, 20);
+
+  @Test
+  public void testGetInstrument() {
+    assertEquals(1, n1.getInstrument());
+    assertEquals(45, n6.getInstrument());
+  }
+
+  @Test
+  public void testGetVolume() {
+    assertEquals(64, n1.getVolume());
+    assertEquals(20, n6.getVolume());
+  }
 
   @Test
   public void testUtilsToString() {
