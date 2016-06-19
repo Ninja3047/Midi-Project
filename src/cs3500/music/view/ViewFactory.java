@@ -16,11 +16,11 @@ public class ViewFactory {
   public static View createView(String view, Controller<Note> con) throws IllegalArgumentException {
     switch (view) {
       case "console":
-        return new ConsoleViewImpl(con);
+        return new ConsoleView(con);
       case "visual":
         return new GuiViewFrame(con);
       case "midi":
-        return new MidiViewImpl(con);
+        return new MidiView(con);
       default:
         throw new IllegalArgumentException();
     }

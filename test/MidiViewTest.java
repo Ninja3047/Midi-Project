@@ -8,7 +8,7 @@ import cs3500.music.model.MusicModel;
 import cs3500.music.model.MusicModelComposition;
 import cs3500.music.model.Note;
 import cs3500.music.util.MusicReader;
-import cs3500.music.view.MidiViewImpl;
+import cs3500.music.view.MidiView;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,7 +25,7 @@ public class MidiViewTest {
           new MusicModelComposition.Builder());
   Controller<Note> con = new ControllerImpl(model);
   MockSequencer mock = new MockSequencer();
-  MidiViewImpl testView = new MidiViewImpl(con, mock);
+  MidiView testView = new MidiView(con, mock);
 
   @Test
   public void testMidiData() {

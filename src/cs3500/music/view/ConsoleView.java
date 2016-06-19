@@ -12,17 +12,17 @@ import cs3500.music.model.Note.Pitch;
 /**
  * The Console View
  */
-public class ConsoleViewImpl implements View {
+public class ConsoleView implements View {
 
   private final Controller<Note> con;
   private Appendable output;
 
-  public ConsoleViewImpl(Controller<Note> con) {
+  public ConsoleView(Controller<Note> con) {
     this.con = con;
     this.output = System.out;
   }
 
-  public ConsoleViewImpl(Controller<Note> con, Appendable output) {
+  public ConsoleView(Controller<Note> con, Appendable output) {
     this.con = con;
     this.output = output;
   }

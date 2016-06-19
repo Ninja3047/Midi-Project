@@ -9,7 +9,7 @@ import cs3500.music.model.MusicModel;
 import cs3500.music.model.MusicModelComposition;
 import cs3500.music.model.Note;
 import cs3500.music.util.MusicReader;
-import cs3500.music.view.ConsoleViewImpl;
+import cs3500.music.view.ConsoleView;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,7 +21,7 @@ public class ConsoleViewTest {
           new MusicModelComposition.Builder());
   private Controller c = new ControllerImpl(model);
   private StringBuilder sb = new StringBuilder();
-  private ConsoleViewImpl testView = new ConsoleViewImpl(c, sb);
+  private ConsoleView testView = new ConsoleView(c, sb);
 
   public ConsoleViewTest() throws FileNotFoundException {
     c.setView(testView);
