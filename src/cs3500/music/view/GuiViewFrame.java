@@ -5,7 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import cs3500.music.controller.Controller;
-import cs3500.music.model.MusicNote;
+import cs3500.music.model.Note;
 
 /**
  * A skeleton Frame (i.e., a window) in Swing
@@ -13,12 +13,12 @@ import cs3500.music.model.MusicNote;
 public class GuiViewFrame extends javax.swing.JFrame implements View {
 
   private final JScrollPane displayPanel; // You may want to refine this to a subtype of JPanel
-  private final Controller<MusicNote> controller;
+  private final Controller<Note> controller;
 
   /**
    * Creates new GuiView
    */
-  public GuiViewFrame(Controller<MusicNote> controller) {
+  public GuiViewFrame(Controller<Note> controller) {
     this.controller = controller;
     this.displayPanel = new JScrollPane(new ConcreteGuiViewPanel(controller));
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

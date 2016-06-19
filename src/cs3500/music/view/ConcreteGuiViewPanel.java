@@ -1,15 +1,14 @@
 package cs3500.music.view;
 
 import java.awt.*;
-
 import java.util.List;
 
 import javax.swing.*;
 
 import cs3500.music.controller.Controller;
 import cs3500.music.model.Note;
-import cs3500.music.model.Note.Octave;
-import cs3500.music.model.Note.Pitch;
+//import cs3500.music.model.Note.Octave;
+//import cs3500.music.model.Note.Pitch;
 
 /**
  * Draws the composition
@@ -49,13 +48,14 @@ public class ConcreteGuiViewPanel extends JPanel {
     int pitches = highPitch.toInt() - lowPitch.toInt() + 1;
 
     // draw horizontal note lines and pitch labels
-    Octave[] os = Octave.values();
+    //Octave[] os = Octave.values();
 
     for (int i = 0; i <= pitches; i++) {
       g2d.drawLine(LEFT_OFFSET, CELL_SIZE * (i + 1),
               LEFT_OFFSET + CELL_SIZE * lastBeat, CELL_SIZE * (i + 1));
     }
 
+    /*
     for (int o = os.length - 1; o >= 0; o--) {
       for (Pitch p : Pitch.values()) {
         int note = Note.Utils.toInt(p, os[o]);
@@ -65,6 +65,7 @@ public class ConcreteGuiViewPanel extends JPanel {
         }
       }
     }
+    */
 
     int measures = (int) Math.ceil(lastBeat / 4.0);
 
