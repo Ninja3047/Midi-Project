@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Final-Music-Project:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Final_Music_Project_jar</output-path>
+    <root id="archive" name="Final-Music-Project.jar">
+      <element id="module-output" name="Final-Music-Project" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
