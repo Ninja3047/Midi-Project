@@ -1,5 +1,6 @@
 package cs3500.music.view;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,15 +15,26 @@ import cs3500.music.model.Note.Pitch;
 public class ConsoleViewImpl implements View {
 
   private final Controller<Note> con;
+  private Appendable output;
 
   public ConsoleViewImpl(Controller<Note> con) {
     this.con = con;
+    this.output = System.out;
+  }
+
+  public ConsoleViewImpl(Controller<Note> con, Appendable output) {
+    this.con = con;
+    this.output = output;
   }
 
   @Override
   public void display() {
     String formatNotes = this.printNotes(this.con.getNotes());
-    System.out.println(formatNotes);
+    try {
+      output.append(formatNotes);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -35,8 +47,8 @@ public class ConsoleViewImpl implements View {
       return "No notes";
     }
     //Get the lowest and highest note
-    Note low = toPrint.get(0);
-    Note high = toPrint.get(toPrint.size() - 1);
+    Note low = this.con.getLowestNote();
+    Note high = this.con.getHighestNote();
 
     //Info about dimensions
     int totalNotes = high.toInt() - low.toInt() + 1;

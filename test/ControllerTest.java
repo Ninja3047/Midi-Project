@@ -27,18 +27,38 @@ public class ControllerTest {
   private Controller testCon = new ControllerImpl(model);
 
   @Test
+  public void testGetHighestNote() {
+    assertEquals(new Note(Pitch.E, Octave.FOUR, 0, 2), testCon.getHighestNote());
+  }
+
+  @Test
+  public void testGetLowestNote() {
+    assertEquals(new Note(Pitch.G, Octave.THREE, 0, 7), testCon.getLowestNote());
+  }
+
+  @Test
+  public void testGetSize() {
+    assertEquals(6, testCon.getSize());
+  }
+
+  @Test
+  public void testGetNotesAt() {
+    Note[] expected = {new Note(Pitch.E, Octave.FOUR, 0, 2),
+            new Note(Pitch.G, Octave.THREE, 0, 7)};
+    assertArrayEquals(expected, testCon.getNotesAtBeat(0).toArray());
+  }
+
+  @Test
   public void testGetNotes() {
-    testCon.start();
-    Note[] correct = {new Note(Pitch.G, Octave.THREE, 0, 8),
-            new Note(Pitch.C, Octave.FOUR, 4, 3),
-            new Note(Pitch.D, Octave.FOUR, 2, 3),
-            new Note(Pitch.E, Octave.FOUR, 0, 3)};
+    Note[] correct = {new Note(Pitch.E, Octave.FOUR, 0, 2),
+            new Note(Pitch.G, Octave.THREE, 0, 7),
+            new Note(Pitch.D, Octave.FOUR, 2, 2),
+            new Note(Pitch.C, Octave.FOUR, 4, 2)};
     assertArrayEquals(correct, this.testCon.getNotes().toArray());
   }
 
   @Test
   public void testGetTempo() {
-    testCon.start();
     assertEquals(200000, this.testCon.getTempo());
   }
 }

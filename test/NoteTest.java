@@ -1,8 +1,8 @@
 import org.junit.Test;
 
 import cs3500.music.model.Note;
-import cs3500.music.model.Note.Pitch;
 import cs3500.music.model.Note.Octave;
+import cs3500.music.model.Note.Pitch;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -29,9 +29,9 @@ public class NoteTest {
 
   @Test
   public void testUtilsToInt() {
-    assertEquals(0, Note.Utils.toInt(Pitch.C, Octave.ZERO));
-    assertEquals(40, Note.Utils.toInt(Pitch.E, Octave.THREE));
-    assertEquals(127, Note.Utils.toInt(Pitch.G, Octave.TEN));
+    assertEquals(12, Note.Utils.toInt(Pitch.C, Octave.ZERO));
+    assertEquals(52, Note.Utils.toInt(Pitch.E, Octave.THREE));
+    assertEquals(139, Note.Utils.toInt(Pitch.G, Octave.TEN));
   }
 
   @Test
@@ -105,10 +105,10 @@ public class NoteTest {
 
   @Test
   public void testGetCurOctave() {
-    assertEquals(1, n1.getCurOctave());
-    assertEquals(1, n2.getCurOctave());
-    assertEquals(2, n3.getCurOctave());
-    assertEquals(1, n4.getCurOctave());
+    assertEquals(Octave.ONE, n1.getCurOctave());
+    assertEquals(Octave.ONE, n2.getCurOctave());
+    assertEquals(Octave.TWO, n3.getCurOctave());
+    assertEquals(Octave.ONE, n4.getCurOctave());
   }
 
   @Test
@@ -138,17 +138,17 @@ public class NoteTest {
 
   @Test
   public void testToInt() {
-    assertEquals(21, n1.toInt());
-    assertEquals(23, n2.toInt());
-    assertEquals(33, n3.toInt());
-    assertEquals(21, n4.toInt());
+    assertEquals(33, n1.toInt());
+    assertEquals(35, n2.toInt());
+    assertEquals(45, n3.toInt());
+    assertEquals(33, n4.toInt());
   }
 
   @Test
   public void testCompare() {
-    assertEquals(-2, n1.compareTo(n2));
-    assertEquals(-1, n2.compareTo(n3));
-    assertEquals(1, n3.compareTo(n5));
-    assertEquals(-1, n1.compareTo(n5));
+    assertEquals(2, n1.compareTo(n2));
+    assertEquals(10, n2.compareTo(n3));
+    assertEquals(-12, n3.compareTo(n5));
+    assertEquals(0, n1.compareTo(n5));
   }
 }

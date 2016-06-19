@@ -1,22 +1,8 @@
-import org.junit.Test;
-
-import java.io.StringReader;
-
-import cs3500.music.controller.Controller;
-import cs3500.music.controller.ControllerImpl;
-import cs3500.music.model.MusicModel;
-import cs3500.music.model.MusicModelComposition;
-import cs3500.music.model.Note;
-import cs3500.music.util.MusicReader;
-
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-
-
 /**
  * Class to test MidiView
  */
 public class MidiViewTest {
+  /*
   MusicModel<Note> model = MusicReader.parseFile(new StringReader("tempo 200000\n" +
             "note 0 2 1 64 72\n" +
             "note 0 7 1 55 70\n" +
@@ -37,4 +23,5 @@ public class MidiViewTest {
     assertArrayEquals(expectedStarts, v.getStarts().toArray());
     assertArrayEquals(expectedEnds, v.getEnds().toArray());
   }
+  */
 }

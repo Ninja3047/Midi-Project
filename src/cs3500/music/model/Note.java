@@ -190,7 +190,7 @@ public class Note implements Comparable<Note> {
 
   @Override
   public String toString() {
-    return this.curPitch.toString() + this.curOctave;
+    return this.curPitch.toString() + this.curOctave.toString();
   }
 
   /**
@@ -199,7 +199,7 @@ public class Note implements Comparable<Note> {
    * @return the integer representation
    */
   public int toInt() {
-    return this.curOctave.getValue() * 12 + this.curPitch.ordinal();
+    return this.curOctave.getValue() * 12 + this.curPitch.ordinal() + 12;
   }
 
   @Override
