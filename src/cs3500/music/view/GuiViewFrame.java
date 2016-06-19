@@ -22,6 +22,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements View {
     this.controller = controller;
     this.displayPanel = new JScrollPane(new ConcreteGuiViewPanel(controller));
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    this.setTitle("Music Player");
     this.getContentPane().add(displayPanel, BorderLayout.CENTER);
     this.pack();
   }
