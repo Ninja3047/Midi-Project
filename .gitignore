@@ -10,6 +10,12 @@
 *.war
 *.ear
 
+# IntelliJ configuration, workspace, and output
+*.iws
+.idea/workspace.xml
+classes
+javadoc
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 ### Maven template
@@ -33,3 +39,4 @@ Session.vim
 *~
 # auto-generated tag files
 tags
+out/
