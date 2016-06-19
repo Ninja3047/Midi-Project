@@ -21,6 +21,7 @@ import javax.sound.midi.Transmitter;
  */
 public class MockSequencer implements Sequencer {
   private Sequence seq;
+  private float tempo;
 
   @Override
   public void setSequence(Sequence seq) {
@@ -34,7 +35,7 @@ public class MockSequencer implements Sequencer {
    */
   public String getData() {
     Track t = this.seq.getTracks()[0];
-    StringBuilder sb = new StringBuilder();
+    StringBuilder sb = new StringBuilder("Tempo: " + Float.toString(this.tempo) + "\n");
     for (int i = 0; i < t.size() - 1; i += 1) {
       MidiEvent me = t.get(i);
       long time = me.getTick();
@@ -49,6 +50,11 @@ public class MockSequencer implements Sequencer {
       sb.append(time).append(" ").append(command).append(" ").append(pitch).append("\n");
     }
     return sb.toString();
+  }
+
+  @Override
+  public void setTempoInMPQ(float v) {
+    this.tempo = v;
   }
 
   @Override
@@ -114,11 +120,6 @@ public class MockSequencer implements Sequencer {
   @Override
   public float getTempoInMPQ() {
     return 0;
-  }
-
-  @Override
-  public void setTempoInMPQ(float v) {
-
   }
 
   @Override

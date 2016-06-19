@@ -2,7 +2,6 @@ package cs3500.music.tests;
 
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +27,8 @@ public class ModelTest {
   private Model<Note> tester =
           MusicReader.parseFile(new StringReader(""), new MusicModel.Builder());
   private Note n1 = new MusicNote(Pitch.CSHARP, Octave.ONE, 0, 2);
+  private Note n2 = new MusicNote(Pitch.B, Octave.ONE, 0, 3);
+  private Note n3 = new MusicNote(Pitch.A, Octave.ONE, 2, 4);
 
   private Model<Note> advancedTester =
           MusicReader.parseFile(new StringReader("tempo 200000\n" +
@@ -37,7 +38,7 @@ public class ModelTest {
                   "note 4 6 1 60 71"), new MusicModel.Builder());
 
   @Test
-  public void testBuilder() throws FileNotFoundException {
+  public void testBuilder() {
     Note[] expected = {new MusicNote(Pitch.E, Octave.FOUR, 0, 2),
             new MusicNote(Pitch.G, Octave.THREE, 0, 7),
             new MusicNote(Pitch.D, Octave.FOUR, 2, 2),
@@ -84,9 +85,14 @@ public class ModelTest {
   public void testModel() {
     assertArrayEquals(new MusicNote[0], tester.getAllNotes().toArray());
 
-    MusicNote[] expected = {new MusicNote(Pitch.CSHARP, Octave.ONE, 0, 2)};
+    MusicNote[] expected1 = {new MusicNote(Pitch.CSHARP, Octave.ONE, 0, 2)};
     tester.addNote(n1);
-    assertArrayEquals(expected, tester.getAllNotes().toArray());
+    assertArrayEquals(expected1, tester.getAllNotes().toArray());
+
+    tester.overlayNotes(n2);
+    MusicNote[] expected2 = {new MusicNote(Pitch.CSHARP, Octave.ONE, 0, 2),
+            new MusicNote(Pitch.B, Octave.ONE, 0, 3)};
+    assertArrayEquals(expected2, tester.getAllNotes().toArray());
 
     tester.deleteNote(new MusicNote(Pitch.CSHARP, Octave.ONE, 0, 2));
     assertArrayEquals(new MusicNote[0], tester.getAllNotes().toArray());
