@@ -51,13 +51,13 @@ public class MockSequencer implements Sequencer {
   }
 
   @Override
-  public void setSequence(InputStream inputStream) throws IOException, InvalidMidiDataException {
-
+  public Sequence getSequence() {
+    return null;
   }
 
   @Override
-  public Sequence getSequence() {
-    return null;
+  public void setSequence(InputStream inputStream) throws IOException, InvalidMidiDataException {
+
   }
 
   @Override
@@ -121,13 +121,13 @@ public class MockSequencer implements Sequencer {
   }
 
   @Override
-  public void setTempoFactor(float v) {
-
+  public float getTempoFactor() {
+    return 0;
   }
 
   @Override
-  public float getTempoFactor() {
-    return 0;
+  public void setTempoFactor(float v) {
+
   }
 
   @Override
@@ -161,13 +161,13 @@ public class MockSequencer implements Sequencer {
   }
 
   @Override
-  public void setMasterSyncMode(SyncMode syncMode) {
-
+  public SyncMode getMasterSyncMode() {
+    return null;
   }
 
   @Override
-  public SyncMode getMasterSyncMode() {
-    return null;
+  public void setMasterSyncMode(SyncMode syncMode) {
+
   }
 
   @Override
@@ -176,13 +176,13 @@ public class MockSequencer implements Sequencer {
   }
 
   @Override
-  public void setSlaveSyncMode(SyncMode syncMode) {
-
+  public SyncMode getSlaveSyncMode() {
+    return null;
   }
 
   @Override
-  public SyncMode getSlaveSyncMode() {
-    return null;
+  public void setSlaveSyncMode(SyncMode syncMode) {
+
   }
 
   @Override
@@ -231,17 +231,12 @@ public class MockSequencer implements Sequencer {
   }
 
   @Override
-  public void setLoopStartPoint(long l) {
-
-  }
-
-  @Override
   public long getLoopStartPoint() {
     return 0;
   }
 
   @Override
-  public void setLoopEndPoint(long l) {
+  public void setLoopStartPoint(long l) {
 
   }
 
@@ -251,13 +246,18 @@ public class MockSequencer implements Sequencer {
   }
 
   @Override
-  public void setLoopCount(int i) {
+  public void setLoopEndPoint(long l) {
 
   }
 
   @Override
   public int getLoopCount() {
     return 0;
+  }
+
+  @Override
+  public void setLoopCount(int i) {
+
   }
 
   @Override

@@ -61,6 +61,7 @@ public interface Controller<T> {
 
   /**
    * Gets the tempo from the model
+   *
    * @return the tempo
    */
   int getTempo();

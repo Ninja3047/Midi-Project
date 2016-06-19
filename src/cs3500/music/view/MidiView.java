@@ -70,9 +70,9 @@ public class MidiView implements View {
 
   /**
    * Turns a list of notes into a MidiSequence
+   *
    * @param toPlay the track to play
-   * @param toAdd the list of notes to add to the track
-   * @throws InvalidMidiDataException
+   * @param toAdd  the list of notes to add to the track
    */
   private void createMidiTrack(Track toPlay, List<Note> toAdd) throws InvalidMidiDataException {
     HashMap<Integer, Integer> instruments = new HashMap<>();

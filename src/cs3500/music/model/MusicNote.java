@@ -76,6 +76,81 @@ public class MusicNote implements Comparable<Note>, Note {
     this.duration = n.duration;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof MusicNote)) {
+      return false;
+    } else {
+      MusicNote n = (MusicNote) o;
+      return this.curPitch == n.curPitch &&
+              this.start == n.start &&
+              this.duration == n.duration &&
+              this.curOctave == n.curOctave;
+    }
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.curPitch, this.start, this.duration, this.curOctave);
+  }
+
+  @Override
+  public int getDuration() {
+    return this.duration;
+  }
+
+  @Override
+  public void setDuration(int newDuration) {
+    if (newDuration < 1) {
+      throw new IllegalArgumentException("Illegal duration");
+    } else {
+      this.duration = newDuration;
+    }
+  }
+
+  @Override
+  public int getStart() {
+    return this.start;
+  }
+
+  @Override
+  public void setStart(int newStart) {
+    if (newStart < 0) {
+      throw new IllegalArgumentException("Illegal start time");
+    } else {
+      this.start = newStart;
+    }
+  }
+
+  public Octave getCurOctave() {
+    return this.curOctave;
+  }
+
+  @Override
+  public int getInstrument() {
+    return this.instrument;
+  }
+
+  @Override
+  public int getVolume() {
+    return this.volume;
+  }
+
+  @Override
+  public String toString() {
+    return this.curPitch.toString() + this.curOctave.toString();
+  }
+
+  @Override
+  public int toInt() {
+    return this.curOctave.getValue() * 12 + this.curPitch.ordinal() + 12;
+  }
+
+  @Override
+  public int compareTo(Note n) {
+    return n.toInt() - this.toInt();
+  }
+
   public enum Pitch {
     C(0), CSHARP(1), D(2), DSHARP(3), E(4), F(5),
     FSHARP(6), G(7), GSHARP(8), A(9), ASHARP(10), B(11);
@@ -162,80 +237,5 @@ public class MusicNote implements Comparable<Note>, Note {
     public static String toString(Pitch p, Octave o) {
       return p.toString() + o.toString();
     }
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (!(o instanceof MusicNote)) {
-      return false;
-    } else {
-      MusicNote n = (MusicNote) o;
-      return this.curPitch == n.curPitch &&
-              this.start == n.start &&
-              this.duration == n.duration &&
-              this.curOctave == n.curOctave;
-    }
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(this.curPitch, this.start, this.duration, this.curOctave);
-  }
-
-  @Override
-  public void setDuration(int newDuration) {
-    if (newDuration < 1) {
-      throw new IllegalArgumentException("Illegal duration");
-    } else {
-      this.duration = newDuration;
-    }
-  }
-
-  @Override
-  public void setStart(int newStart) {
-    if (newStart < 0) {
-      throw new IllegalArgumentException("Illegal start time");
-    } else {
-      this.start = newStart;
-    }
-  }
-
-  @Override
-  public int getDuration() {
-    return this.duration;
-  }
-
-  @Override
-  public int getStart() {
-    return this.start;
-  }
-
-  public Octave getCurOctave() {
-    return this.curOctave;
-  }
-
-  @Override
-  public int getInstrument() {
-    return this.instrument;
-  }
-
-  @Override
-  public int getVolume() {
-    return this.volume;
-  }
-
-  @Override
-  public String toString() {
-    return this.curPitch.toString() + this.curOctave.toString();
-  }
-
-  @Override
-  public int toInt() {
-    return this.curOctave.getValue() * 12 + this.curPitch.ordinal() + 12;
-  }
-
-  @Override
-  public int compareTo(Note n) {
-    return n.toInt() - this.toInt();
   }
 }

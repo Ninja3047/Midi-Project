@@ -25,7 +25,7 @@ public class ConcreteGuiViewPanel extends JPanel {
   }
 
   @Override
-  public void paintComponent(Graphics g){
+  public void paintComponent(Graphics g) {
     // Handle the default painting
     super.paintComponent(g);
     for (int i = 0; i < controller.getSize() + 1; i++) {

@@ -43,28 +43,31 @@ public interface Composition<T> {
 
   /**
    * Returns the last note location
+   *
    * @return the last note location
    */
   int getLastNoteBeat();
 
   /**
    * Returns a list of notes that start at the given beat
+   *
    * @param beat a beat
    * @return the list of notes at the given beat
-   * @throws IndexOutOfBoundsException when beat is out of range (either less than 0 or greater
-   * than
+   * @throws IndexOutOfBoundsException when beat is out of range (either less than 0 or greater than
    *                                   the size of the composition)
    */
   List<T> getNotes(Integer beat) throws IndexOutOfBoundsException;
 
   /**
    * Returns the size of the composition
+   *
    * @return composition size
    */
   int size();
 
   /**
    * Returns the lowest note of this composition
+   *
    * @return the lowest note
    */
   T getLowestNote();
@@ -78,12 +81,14 @@ public interface Composition<T> {
 
   /**
    * Combines the given composition with this one
+   *
    * @param c a composition
    */
   void combineComposition(Composition<T> c);
 
   /**
    * Appends the given composition to the end of this one
+   *
    * @param c a composition
    */
   void appendComposition(Composition<T> c);

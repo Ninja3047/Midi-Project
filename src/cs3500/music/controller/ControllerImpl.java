@@ -15,6 +15,7 @@ public class ControllerImpl implements Controller<Note> {
 
   /**
    * Constructor
+   *
    * @param m model to communicate with
    */
   public ControllerImpl(Model<Note> m) {

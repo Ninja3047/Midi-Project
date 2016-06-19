@@ -5,6 +5,8 @@ package cs3500.music.model;
  */
 public interface Note {
 
+  int getDuration();
+
   /**
    * Sets the duration of the note
    *
@@ -12,16 +14,14 @@ public interface Note {
    */
   void setDuration(int newDuration);
 
+  int getStart();
+
   /**
    * Sets the start time of the note
    *
    * @param newStart the new start time
    */
   void setStart(int newStart);
-
-  int getDuration();
-
-  int getStart();
 
   int getInstrument();
 

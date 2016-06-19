@@ -27,7 +27,8 @@ public class ConsoleView implements View {
 
   /**
    * Constructor to explicitly state output
-   * @param con the controller to use
+   *
+   * @param con    the controller to use
    * @param output the output to print to
    */
   public ConsoleView(Controller<Note> con, Appendable output) {
@@ -47,6 +48,7 @@ public class ConsoleView implements View {
 
   /**
    * Prints out the notes given
+   *
    * @param toPrint the notes to print
    * @return the formatted printed notes
    */

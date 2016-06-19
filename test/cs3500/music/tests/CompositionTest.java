@@ -7,11 +7,13 @@ import java.util.NoSuchElementException;
 import cs3500.music.model.Composition;
 import cs3500.music.model.MusicComposition;
 import cs3500.music.model.MusicNote;
-import cs3500.music.model.MusicNote.Pitch;
 import cs3500.music.model.MusicNote.Octave;
+import cs3500.music.model.MusicNote.Pitch;
 import cs3500.music.model.Note;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * Tests for Composition
