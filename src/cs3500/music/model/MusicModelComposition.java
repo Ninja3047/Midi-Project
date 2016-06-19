@@ -92,6 +92,7 @@ public class MusicModelComposition implements MusicModel<Note> {
 
     public Builder() {
       this.notes = new MusicComposition();
+      this.tempo = 0;
     }
 
     @Override

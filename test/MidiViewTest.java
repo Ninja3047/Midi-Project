@@ -7,7 +7,7 @@ public class MidiViewTest {
             "note 0 2 1 64 72\n" +
             "note 0 7 1 55 70\n" +
             "note 2 4 1 62 72\n" +
-          "note 4 6 1 60 71"), new MusicModelComposition.Builder());
+          "note 4 6 1 60 71"), new MusicModelTest.Builder());
   private Controller con = new ControllerImpl(model);
   private MidiViewMock v = new MidiViewMock(con);
 

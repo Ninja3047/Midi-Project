@@ -1,7 +1,6 @@
 package cs3500.music.model;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -94,7 +93,7 @@ public abstract class AbstractComposition<T> implements Composition<T> {
     }
     List<Integer> c = composition.get(t);
     if (c == null) {
-      throw new NoSuchElementException();
+      throw new NoSuchElementException("Note does not exist");
     }
     for (Integer i : c) {
       if (i.equals(beat)) {
@@ -135,7 +134,7 @@ public abstract class AbstractComposition<T> implements Composition<T> {
   @Override
   public List<T> getNotes(Integer beat) throws IndexOutOfBoundsException {
     if (beat < 0) {
-      throw new IndexOutOfBoundsException();
+      throw new IndexOutOfBoundsException("Illegal beat number");
     }
 
     List<T> notes = new ArrayList<>();
