@@ -17,10 +17,10 @@ import cs3500.music.view.ViewFactory;
 
 public class MusicEditor {
   public static void main(String[] args) throws IOException, InvalidMidiDataException {
-    MusicModel<Note> model = MusicReader.parseFile(new FileReader("mary-little-lamb.txt"),
+    MusicModel<Note> model = MusicReader.parseFile(new FileReader(args[1]),
             new MusicModelComposition.Builder());
     Controller con = new ControllerImpl(model);
-    View view = ViewFactory.createView("console", con);
+    View view = ViewFactory.createView(args[0], con);
     con.setView(view);
     con.start();
   }
