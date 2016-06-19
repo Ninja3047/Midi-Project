@@ -4,7 +4,7 @@ Model:
 The model was changed from the first assignment.  We decided to use
 composition to combine the best aspects of both models.  William Tan's model
 was more of data structure for notes while Christopher Brown's model
-interacted well with the notes.  We used object oriented priciples to combine
+interacted well with the notes.  We used object oriented principles to combine
 the two models easily.  We also added more functionality to the MusicNote
 class.  For example having fields for instruments and volume.
 
