@@ -11,6 +11,7 @@ import cs3500.music.model.MusicModelComposition;
 import cs3500.music.model.MusicNote;
 import cs3500.music.model.MusicNote.Octave;
 import cs3500.music.model.MusicNote.Pitch;
+import cs3500.music.model.Note;
 import cs3500.music.util.MusicReader;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -21,7 +22,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ControllerTest {
 
-  MusicModel<MusicNote> model = MusicReader.parseFile(new StringReader("tempo 200000\n" +
+  MusicModel<Note> model = MusicReader.parseFile(new StringReader("tempo 200000\n" +
           "note 0 2 1 64 72\n" +
           "note 0 7 1 55 70\n" +
           "note 2 4 1 62 72\n" +
