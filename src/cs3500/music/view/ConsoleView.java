@@ -5,24 +5,24 @@ import java.util.Arrays;
 import java.util.List;
 
 import cs3500.music.controller.Controller;
-import cs3500.music.model.Note;
-import cs3500.music.model.Note.Octave;
-import cs3500.music.model.Note.Pitch;
+import cs3500.music.model.MusicNote;
+import cs3500.music.model.MusicNote.Octave;
+import cs3500.music.model.MusicNote.Pitch;
 
 /**
  * The Console View
  */
 public class ConsoleView implements View {
 
-  private final Controller<Note> con;
+  private final Controller<MusicNote> con;
   private Appendable output;
 
-  public ConsoleView(Controller<Note> con) {
+  public ConsoleView(Controller<MusicNote> con) {
     this.con = con;
     this.output = System.out;
   }
 
-  public ConsoleView(Controller<Note> con, Appendable output) {
+  public ConsoleView(Controller<MusicNote> con, Appendable output) {
     this.con = con;
     this.output = output;
   }
@@ -42,13 +42,13 @@ public class ConsoleView implements View {
    *
    * @return the notes represented as a string
    */
-  public String printNotes(List<Note> toPrint) {
+  public String printNotes(List<MusicNote> toPrint) {
     if (toPrint.size() == 0) {
       return "No notes";
     }
     //Get the lowest and highest note
-    Note low = this.con.getLowestNote();
-    Note high = this.con.getHighestNote();
+    MusicNote low = this.con.getLowestNote();
+    MusicNote high = this.con.getHighestNote();
 
     //Info about dimensions
     int totalNotes = high.toInt() - low.toInt() + 1;
@@ -65,11 +65,11 @@ public class ConsoleView implements View {
     for (Octave o : Octave.values()) {
       for (Pitch p : Pitch.values()) {
         //If note is within the low and high
-        if (Note.Utils.toInt(p, o) >= low.toInt() &&
-                Note.Utils.toInt(p, o) <= high.toInt()) {
+        if (MusicNote.Utils.toInt(p, o) >= low.toInt() &&
+                MusicNote.Utils.toInt(p, o) <= high.toInt()) {
           //Sets up spacing
-          StringBuilder textNote = new StringBuilder(Note.Utils.toString(p, o));
-          if (Note.Utils.toString(p, o).length() < 4) {
+          StringBuilder textNote = new StringBuilder(MusicNote.Utils.toString(p, o));
+          if (MusicNote.Utils.toString(p, o).length() < 4) {
             textNote.append(" ");
           }
           output.append(String.format("%5s", textNote.toString()));
@@ -88,7 +88,7 @@ public class ConsoleView implements View {
     }
 
     //Inserts the notes into location
-    for (Note n : toPrint) {
+    for (MusicNote n : toPrint) {
       int totalLineChar = totalNotes * 5 + numBeatDigits + 1;
       int startRow = (n.getStart() + 1);
       int locInRow = (2 + numBeatDigits + (((n.toInt()) - low.toInt()) * 5));

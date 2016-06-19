@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.music.controller.Controller;
-import cs3500.music.model.Note;
+import cs3500.music.model.MusicNote;
 import cs3500.music.view.View;
 
 /**
@@ -13,9 +13,9 @@ class MidiViewMock implements View {
   private List<Integer> ends;
   private List<Integer> pitches;
   private int tempo;
-  private Controller<Note> controller;
+  private Controller<MusicNote> controller;
 
-  MidiViewMock(Controller<Note> controller) {
+  MidiViewMock(Controller<MusicNote> controller) {
     this.controller = controller;
     this.starts = new ArrayList<>();
     this.ends = new ArrayList<>();
@@ -25,13 +25,13 @@ class MidiViewMock implements View {
 
   @Override
   public void display() {
-    List<Note> notes = this.controller.getNotes();
+    List<MusicNote> notes = this.controller.getNotes();
     this.tempo = this.controller.getTempo();
     this.createMidiTrack(notes);
   }
 
-  private void createMidiTrack(List<Note> toAdd) {
-    for (Note n : toAdd) {
+  private void createMidiTrack(List<MusicNote> toAdd) {
+    for (MusicNote n : toAdd) {
       int pitch = n.toInt() + 12;
       this.pitches.add(pitch);
       int noteEnd = n.getStart() + n.getDuration();

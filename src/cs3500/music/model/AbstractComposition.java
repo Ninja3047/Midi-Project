@@ -93,7 +93,7 @@ public abstract class AbstractComposition<T> implements Composition<T> {
     }
     List<Integer> c = composition.get(t);
     if (c == null) {
-      throw new NoSuchElementException("Note does not exist");
+      throw new NoSuchElementException("MusicNote does not exist");
     }
     for (Integer i : c) {
       if (i.equals(beat)) {

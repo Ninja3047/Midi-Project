@@ -1,8 +1,8 @@
 import org.junit.Test;
 
-import cs3500.music.model.Note;
-import cs3500.music.model.Note.Octave;
-import cs3500.music.model.Note.Pitch;
+import cs3500.music.model.MusicNote;
+import cs3500.music.model.MusicNote.Octave;
+import cs3500.music.model.MusicNote.Pitch;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -11,33 +11,33 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
- * Class to test the Note class
+ * Class to test the MusicNote class
  */
 public class NoteTest {
-  private Note n1 = new Note(Pitch.A, Octave.ONE, 0, 1);
-  private Note n2 = new Note(Pitch.B, Octave.ONE, 1, 3);
-  private Note n3 = new Note(Pitch.A, Octave.TWO, 2, 2);
-  private Note n4 = new Note(Pitch.A, Octave.ONE, 0, 1);
-  private Note n5 = new Note(Pitch.A, Octave.ONE, 1, 1);
+  private MusicNote n1 = new MusicNote(Pitch.A, Octave.ONE, 0, 1);
+  private MusicNote n2 = new MusicNote(Pitch.B, Octave.ONE, 1, 3);
+  private MusicNote n3 = new MusicNote(Pitch.A, Octave.TWO, 2, 2);
+  private MusicNote n4 = new MusicNote(Pitch.A, Octave.ONE, 0, 1);
+  private MusicNote n5 = new MusicNote(Pitch.A, Octave.ONE, 1, 1);
 
   @Test
   public void testUtilsToString() {
-    assertEquals("A1", Note.Utils.toString(Pitch.A, Octave.ONE));
-    assertEquals("A0", Note.Utils.toString(Pitch.A, Octave.ZERO));
-    assertEquals("C4", Note.Utils.toString(Pitch.C, Octave.FOUR));
+    assertEquals("A1", MusicNote.Utils.toString(Pitch.A, Octave.ONE));
+    assertEquals("A0", MusicNote.Utils.toString(Pitch.A, Octave.ZERO));
+    assertEquals("C4", MusicNote.Utils.toString(Pitch.C, Octave.FOUR));
   }
 
   @Test
   public void testUtilsToInt() {
-    assertEquals(12, Note.Utils.toInt(Pitch.C, Octave.ZERO));
-    assertEquals(52, Note.Utils.toInt(Pitch.E, Octave.THREE));
-    assertEquals(139, Note.Utils.toInt(Pitch.G, Octave.TEN));
+    assertEquals(12, MusicNote.Utils.toInt(Pitch.C, Octave.ZERO));
+    assertEquals(52, MusicNote.Utils.toInt(Pitch.E, Octave.THREE));
+    assertEquals(139, MusicNote.Utils.toInt(Pitch.G, Octave.TEN));
   }
 
   @Test
   public void testStart() {
     try {
-      new Note(Pitch.A, Octave.ONE, -1, 1);
+      new MusicNote(Pitch.A, Octave.ONE, -1, 1);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Illegal start time", e.getMessage());
@@ -47,7 +47,7 @@ public class NoteTest {
   @Test
   public void testDuration() {
     try {
-      new Note(Pitch.A, Octave.ONE, 1, -2);
+      new MusicNote(Pitch.A, Octave.ONE, 1, -2);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals("Illegal duration: -2", e.getMessage());

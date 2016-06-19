@@ -1,7 +1,7 @@
 package cs3500.music.view;
 
 import cs3500.music.controller.Controller;
-import cs3500.music.model.Note;
+import cs3500.music.model.MusicNote;
 
 /**
  * Class for creating views
@@ -13,7 +13,7 @@ public class ViewFactory {
    * @return returns the correct view object based on the given parameter
    * @throws IllegalArgumentException when the view is not one of "console", "visual" or "midi"
    */
-  public static View createView(String view, Controller<Note> con) throws IllegalArgumentException {
+  public static View createView(String view, Controller<MusicNote> con) throws IllegalArgumentException {
     switch (view) {
       case "console":
         return new ConsoleView(con);

@@ -14,16 +14,16 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
 import cs3500.music.controller.Controller;
-import cs3500.music.model.Note;
+import cs3500.music.model.MusicNote;
 
 /**
  * A skeleton for MIDI playback
  */
 public class MidiView implements View {
   private final Sequencer sequencer;
-  private final Controller<Note> controller;
+  private final Controller<MusicNote> controller;
 
-  public MidiView(Controller<Note> controller) {
+  public MidiView(Controller<MusicNote> controller) {
     this.controller = controller;
     Sequencer sequencer;
     try {
@@ -42,14 +42,14 @@ public class MidiView implements View {
    * @param controller controller to interact with
    * @param seq        the sequencer to use
    */
-  public MidiView(Controller<Note> controller, Sequencer seq) {
+  public MidiView(Controller<MusicNote> controller, Sequencer seq) {
     this.controller = controller;
     this.sequencer = seq;
   }
 
   @Override
   public void display() {
-    List<Note> notes = controller.getNotes();
+    List<MusicNote> notes = controller.getNotes();
     int tempo = controller.getTempo();
     this.sequencer.setTempoInMPQ(tempo);
     try {
@@ -63,10 +63,10 @@ public class MidiView implements View {
     this.sequencer.start();
   }
 
-  private void createMidiTrack(Track toPlay, List<Note> toAdd) throws InvalidMidiDataException {
+  private void createMidiTrack(Track toPlay, List<MusicNote> toAdd) throws InvalidMidiDataException {
     HashMap<Integer, Integer> instruments = new HashMap<>();
     int instChannel = 0;
-    for (Note n : toAdd) {
+    for (MusicNote n : toAdd) {
       int curInstrument = n.getInstrument();
       if (!(instruments.containsKey(curInstrument))) {
         instruments.put(curInstrument, instChannel);

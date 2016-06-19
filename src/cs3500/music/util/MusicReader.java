@@ -1,8 +1,5 @@
 package cs3500.music.util;
 
-import cs3500.music.model.*;
-
-import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -19,7 +16,7 @@ public class MusicReader {
    *   <ul>
    *     <li>Tempo lines: the keyword "tempo" followed by a number,
    *      describing the tempo in microseconds per beat</li>
-   *     <li>Note lines: the keyword "note" followed by five numbers indicating
+   *     <li>MusicNote lines: the keyword "note" followed by five numbers indicating
    *      the start and end times of the note, the instrument,
    *      the pitch, and the volume</li>
    *   </ul>

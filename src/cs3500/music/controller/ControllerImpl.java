@@ -3,21 +3,21 @@ package cs3500.music.controller;
 import java.util.List;
 
 import cs3500.music.model.MusicModel;
-import cs3500.music.model.Note;
+import cs3500.music.model.MusicNote;
 import cs3500.music.view.View;
 
 /**
  * Implementation of the controller interface
  */
-public class ControllerImpl implements Controller<Note> {
-  private final MusicModel<Note> curModel;
+public class ControllerImpl implements Controller<MusicNote> {
+  private final MusicModel<MusicNote> curModel;
   private View curView;
 
   /**
    * Constructor
    * @param m model to communicate with
    */
-  public ControllerImpl(MusicModel<Note> m) {
+  public ControllerImpl(MusicModel<MusicNote> m) {
     this.curModel = m;
   }
 
@@ -31,22 +31,22 @@ public class ControllerImpl implements Controller<Note> {
   }
 
   @Override
-  public List<Note> getNotes() {
+  public List<MusicNote> getNotes() {
     return this.curModel.getAllNotes();
   }
 
   @Override
-  public List<Note> getNotesAtBeat(int beat) {
+  public List<MusicNote> getNotesAtBeat(int beat) {
     return this.curModel.getNotesAtBeat(beat);
   }
 
   @Override
-  public Note getHighestNote() {
+  public MusicNote getHighestNote() {
     return this.curModel.getHighestNote();
   }
 
   @Override
-  public Note getLowestNote() {
+  public MusicNote getLowestNote() {
     return this.curModel.getLowestNote();
   }
 
