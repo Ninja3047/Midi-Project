@@ -147,7 +147,7 @@ public abstract class AbstractComposition<T> implements Composition<T> {
 
   @Override
   public int size() {
-    return composition.size();
+    return beats.size();
   }
 
   @Override

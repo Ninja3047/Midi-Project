@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import cs3500.music.model.Composition;
+import cs3500.music.model.MusicComposition;
 import cs3500.music.model.MusicModel;
 import cs3500.music.model.MusicModelComposition;
 import cs3500.music.model.MusicNote;
