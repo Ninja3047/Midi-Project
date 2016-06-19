@@ -52,11 +52,13 @@ public class MusicModelComposition implements MusicModel<Note> {
   @Override
   public List<String> getNoteRange() {
     List<String> range = new ArrayList<>();
-    for (Octave o : Octave.values()) {
-      for (Pitch p : Pitch.values()) {
-        int note = MusicNote.Utils.toInt(p, o);
-        if (getLowestNote().toInt() <= note && getHighestNote().toInt() >= note) {
-          range.add(MusicNote.Utils.toString(p, o));
+    if (notes.size() > 0) {
+      for (Octave o : Octave.values()) {
+        for (Pitch p : Pitch.values()) {
+          int note = MusicNote.Utils.toInt(p, o);
+          if (getLowestNote().toInt() <= note && getHighestNote().toInt() >= note) {
+            range.add(MusicNote.Utils.toString(p, o));
+          }
         }
       }
     }

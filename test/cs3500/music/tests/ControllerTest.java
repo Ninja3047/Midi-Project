@@ -3,6 +3,9 @@ package cs3500.music.tests;
 import org.junit.Test;
 
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import cs3500.music.controller.Controller;
 import cs3500.music.controller.ControllerImpl;
@@ -37,6 +40,13 @@ public class ControllerTest {
   @Test
   public void testGetLowestNote() {
     assertEquals(new MusicNote(Pitch.G, Octave.THREE, 0, 7), testCon.getLowestNote());
+  }
+
+  @Test
+  public void testGetNoteRange() {
+    List<String> expected = Arrays.asList("G3", "G#3", "A3", "A#3", "B3",
+            "C4", "C#4", "D4", "D#4", "E4");
+    assertEquals(expected, testCon.getNoteRange());
   }
 
   @Test

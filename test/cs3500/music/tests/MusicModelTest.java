@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import cs3500.music.model.MusicModel;
@@ -11,6 +14,7 @@ import cs3500.music.model.MusicModelComposition;
 import cs3500.music.model.MusicNote;
 import cs3500.music.model.MusicNote.Octave;
 import cs3500.music.model.MusicNote.Pitch;
+import cs3500.music.model.Note;
 import cs3500.music.util.MusicReader;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -21,11 +25,11 @@ import static org.junit.Assert.fail;
  * Class to test the model class
  */
 public class MusicModelTest {
-  private MusicModel<MusicNote> tester =
+  private MusicModel<Note> tester =
           MusicReader.parseFile(new StringReader(""), new MusicModelComposition.Builder());
-  private MusicNote n1 = new MusicNote(Pitch.CSHARP, Octave.ONE, 0, 2);
+  private Note n1 = new MusicNote(Pitch.CSHARP, Octave.ONE, 0, 2);
 
-  private MusicModel<MusicNote> advancedTester =
+  private MusicModel<Note> advancedTester =
           MusicReader.parseFile(new StringReader("tempo 200000\n" +
                   "note 0 2 1 64 72\n" +
                   "note 0 7 1 55 70\n" +
@@ -34,7 +38,7 @@ public class MusicModelTest {
 
   @Test
   public void testBuilder() throws FileNotFoundException {
-    MusicNote[] expected = {new MusicNote(Pitch.E, Octave.FOUR, 0, 2),
+    Note[] expected = {new MusicNote(Pitch.E, Octave.FOUR, 0, 2),
             new MusicNote(Pitch.G, Octave.THREE, 0, 7),
             new MusicNote(Pitch.D, Octave.FOUR, 2, 2),
             new MusicNote(Pitch.C, Octave.FOUR, 4, 2)};
@@ -49,6 +53,19 @@ public class MusicModelTest {
   @Test
   public void testGetLowestNote() {
     assertEquals(new MusicNote(Pitch.G, Octave.THREE, 0, 7), advancedTester.getLowestNote());
+  }
+
+  @Test
+  public void testGetNoteRange() {
+    List<String> expected = Arrays.asList("G3", "G#3", "A3", "A#3", "B3",
+            "C4", "C#4", "D4", "D#4", "E4");
+    assertEquals(expected, advancedTester.getNoteRange());
+  }
+
+  @Test
+  public void testGetEmptyNoteRange() {
+    List<String> empty = new ArrayList<>();
+    assertEquals(empty, tester.getNoteRange());
   }
 
   @Test
