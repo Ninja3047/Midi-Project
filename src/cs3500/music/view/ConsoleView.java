@@ -59,13 +59,15 @@ public class ConsoleView implements View {
     StringBuilder output = new StringBuilder();
     output.append(pad);
 
-    /*
-    //Create the row of pitches
-        //If note is within the low and high
-          //Sets up spacing
-            textNote.append(" ");
-          output.append(String.format("%5s", textNote.toString()));
-    output.append("\n");*/
+    for (String n : con.getNoteRange()) {
+      StringBuilder textNote = new StringBuilder();
+      textNote.append(n);
+      if (n.length() < 4) {
+        textNote.append(" ");
+      }
+      output.append(String.format("%5s", textNote.toString()));
+    }
+    output.append("\n");
 
     //Sets up the table with spaces
     char[] spaces = new char[totalNotes * 5];
