@@ -15,7 +15,7 @@ import javax.sound.midi.Track;
 import javax.sound.midi.Transmitter;
 
 /**
- * Created by chris on 6/18/16.
+ * Mock of a Sequencer
  */
 public class MockSequencer implements Sequencer {
   Sequence seq;

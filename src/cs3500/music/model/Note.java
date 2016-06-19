@@ -10,6 +10,8 @@ public class Note implements Comparable<Note> {
   private final Octave curOctave;
   private int start;
   private int duration;
+  private int instrument;
+  private int volume;
 
   /**
    * Note constructor
@@ -31,6 +33,34 @@ public class Note implements Comparable<Note> {
       throw new IllegalArgumentException("Illegal duration: " + duration);
     } else {
       this.duration = duration;
+    }
+    this.instrument = 1;
+    this.volume = 64;
+  }
+
+  public Note(Pitch curPitch, Octave curOctave, int start, int duration, int instrument,
+              int volume) {
+    this.curPitch = curPitch;
+    this.curOctave = curOctave;
+    if (start < 0) {
+      throw new IllegalArgumentException("Illegal start time");
+    } else {
+      this.start = start;
+    }
+    if (duration < 0) {
+      throw new IllegalArgumentException("Illegal duration: " + duration);
+    } else {
+      this.duration = duration;
+    }
+    if (instrument < 0) {
+      throw new IllegalArgumentException("Illegal instrument");
+    } else {
+      this.instrument = instrument;
+    }
+    if (volume < 0) {
+      throw new IllegalArgumentException("Illegal volume");
+    } else {
+      this.volume = volume;
     }
   }
 
@@ -186,6 +216,14 @@ public class Note implements Comparable<Note> {
 
   public Octave getCurOctave() {
     return this.curOctave;
+  }
+
+  public int getInstrument() {
+    return this.instrument;
+  }
+
+  public int getVolume() {
+    return this.volume;
   }
 
   @Override

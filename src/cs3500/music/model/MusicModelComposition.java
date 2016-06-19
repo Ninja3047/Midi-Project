@@ -115,7 +115,7 @@ public class MusicModelComposition implements MusicModel<Note> {
         }
       }
       int curDuration = end - start;
-      this.notes.addNote(new Note(curPitch, curOctave, start, curDuration), start);
+      this.notes.addNote(new Note(curPitch, curOctave, start, curDuration, instrument, pitch), start);
       return this;
     }
 
