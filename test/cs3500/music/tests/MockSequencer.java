@@ -1,3 +1,5 @@
+package cs3500.music.tests;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
