@@ -15,11 +15,21 @@ public class ConsoleView implements View {
   private final Controller<Note> con;
   private Appendable output;
 
+  /**
+   * Default constructor
+   *
+   * @param con the controller to use
+   */
   public ConsoleView(Controller<Note> con) {
     this.con = con;
     this.output = System.out;
   }
 
+  /**
+   * Constructor to explicitly state output
+   * @param con the controller to use
+   * @param output the output to print to
+   */
   public ConsoleView(Controller<Note> con, Appendable output) {
     this.con = con;
     this.output = output;
@@ -36,11 +46,11 @@ public class ConsoleView implements View {
   }
 
   /**
-   * Gets the notes printed out
-   *
-   * @return the notes represented as a string
+   * Prints out the notes given
+   * @param toPrint the notes to print
+   * @return the formatted printed notes
    */
-  public String printNotes(List<Note> toPrint) {
+  private String printNotes(List<Note> toPrint) {
     if (toPrint.size() == 0) {
       return "No notes";
     }
