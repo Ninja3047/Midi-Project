@@ -7,12 +7,13 @@ import java.awt.event.KeyListener;
 import javax.swing.*;
 
 import cs3500.music.controller.Controller;
+import cs3500.music.controller.MouseHandler;
 import cs3500.music.model.Note;
 
 /**
  * A skeleton Frame for the visual View
  */
-public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
+public class GuiViewFrame extends JFrame implements GuiView {
 
   private final JScrollPane displayPanel;
   private final JButton play;
@@ -23,6 +24,7 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   public GuiViewFrame(Controller<Note> controller) {
     this.displayPanel = new JScrollPane(new ConcreteGuiViewPanel(controller));
     this.displayPanel.setFocusable(true);
+    this.displayPanel.addMouseListener(new MouseHandler());
     this.play = new JButton("▶");
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     this.setTitle("Music Player");
@@ -42,9 +44,18 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
     return new Dimension(1333, 390);
   }
 
+  /*
   @Override
   public void addKeyListener(KeyListener listen) {
-    displayPanel.addKeyListener(listen);
+    System.out.println("hello?");
+    //ConcreteGuiViewPanel tmp = (ConcreteGuiViewPanel) this.displayPanel;
+    this.displayPanel.addKeyListener(listen);
+  }
+  */
+
+  @Override
+  public void addKeyListener(KeyListener listen) {
+    this.getContentPane().;
   }
 
   @Override
