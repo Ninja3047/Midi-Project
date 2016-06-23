@@ -1,7 +1,6 @@
 package cs3500.music.view;
 
 import java.awt.*;
-import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.*;

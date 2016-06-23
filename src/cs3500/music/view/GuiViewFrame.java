@@ -17,7 +17,7 @@ public class GuiViewFrame extends JFrame implements GuiView {
 
   private final JScrollPane displayPanel;
   private final JButton play;
-  private final ConcreteGuiViewPanel notesPanel;
+  private final JPanel notesPanel;
 
   /**
    * Creates new GuiView
