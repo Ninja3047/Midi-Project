@@ -48,6 +48,7 @@ public class KeyboardHandler implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent keyEvent) {
+    System.out.println("hello");
     if (keytyped.containsKey(keyEvent.getKeyCode())) {
       keypressed.get(keyEvent.getKeyCode()).run();
     }

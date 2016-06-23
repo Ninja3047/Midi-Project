@@ -138,10 +138,4 @@ public class ConcreteGuiViewPanel extends JPanel {
       return super.getPreferredSize();
     }
   }
-
-  @Override
-  public void addKeyListener(KeyListener listen) {
-    super.addKeyListener(listen);
-    System.out.println("AYYYY");
-  }
 }

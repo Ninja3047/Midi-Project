@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 public class MouseHandler implements MouseListener {
   @Override
   public void mouseClicked(MouseEvent mouseEvent) {
-
+    System.out.println("test");
   }
 
   @Override

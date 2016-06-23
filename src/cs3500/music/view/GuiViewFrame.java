@@ -15,9 +15,9 @@ import cs3500.music.model.Note;
  */
 public class GuiViewFrame extends JFrame implements GuiView {
 
-  private final JPanel notesPanel;
   private final JScrollPane displayPanel;
   private final JButton play;
+  private final ConcreteGuiViewPanel notesPanel;
 
   /**
    * Creates new GuiView
