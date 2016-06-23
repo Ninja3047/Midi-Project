@@ -49,8 +49,8 @@ public class ControllerImpl implements Controller<Note> {
     kbd.setKeyPressedMap(keyPresses);
 
     MusicEditorView tmpView = (MusicEditorView) this.curView;
-    //GuiViewFrame pls = (GuiViewFrame) tmpView.getGui();
-    tmpView.getGui();
+    System.out.println("kek2");
+    tmpView.addKeyListener(kbd);
   }
 
   @Override

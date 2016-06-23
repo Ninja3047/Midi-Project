@@ -15,6 +15,7 @@ import cs3500.music.model.Note;
  */
 public class GuiViewFrame extends JFrame implements GuiView {
 
+  private final JPanel notesPanel;
   private final JScrollPane displayPanel;
   private final JButton play;
 
@@ -22,9 +23,9 @@ public class GuiViewFrame extends JFrame implements GuiView {
    * Creates new GuiView
    */
   public GuiViewFrame(Controller<Note> controller) {
-    this.displayPanel = new JScrollPane(new ConcreteGuiViewPanel(controller));
-    this.displayPanel.setFocusable(true);
-    this.displayPanel.addMouseListener(new MouseHandler());
+    this.notesPanel = new ConcreteGuiViewPanel(controller);
+    this.notesPanel.setFocusable(true);
+    this.displayPanel = new JScrollPane(notesPanel);
     this.play = new JButton("▶");
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     this.setTitle("Music Player");
@@ -44,18 +45,10 @@ public class GuiViewFrame extends JFrame implements GuiView {
     return new Dimension(1333, 390);
   }
 
-  /*
   @Override
   public void addKeyListener(KeyListener listen) {
-    System.out.println("hello?");
-    //ConcreteGuiViewPanel tmp = (ConcreteGuiViewPanel) this.displayPanel;
-    this.displayPanel.addKeyListener(listen);
-  }
-  */
-
-  @Override
-  public void addKeyListener(KeyListener listen) {
-    this.getContentPane().;
+    System.out.println("kek4");
+    this.notesPanel.addKeyListener(listen);
   }
 
   @Override

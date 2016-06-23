@@ -1,6 +1,7 @@
 package cs3500.music.view;
 
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.*;
@@ -20,6 +21,8 @@ public class ConcreteGuiViewPanel extends JPanel {
     super();
     this.controller = controller;
     this.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
+    this.requestFocusInWindow();
+    this.setFocusable(true);
   }
 
   @Override
@@ -134,5 +137,11 @@ public class ConcreteGuiViewPanel extends JPanel {
     } else {
       return super.getPreferredSize();
     }
+  }
+
+  @Override
+  public void addKeyListener(KeyListener listen) {
+    super.addKeyListener(listen);
+    System.out.println("AYYYY");
   }
 }
