@@ -1,9 +1,20 @@
 package cs3500.music.controller;
 
+import java.awt.event.ActionListener;
+
+import java.awt.event.KeyListener;
+
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cs3500.music.model.Model;
 import cs3500.music.model.Note;
+import cs3500.music.view.GuiView;
+import cs3500.music.view.GuiViewFrame;
+import cs3500.music.view.MidiView;
+import cs3500.music.view.MusicEditorView;
 import cs3500.music.view.View;
 import cs3500.music.view.ViewFactory;
 
@@ -23,9 +34,32 @@ public class ControllerImpl implements Controller<Note> {
     this.curModel = m;
   }
 
+  private void configureKeyBoardListener() {
+    Map<Character, Runnable> keyTypes = new HashMap<>();
+    Map<Integer, Runnable> keyPresses = new HashMap<>();
+    Map<Integer, Runnable> keyReleases = new HashMap<>();
+
+    keyTypes.put('x', () -> {
+      System.out.println("Tilliam Wan is shit (its just a prank bro)");
+    });
+    keyPresses.put(KeyEvent.VK_X, keyTypes.get('x'));
+
+    KeyboardHandler kbd = new KeyboardHandler();
+    kbd.setKeyTypedMap(keyTypes);
+    kbd.setKeyPressedMap(keyPresses);
+
+    MusicEditorView tmpView = (MusicEditorView) this.curView;
+    //GuiViewFrame pls = (GuiViewFrame) tmpView.getGui();
+    tmpView.getGui();
+  }
+
   @Override
   public void setView(View v) {
     this.curView = v;
+    if (this.curView instanceof MusicEditorView) {
+      System.out.println("kek");
+      this.configureKeyBoardListener();
+    }
   }
 
   @Override
