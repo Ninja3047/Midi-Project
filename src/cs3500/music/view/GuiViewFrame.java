@@ -10,7 +10,7 @@ import cs3500.music.model.Note;
 /**
  * A skeleton Frame for the visual View
  */
-public class GuiViewFrame extends javax.swing.JFrame implements View {
+public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   private final JScrollPane displayPanel;
 
