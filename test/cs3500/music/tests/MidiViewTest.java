@@ -18,7 +18,6 @@ import static org.junit.Assert.assertEquals;
  * Class to test MidiView
  */
 public class MidiViewTest {
-
   Model<Note> model = MusicReader.parseFile(new StringReader("tempo 200000\n" +
                   "note 0 2 1 64 72\n" +
                   "note 0 7 1 55 70\n" +

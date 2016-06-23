@@ -14,7 +14,9 @@ import cs3500.music.util.MusicReader;
 import cs3500.music.view.View;
 import cs3500.music.view.ViewFactory;
 
-
+/**
+ * Class to start the program
+ */
 public class MusicEditor {
   public static void main(String[] args) throws IOException, InvalidMidiDataException {
     Model<Note> model = MusicReader.parseFile(new FileReader(args[1]),

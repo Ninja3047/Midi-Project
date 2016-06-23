@@ -7,8 +7,6 @@ import javax.swing.*;
 
 import cs3500.music.controller.Controller;
 import cs3500.music.model.Note;
-//import cs3500.music.model.Note.Octave;
-//import cs3500.music.model.Note.Pitch;
 
 /**
  * Draws the composition

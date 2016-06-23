@@ -8,11 +8,11 @@ import cs3500.music.controller.Controller;
 import cs3500.music.model.Note;
 
 /**
- * A skeleton Frame (i.e., a window) in Swing
+ * A skeleton Frame for the visual View
  */
 public class GuiViewFrame extends javax.swing.JFrame implements View {
 
-  private final JScrollPane displayPanel; // You may want to refine this to a subtype of JPanel
+  private final JScrollPane displayPanel;
 
   /**
    * Creates new GuiView

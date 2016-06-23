@@ -14,7 +14,7 @@ public class ControllerImpl implements Controller<Note> {
   private View curView;
 
   /**
-   * Constructor
+   * Constructor for the controller
    *
    * @param m model to communicate with
    */
