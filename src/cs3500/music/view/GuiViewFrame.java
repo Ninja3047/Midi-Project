@@ -1,6 +1,8 @@
 package cs3500.music.view;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
@@ -13,15 +15,19 @@ import cs3500.music.model.Note;
 public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
 
   private final JScrollPane displayPanel;
+  private final JButton play;
 
   /**
    * Creates new GuiView
    */
   public GuiViewFrame(Controller<Note> controller) {
     this.displayPanel = new JScrollPane(new ConcreteGuiViewPanel(controller));
+    this.play = new JButton("▶");
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     this.setTitle("Music Player");
+    this.setLayout(new BorderLayout());
     this.getContentPane().add(displayPanel, BorderLayout.CENTER);
+    this.getContentPane().add(play, BorderLayout.SOUTH);
     this.pack();
   }
 
@@ -33,5 +39,15 @@ public class GuiViewFrame extends javax.swing.JFrame implements GuiView {
   @Override
   public Dimension getPreferredSize() {
     return new Dimension(1333, 390);
+  }
+
+  @Override
+  public void addKeyListener(KeyListener listen) {
+    displayPanel.addKeyListener(listen);
+  }
+
+  @Override
+  public void addActionListener(ActionListener listener) {
+    play.addActionListener(listener);
   }
 }

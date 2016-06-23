@@ -1,26 +1,21 @@
 package cs3500.music.view;
 
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+
 /**
- * Interface to represent gui specific methods
+ * Represents a GUI View
  */
 public interface GuiView extends View {
   /**
-   * Jumps to position
+   * Adds the given keyboard listener to the view
+   * @param listener a keyboard listener
    */
-  void jumpTo();
+  void addKeyListener(KeyListener listener);
 
   /**
-   * Deletes a note
+   * Adds the given action listener to the view
+   * @param listener an action listener
    */
-  void deleteNote();
-
-  /**
-   * Adds a note
-   */
-  void addNote();
-
-  /**
-   * Scrolls with key event
-   */
-  void scrollKey();
+  void addActionListener(ActionListener listener);
 }

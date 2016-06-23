@@ -5,6 +5,7 @@ import java.util.List;
 import cs3500.music.model.Model;
 import cs3500.music.model.Note;
 import cs3500.music.view.View;
+import cs3500.music.view.ViewFactory;
 
 /**
  * Implementation of the controller interface
@@ -65,5 +66,66 @@ public class ControllerImpl implements Controller<Note> {
   @Override
   public int getSize() {
     return this.curModel.getSize();
+  }
+
+  @Override
+  public float getTime() {
+    // TODO
+    return 0.0F;
+  }
+
+  /**
+   * Plays the midi
+   */
+  class PlayMusic implements Runnable {
+
+    @Override
+    public void run() {
+      start();
+    }
+  }
+
+  /**
+   * Adds a note to the model
+   */
+  class AddNote implements Runnable {
+
+    @Override
+    public void run() {
+
+    }
+  }
+
+  /**
+   * Removes a note from the model
+   */
+  class DeleteNote implements Runnable {
+
+    @Override
+    public void run() {
+
+    }
+  }
+
+  /**
+   * Moves a note in the model
+   */
+  class MoveNote implements Runnable {
+
+    @Override
+    public void run() {
+
+    }
+  }
+
+  /**
+   * Scroll composition
+   */
+  class Scroll implements Runnable {
+
+    @Override
+    public void run() {
+
+    }
   }
 }

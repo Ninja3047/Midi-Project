@@ -30,6 +30,7 @@ public class ConcreteGuiViewPanel extends JPanel {
       drawNotes(g, controller.getNotesAtBeat(i), controller.getHighestNote());
     }
     drawMeasures(g, controller.getHighestNote(), controller.getLowestNote(), controller.getSize());
+    drawTime(g, controller.getHighestNote().toInt() - controller.getLowestNote().toInt());
   }
 
   /**
@@ -44,14 +45,20 @@ public class ConcreteGuiViewPanel extends JPanel {
     Graphics2D g2d = (Graphics2D) g;
 
     g2d.setColor(Color.BLACK);
-    g2d.setStroke(new BasicStroke(2));
+    Stroke thin = new BasicStroke(2);
+    Stroke thick = new BasicStroke(3);
+    g2d.setStroke(thin);
 
     int pitches = highPitch.toInt() - lowPitch.toInt() + 1;
 
     // draw horizontal note lines and pitch labels
-    //Octave[] os = Octave.values();
 
     for (int i = 0; i <= pitches; i++) {
+      if ((highPitch.toInt() - i + 1) % 12 == 0) {
+        g2d.setStroke(thick);
+      } else {
+        g2d.setStroke(thin);
+      }
       g2d.drawLine(LEFT_OFFSET, CELL_SIZE * (i + 1),
               LEFT_OFFSET + CELL_SIZE * lastBeat, CELL_SIZE * (i + 1));
     }
@@ -107,6 +114,15 @@ public class ConcreteGuiViewPanel extends JPanel {
       g2d.fillRect(pos + i * CELL_SIZE + LEFT_OFFSET, pitch * CELL_SIZE
               + CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
+  }
+
+  private void drawTime(Graphics g, int lastbeat) {
+    Graphics2D g2d = (Graphics2D) g;
+
+    float time = controller.getTime();
+
+    g2d.setColor(Color.RED);
+    g2d.drawLine(LEFT_OFFSET, CELL_SIZE, LEFT_OFFSET, LEFT_OFFSET + CELL_SIZE * lastbeat);
   }
 
   @Override

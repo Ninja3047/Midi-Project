@@ -69,6 +69,17 @@ public class MidiView implements View {
   }
 
   /**
+   * Toggles the play state of the sequencer
+   */
+  public void togglePlay() {
+    if (this.sequencer.isRunning()) {
+      this.sequencer.stop();
+    } else {
+      this.sequencer.start();
+    }
+  }
+
+  /**
    * Turns a list of notes into a MidiSequence
    *
    * @param toPlay the track to play
@@ -80,7 +91,11 @@ public class MidiView implements View {
     for (Note n : toAdd) {
       int curInstrument = n.getInstrument();
       if (!(instruments.containsKey(curInstrument))) {
-        instruments.put(curInstrument, instChannel);
+        if (instChannel != 10) {
+          instruments.put(curInstrument, instChannel);
+        } else {
+          instruments.put(curInstrument, ++instChannel);
+        }
         MidiMessage iMessage = new ShortMessage(ShortMessage.PROGRAM_CHANGE,
                 instChannel, curInstrument, 0);
         toPlay.add(new MidiEvent(iMessage, 0));

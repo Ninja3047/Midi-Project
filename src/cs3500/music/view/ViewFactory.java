@@ -23,6 +23,8 @@ public class ViewFactory {
         return new GuiViewFrame(con);
       case "midi":
         return new MidiView(con);
+      case "player":
+        return new MusicEditorView(con, new GuiViewFrame(con), new MidiView(con));
       default:
         throw new IllegalArgumentException();
     }
