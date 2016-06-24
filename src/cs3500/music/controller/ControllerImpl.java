@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import cs3500.music.model.Model;
+import cs3500.music.model.MusicNote;
 import cs3500.music.model.Note;
 import cs3500.music.view.GuiView;
 import cs3500.music.view.GuiViewFrame;
@@ -75,7 +76,7 @@ public class ControllerImpl implements Controller<Note> {
     kbd.setKeyPressedMap(keyPresses);
     kbd.setKeyReleasedMap(keyReleases);
 
-    editorview.addMouseListener(new MouseHandler());
+    editorview.addMouseListener(new MouseHandler(this));
     editorview.addKeyListener(kbd);
   }
 
@@ -134,58 +135,8 @@ public class ControllerImpl implements Controller<Note> {
     return 0.0F;
   }
 
-  /**
-   * Plays the midi
-   */
-  class PlayMusic implements Runnable {
-
-    @Override
-    public void run() {
-      start();
-    }
-  }
-
-  /**
-   * Adds a note to the model
-   */
-  class AddNote implements Runnable {
-
-    @Override
-    public void run() {
-
-    }
-  }
-
-  /**
-   * Removes a note from the model
-   */
-  class DeleteNote implements Runnable {
-
-    @Override
-    public void run() {
-
-    }
-  }
-
-  /**
-   * Moves a note in the model
-   */
-  class MoveNote implements Runnable {
-
-    @Override
-    public void run() {
-
-    }
-  }
-
-  /**
-   * Scroll composition
-   */
-  class Scroll implements Runnable {
-
-    @Override
-    public void run() {
-
-    }
+  @Override
+  public void addNoteFromInt(int pitch, int start, int end) {
+    this.curModel.addNoteFromInt(pitch, start, end);
   }
 }

@@ -79,4 +79,6 @@ public interface Controller<T> {
    * @return the number of beats
    */
   int getSize();
+
+  void addNoteFromInt(int pitch, int start, int end);
 }
