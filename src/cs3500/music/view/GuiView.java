@@ -2,6 +2,7 @@ package cs3500.music.view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 
 /**
  * Represents a GUI View
@@ -18,4 +19,6 @@ public interface GuiView extends View {
    * @param listener an action listener
    */
   void addActionListener(ActionListener listener);
+
+  void addMouseListener(MouseListener listener);
 }

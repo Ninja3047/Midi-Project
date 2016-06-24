@@ -75,6 +75,7 @@ public class ControllerImpl implements Controller<Note> {
     kbd.setKeyPressedMap(keyPresses);
     kbd.setKeyReleasedMap(keyReleases);
 
+    editorview.addMouseListener(new MouseHandler());
     editorview.addKeyListener(kbd);
   }
 

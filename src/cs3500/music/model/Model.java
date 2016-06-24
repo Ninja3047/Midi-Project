@@ -88,4 +88,6 @@ public interface Model<K> {
    * @return the number of beats
    */
   int getSize();
+
+  void addNoteFromInt(int note, int start, int end);
 }

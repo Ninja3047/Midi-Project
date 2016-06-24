@@ -3,6 +3,7 @@ package cs3500.music.view;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
@@ -60,6 +61,11 @@ public class GuiViewFrame extends JFrame implements GuiView {
   public void addKeyListener(KeyListener listen) {
     System.out.println("kek4");
     this.notesPanel.addKeyListener(listen);
+  }
+
+  @Override
+  public void addMouseListener(MouseListener listener) {
+    this.notesPanel.addMouseListener(listener);
   }
 
   @Override

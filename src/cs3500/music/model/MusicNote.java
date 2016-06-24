@@ -69,6 +69,29 @@ public class MusicNote implements Comparable<Note>, Note {
     this(n.curPitch, n.curOctave, n.start, n.duration);
   }
 
+  public MusicNote(int pitch, int start, int end) {
+    int octaveInt = pitch / 12 - 1;
+      int pitchInt = pitch % 12;
+      Pitch curPitch = Pitch.C;
+      for (Pitch p : Pitch.values()) {
+        if (p.getValue() == pitchInt) {
+          curPitch = p;
+          break;
+        }
+      }
+      Octave curOctave = Octave.ZERO;
+      for (Octave o : Octave.values()) {
+        if (o.getValue() == octaveInt) {
+          curOctave = o;
+          break;
+        }
+      }
+    this.curPitch = curPitch;
+    this.curOctave = curOctave;
+    this.duration = end - start;
+    this.start = start;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (!(o instanceof MusicNote)) {

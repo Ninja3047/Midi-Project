@@ -112,6 +112,11 @@ public class MusicModel implements Model<Note> {
     return allnotes;
   }
 
+  @Override
+  public void addNoteFromInt(int note, int start, int end) {
+    this.addNote(new MusicNote(note, start, end));
+  }
+
   /**
    * Builds the Music Model
    */
@@ -130,25 +135,7 @@ public class MusicModel implements Model<Note> {
     @Override
     public CompositionBuilder<Model<Note>> addNote(int start, int end, int instrument,
                                                    int pitch, int volume) {
-      int octaveInt = pitch / 12 - 1;
-      int pitchInt = pitch % 12;
-      Pitch curPitch = Pitch.C;
-      for (Pitch p : Pitch.values()) {
-        if (p.getValue() == pitchInt) {
-          curPitch = p;
-          break;
-        }
-      }
-      Octave curOctave = Octave.ZERO;
-      for (Octave o : Octave.values()) {
-        if (o.getValue() == octaveInt) {
-          curOctave = o;
-          break;
-        }
-      }
-      int curDuration = end - start;
-      this.notes.addNote(new MusicNote(curPitch, curOctave, start, curDuration, instrument,
-              pitch), start);
+      this.notes.addNote(new MusicNote(pitch, start, end), start);
       return this;
     }
 
