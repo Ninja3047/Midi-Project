@@ -149,4 +149,18 @@ public class MidiView implements View {
       toPlay.add(new MidiEvent(end, 96 * noteEnd));
     }
   }
+
+  @Override
+  public void addToTrack(int pitch, int start, int end) {
+    Track t = this.sequencer.getSequence().getTracks()[0];
+
+    try {
+      MidiMessage startMess = new ShortMessage(ShortMessage.NOTE_ON, 1, pitch, 64);
+      MidiMessage endMess = new ShortMessage(ShortMessage.NOTE_OFF, 1, pitch, 64);
+      t.add(new MidiEvent(startMess, 96 * start));
+      t.add(new MidiEvent(endMess, 96 * end));
+    } catch (InvalidMidiDataException e) {
+      e.printStackTrace();
+    }
+  }
 }

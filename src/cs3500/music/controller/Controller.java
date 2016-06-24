@@ -74,4 +74,6 @@ public interface Controller<T> {
   int getSize();
 
   void addNoteFromInt(int pitch, int start, int end);
+
+  void addToTrack(int pitch, int start, int stop);
 }

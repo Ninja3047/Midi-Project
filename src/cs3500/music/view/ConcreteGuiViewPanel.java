@@ -121,7 +121,7 @@ public class ConcreteGuiViewPanel extends JPanel {
   private void drawTime(Graphics g, int lastbeat) {
     Graphics2D g2d = (Graphics2D) g;
 
-    float time = controller.getTime();
+    //float time = controller.getTime();
 
     g2d.setColor(Color.RED);
     g2d.drawLine(LEFT_OFFSET, CELL_SIZE, LEFT_OFFSET, LEFT_OFFSET + CELL_SIZE * lastbeat);

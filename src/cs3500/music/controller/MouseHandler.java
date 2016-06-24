@@ -27,17 +27,18 @@ public class MouseHandler implements MouseListener {
   public void mousePressed(MouseEvent mouseEvent) {
     this.start = (mouseEvent.getX() - 40) / 20;
     this.pitch = (this.controller.getHighestNote().toInt() - (mouseEvent.getY() / 20 - 1));
-    System.out.println(this.start);
-    //System.out.println(mouseEvent.getY());
-    System.out.println(this.pitch);
-    //mouseEvent.getY();
   }
 
   @Override
   public void mouseReleased(MouseEvent mouseEvent) {
-    this.controller.addNoteFromInt(this.pitch, this.start, (mouseEvent.getX() - 40) / 20);
-    mouseEvent.getComponent().repaint();
-    //System.out.println(this.controller.getNotesAtBeat(4));
+    int stop = (mouseEvent.getX() - 40) / 20 + 1;
+    if (this.pitch <= this.controller.getHighestNote().toInt() &&
+            this.pitch >= this.controller.getLowestNote().toInt() &&
+            this.start >= 0 && stop - this.start > 0 && stop <= this.controller.getSize()) {
+      this.controller.addNoteFromInt(this.pitch, this.start, stop);
+      mouseEvent.getComponent().repaint();
+      this.controller.addToTrack(this.pitch, this.start, stop);
+    }
   }
 
   @Override

@@ -34,6 +34,11 @@ public class MusicEditorView implements GuiView {
     gui.display();
   }
 
+  @Override
+  public void addToTrack(int pitch, int start, int end) {
+    this.midi.addToTrack(pitch, start, end);
+  }
+
   /**
    * Toggles the play state of the midi
    */

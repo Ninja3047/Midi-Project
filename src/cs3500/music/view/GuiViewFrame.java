@@ -42,6 +42,11 @@ public class GuiViewFrame extends JFrame implements GuiView {
     this.setVisible(true);
   }
 
+  @Override
+  public void addToTrack(int pitch, int start, int end) {
+
+  }
+
   public void moveToBeginning() {
     JScrollBar sb = this.displayPanel.getHorizontalScrollBar();
     sb.setValue(0);

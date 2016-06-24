@@ -46,6 +46,11 @@ public class ConsoleView implements View {
     }
   }
 
+  @Override
+  public void addToTrack(int pitch, int start, int end) {
+
+  }
+
   /**
    * Prints out the notes given
    *
