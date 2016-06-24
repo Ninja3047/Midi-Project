@@ -41,6 +41,16 @@ public class GuiViewFrame extends JFrame implements GuiView {
     this.setVisible(true);
   }
 
+  public void moveToBeginning() {
+    JScrollBar sb = this.displayPanel.getHorizontalScrollBar();
+    sb.setValue(0);
+  }
+
+  public void moveToEnd() {
+    JScrollBar sb = this.displayPanel.getHorizontalScrollBar();
+    sb.setValue(sb.getMaximum());
+  }
+
   @Override
   public Dimension getPreferredSize() {
     return new Dimension(1333, 390);

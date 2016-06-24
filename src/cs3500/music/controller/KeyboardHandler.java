@@ -2,6 +2,7 @@ package cs3500.music.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -10,6 +11,12 @@ import java.util.Map;
 public class KeyboardHandler implements KeyListener {
   private Map<Character, Runnable> keytyped;
   private Map<Integer, Runnable> keypressed, keyreleased;
+
+  public KeyboardHandler() {
+    keytyped = new HashMap<>();
+    keypressed = new HashMap<>();
+    keyreleased = new HashMap<>();
+  }
 
   /**
    * Sets the map for key typed events

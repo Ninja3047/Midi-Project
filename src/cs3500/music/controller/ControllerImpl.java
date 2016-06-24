@@ -38,19 +38,44 @@ public class ControllerImpl implements Controller<Note> {
     Map<Character, Runnable> keyTypes = new HashMap<>();
     Map<Integer, Runnable> keyPresses = new HashMap<>();
     Map<Integer, Runnable> keyReleases = new HashMap<>();
-
-    keyTypes.put('x', () -> {
-      System.out.println("Tilliam Wan is shit (its just a prank bro)");
-    });
-    keyPresses.put(KeyEvent.VK_X, keyTypes.get('x'));
-
+    MusicEditorView editorview = (MusicEditorView) this.curView;
     KeyboardHandler kbd = new KeyboardHandler();
+
+    keyTypes.put('p', () -> {
+      System.out.println("Now Playing/Pausing");
+      editorview.togglePlay();
+    });
+    keyPresses.put(KeyEvent.VK_P, keyTypes.get('p'));
+
+    keyTypes.put('a', () -> {
+      System.out.println("Adding a note");
+      // TODO when a is pressed, add a mouse handler to the view to add a note
+      // and then remove it after
+    });
+    keyPresses.put(KeyEvent.VK_A, keyTypes.get('a'));
+
+    keyTypes.put('d', () -> {
+      System.out.println("Deleting a note");
+      // TODO when d is pressed, add a mouse handler to the view to delete a note
+      // and then remove it after
+    });
+    keyPresses.put(KeyEvent.VK_D, keyTypes.get('d'));
+
+    keyPresses.put(KeyEvent.VK_HOME, () -> {
+      System.out.println("Moving to the beginning of the composition");
+      editorview.moveToBeginning();
+    });
+
+    keyPresses.put(KeyEvent.VK_END, () -> {
+      System.out.println("Moving to the end of the composition");
+      editorview.moveToEnd();
+    });
+
     kbd.setKeyTypedMap(keyTypes);
     kbd.setKeyPressedMap(keyPresses);
+    kbd.setKeyReleasedMap(keyReleases);
 
-    MusicEditorView tmpView = (MusicEditorView) this.curView;
-    System.out.println("kek2");
-    tmpView.addKeyListener(kbd);
+    editorview.addKeyListener(kbd);
   }
 
   @Override

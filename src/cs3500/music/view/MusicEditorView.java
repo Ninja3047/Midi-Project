@@ -33,6 +33,27 @@ public class MusicEditorView implements GuiView {
     gui.display();
   }
 
+  /**
+   * Toggles the play state of the midi
+   */
+  public void togglePlay() {
+    midi.togglePlay();
+  }
+
+  /**
+   * Moves the view to the beginning
+   */
+  public void moveToBeginning() {
+    gui.moveToBeginning();
+  }
+
+  /**
+   * Moves the view to the end
+   */
+  public void moveToEnd() {
+    gui.moveToEnd();
+  }
+
   @Override
   public void addKeyListener(KeyListener listener) {
     System.out.println("kek3");
