@@ -17,7 +17,7 @@ public class GuiViewFrame extends JFrame implements GuiView {
 
   private final JScrollPane displayPanel;
   private final JButton play;
-  private final ConcreteGuiViewPanel notesPanel;
+  private final JPanel notesPanel;
 
   /**
    * Creates new GuiView
@@ -27,6 +27,7 @@ public class GuiViewFrame extends JFrame implements GuiView {
     this.notesPanel.setFocusable(true);
     this.displayPanel = new JScrollPane(notesPanel);
     this.play = new JButton("▶");
+    this.play.setFocusable(false);
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     this.setTitle("Music Player");
     this.setLayout(new BorderLayout());

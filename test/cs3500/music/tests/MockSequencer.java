@@ -2,11 +2,13 @@ package cs3500.music.tests;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.sound.midi.ControllerEventListener;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaEventListener;
+import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiEvent;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Receiver;
@@ -21,7 +23,6 @@ import javax.sound.midi.Transmitter;
  */
 public class MockSequencer implements Sequencer {
   private Sequence seq;
-  private float tempo;
 
   @Override
   public void setSequence(Sequence seq) {
@@ -35,8 +36,10 @@ public class MockSequencer implements Sequencer {
    */
   public String getData() {
     Track t = this.seq.getTracks()[0];
-    StringBuilder sb = new StringBuilder("Tempo: " + Float.toString(this.tempo) + "\n");
-    for (int i = 0; i < t.size() - 1; i += 1) {
+    MetaMessage tempoMessage = (MetaMessage) t.get(0).getMessage();
+    String tempo = Arrays.toString(tempoMessage.getData());
+    StringBuilder sb = new StringBuilder("Tempo: " + tempo + " (bytes)\n");
+    for (int i = 1; i < t.size() - 1; i += 1) {
       MidiEvent me = t.get(i);
       long time = me.getTick();
       ShortMessage sm = (ShortMessage) me.getMessage();
@@ -54,7 +57,7 @@ public class MockSequencer implements Sequencer {
 
   @Override
   public void setTempoInMPQ(float v) {
-    this.tempo = v;
+
   }
 
   @Override

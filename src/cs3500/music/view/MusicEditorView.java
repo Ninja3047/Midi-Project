@@ -31,7 +31,6 @@ public class MusicEditorView implements GuiView {
   @Override
   public void display() {
     gui.display();
-    midi.display();
   }
 
   @Override

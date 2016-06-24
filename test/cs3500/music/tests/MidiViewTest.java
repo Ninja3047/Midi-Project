@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.io.StringReader;
 
+import javax.sound.midi.InvalidMidiDataException;
+
 import cs3500.music.controller.Controller;
 import cs3500.music.controller.ControllerImpl;
 import cs3500.music.model.Model;
@@ -18,21 +20,24 @@ import static org.junit.Assert.assertEquals;
  * Class to test MidiView
  */
 public class MidiViewTest {
-  Model<Note> model = MusicReader.parseFile(new StringReader("tempo 200000\n" +
+  private Model<Note> model = MusicReader.parseFile(new StringReader("tempo 200000\n" +
                   "note 0 2 1 64 72\n" +
                   "note 0 7 1 55 70\n" +
                   "note 2 4 1 62 72\n" +
                   "note 4 6 1 60 71"),
           new MusicModel.Builder());
-  Controller<Note> con = new ControllerImpl(model);
-  MockSequencer mock = new MockSequencer();
-  MidiView testView = new MidiView(con, mock);
+  private Controller<Note> con = new ControllerImpl(model);
+  private MockSequencer mock = new MockSequencer();
+  private MidiView testView = new MidiView(con, mock);
+
+  private MidiViewTest() throws InvalidMidiDataException {
+  }
 
   @Test
   public void testMidiData() {
     con.setView(testView);
     testView.display();
-    assertEquals("Tempo: 200000.0\n" +
+    assertEquals("Tempo: [3, 13, 64] (bytes)\n" +
             "0 PROGRAM_CHANGE 1\n" +
             "0 NOTE_ON 64\n" +
             "0 NOTE_ON 55\n" +
