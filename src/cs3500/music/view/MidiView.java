@@ -99,6 +99,24 @@ public class MidiView implements View {
   }
 
   /**
+   * Returns the current position in the midi in microseconds
+   *
+   * @return a time as a long in microseconds
+   */
+  public long getCurrentTime() {
+    return this.sequencer.getMicrosecondPosition();
+  }
+
+  /**
+   * Returns the total length of the current midi in microseconds
+   *
+   * @return a time as a long in microseconds
+   */
+  public long getTotalTime() {
+    return this.sequencer.getMicrosecondLength();
+  }
+
+  /**
    * Turns a list of notes into a MidiSequence
    *
    * @param toPlay the track to play
