@@ -1,9 +1,5 @@
 package cs3500.music.controller;
 
-import java.awt.event.ActionListener;
-
-import java.awt.event.KeyListener;
-
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
@@ -79,7 +75,6 @@ public class ControllerImpl implements Controller<Note> {
   public void setView(View v) {
     this.curView = v;
     if (this.curView instanceof MusicEditorView) {
-      System.out.println("kek");
       this.configureKeyBoardListener();
     }
   }
@@ -122,12 +117,6 @@ public class ControllerImpl implements Controller<Note> {
   @Override
   public int getSize() {
     return this.curModel.getSize();
-  }
-
-  @Override
-  public float getTime() {
-    // TODO
-    return 0.0F;
   }
 
   @Override
