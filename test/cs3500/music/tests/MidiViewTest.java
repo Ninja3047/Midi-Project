@@ -28,13 +28,11 @@ public class MidiViewTest {
           new MusicModel.Builder());
   private Controller<Note> con = new ControllerImpl(model);
   private MockSequencer mock = new MockSequencer();
-  private MidiView testView = new MidiView(con, mock);
-
-  private MidiViewTest() throws InvalidMidiDataException {
-  }
 
   @Test
-  public void testMidiData() {
+  public void testMidiData() throws InvalidMidiDataException {
+
+    MidiView testView = new MidiView(con, mock);
     con.setView(testView);
     testView.display();
     assertEquals("Tempo: [3, 13, 64] (bytes)\n" +

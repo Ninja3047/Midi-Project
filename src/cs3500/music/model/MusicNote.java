@@ -90,6 +90,8 @@ public class MusicNote implements Comparable<Note>, Note {
     this.curOctave = curOctave;
     this.duration = end - start;
     this.start = start;
+    this.instrument = 1;
+    this.volume = 64;
   }
 
   @Override

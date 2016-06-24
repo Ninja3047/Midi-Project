@@ -10,14 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 import cs3500.music.model.Model;
-import cs3500.music.model.MusicNote;
 import cs3500.music.model.Note;
-import cs3500.music.view.GuiView;
-import cs3500.music.view.GuiViewFrame;
-import cs3500.music.view.MidiView;
 import cs3500.music.view.MusicEditorView;
 import cs3500.music.view.View;
-import cs3500.music.view.ViewFactory;
 
 /**
  * Implementation of the controller interface
