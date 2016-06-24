@@ -2,7 +2,6 @@ package cs3500.music.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -48,15 +47,14 @@ public class KeyboardHandler implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent keyEvent) {
-    System.out.println("hello");
-    if (keytyped.containsKey(keyEvent.getKeyCode())) {
+    if (keypressed.containsKey(keyEvent.getKeyCode())) {
       keypressed.get(keyEvent.getKeyCode()).run();
     }
   }
 
   @Override
   public void keyReleased(KeyEvent keyEvent) {
-    if (keytyped.containsKey(keyEvent.getKeyCode())) {
+    if (keyreleased.containsKey(keyEvent.getKeyCode())) {
       keyreleased.get(keyEvent.getKeyCode()).run();
     }
   }
