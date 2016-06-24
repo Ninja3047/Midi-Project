@@ -76,4 +76,6 @@ public interface Controller<T> {
   void addNoteFromInt(int pitch, int start, int end);
 
   void addToTrack(int pitch, int start, int stop);
+
+  double getTime();
 }

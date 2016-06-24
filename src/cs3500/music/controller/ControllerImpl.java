@@ -128,4 +128,9 @@ public class ControllerImpl implements Controller<Note> {
   public void addToTrack(int pitch, int start, int stop) {
     this.curView.addToTrack(pitch, start, stop);
   }
+
+  @Override
+  public double getTime() {
+    return this.curView.getTime();
+  }
 }

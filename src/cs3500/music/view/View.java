@@ -11,5 +11,12 @@ public interface View {
    */
   void display();
 
+  /**
+   * Get the time position
+   *
+   * @return the time ratio
+   */
+  double getTime();
+
   void addToTrack(int pitch, int start, int stop);
 }

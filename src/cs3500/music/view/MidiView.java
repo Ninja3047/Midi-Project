@@ -43,6 +43,18 @@ public class MidiView implements View {
     this.initSequencerData();
   }
 
+  /**
+   * Constructor for explicit sequencer
+   *
+   * @param controller the controller to use
+   * @param seq        the sequencer to use
+   */
+  public MidiView(Controller<Note> controller, Sequencer seq) throws InvalidMidiDataException {
+    this.sequencer = seq;
+    this.controller = controller;
+    this.initSequencerData();
+  }
+
   private void initSequencerData() {
     try {
       List<Note> notes = controller.getNotes();
@@ -68,18 +80,6 @@ public class MidiView implements View {
     } catch (InvalidMidiDataException e) {
       e.printStackTrace();
     }
-  }
-
-  /**
-   * Constructor for explicit sequencer
-   *
-   * @param controller the controller to use
-   * @param seq        the sequencer to use
-   */
-  public MidiView(Controller<Note> controller, Sequencer seq) throws InvalidMidiDataException {
-    this.sequencer = seq;
-    this.controller = controller;
-    this.initSequencerData();
   }
 
   @Override
@@ -148,6 +148,12 @@ public class MidiView implements View {
       toPlay.add(new MidiEvent(start, 96 * n.getStart()));
       toPlay.add(new MidiEvent(end, 96 * noteEnd));
     }
+  }
+
+  @Override
+  public double getTime() {
+    double time = (double) sequencer.getTickPosition() / sequencer.getTickLength();
+    return time;
   }
 
   @Override
