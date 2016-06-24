@@ -8,7 +8,6 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 
 import cs3500.music.controller.Controller;
-import cs3500.music.controller.MouseHandler;
 import cs3500.music.model.Note;
 
 /**
@@ -59,7 +58,6 @@ public class GuiViewFrame extends JFrame implements GuiView {
 
   @Override
   public void addKeyListener(KeyListener listen) {
-    System.out.println("kek4");
     this.notesPanel.addKeyListener(listen);
   }
 
@@ -71,5 +69,10 @@ public class GuiViewFrame extends JFrame implements GuiView {
   @Override
   public void addActionListener(ActionListener listener) {
     play.addActionListener(listener);
+  }
+
+  @Override
+  public double getTime() {
+    return 0;
   }
 }

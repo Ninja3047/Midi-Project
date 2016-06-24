@@ -8,4 +8,11 @@ public interface View {
    * Starts the view
    */
   void display();
+
+  /**
+   * Get the time position
+   *
+   * @return the time ratio
+   */
+  double getTime();
 }

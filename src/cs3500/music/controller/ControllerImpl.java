@@ -123,4 +123,9 @@ public class ControllerImpl implements Controller<Note> {
   public void addNoteFromInt(int pitch, int start, int end) {
     this.curModel.addNoteFromInt(pitch, start, end);
   }
+
+  @Override
+  public double getTime() {
+    return this.curView.getTime();
+  }
 }

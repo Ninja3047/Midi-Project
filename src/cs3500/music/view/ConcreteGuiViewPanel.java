@@ -17,7 +17,6 @@ public class ConcreteGuiViewPanel extends JPanel {
   private final Controller<Note> controller;
 
   public ConcreteGuiViewPanel(Controller<Note> controller) {
-    super();
     this.controller = controller;
     this.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
     this.requestFocusInWindow();
@@ -32,7 +31,7 @@ public class ConcreteGuiViewPanel extends JPanel {
       drawNotes(g, controller.getNotesAtBeat(i), controller.getHighestNote());
     }
     drawMeasures(g, controller.getHighestNote(), controller.getLowestNote(), controller.getSize());
-    drawTime(g, controller.getHighestNote().toInt() - controller.getLowestNote().toInt());
+    drawTime(g);
   }
 
   /**
@@ -118,13 +117,14 @@ public class ConcreteGuiViewPanel extends JPanel {
     }
   }
 
-  private void drawTime(Graphics g, int lastbeat) {
+  public void drawTime(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
 
-    float time = controller.getTime();
-
     g2d.setColor(Color.RED);
-    g2d.drawLine(LEFT_OFFSET, CELL_SIZE, LEFT_OFFSET, LEFT_OFFSET + CELL_SIZE * lastbeat);
+    int movement = (int) (controller.getSize() * CELL_SIZE * controller.getTime());
+    g2d.drawLine(LEFT_OFFSET + movement, CELL_SIZE, LEFT_OFFSET + movement,
+            LEFT_OFFSET + CELL_SIZE * (controller.getNoteRange().size() - 1));
+    this.repaint();
   }
 
   @Override

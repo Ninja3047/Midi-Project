@@ -107,4 +107,9 @@ public class ConsoleView implements View {
 
     return output.toString();
   }
+
+  @Override
+  public double getTime() {
+    return 0;
+  }
 }
