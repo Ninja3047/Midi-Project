@@ -126,7 +126,7 @@ public class ConcreteGuiViewPanel extends JPanel {
             LEFT_OFFSET + CELL_SIZE * (controller.getNoteRange().size() - 1));
     this.repaint();
     this.revalidate();
-    this.scrollRectToVisible(new Rectangle(movement, 1, 15 * CELL_SIZE, 1));
+    this.scrollRectToVisible(new Rectangle(movement, 1, movement, 1));
   }
 
   @Override
