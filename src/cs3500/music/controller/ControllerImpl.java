@@ -1,23 +1,14 @@
 package cs3500.music.controller;
 
-import java.awt.event.ActionListener;
-
-import java.awt.event.KeyListener;
-
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import cs3500.music.model.Model;
-import cs3500.music.model.MusicNote;
 import cs3500.music.model.Note;
-import cs3500.music.view.GuiView;
-import cs3500.music.view.GuiViewFrame;
-import cs3500.music.view.MidiView;
 import cs3500.music.view.MusicEditorView;
 import cs3500.music.view.View;
-import cs3500.music.view.ViewFactory;
 
 /**
  * Implementation of the controller interface
@@ -84,7 +75,6 @@ public class ControllerImpl implements Controller<Note> {
   public void setView(View v) {
     this.curView = v;
     if (this.curView instanceof MusicEditorView) {
-      System.out.println("kek");
       this.configureKeyBoardListener();
     }
   }
@@ -127,12 +117,6 @@ public class ControllerImpl implements Controller<Note> {
   @Override
   public int getSize() {
     return this.curModel.getSize();
-  }
-
-  @Override
-  public float getTime() {
-    // TODO
-    return 0.0F;
   }
 
   @Override

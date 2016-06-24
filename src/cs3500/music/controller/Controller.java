@@ -67,13 +67,6 @@ public interface Controller<T> {
   int getTempo();
 
   /**
-   * Returns the time the midi view is at
-   *
-   * @return the time
-   */
-  float getTime();
-
-  /**
    * Gets number of beats in the current piece from the model
    *
    * @return the number of beats
