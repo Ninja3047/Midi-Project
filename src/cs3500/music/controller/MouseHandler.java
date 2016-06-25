@@ -65,7 +65,6 @@ public class MouseHandler implements MouseListener {
     if (this.mouseAction.containsKey("pressed")) {
       this.updateData(mouseEvent);
       this.mouseAction.get("pressed").run();
-      mouseEvent.getComponent().repaint();
     }
   }
 
@@ -74,6 +73,7 @@ public class MouseHandler implements MouseListener {
     this.updateData(mouseEvent);
     if (this.mouseAction.containsKey("released")) {
       this.mouseAction.get("released").run();
+      mouseEvent.getComponent().repaint();
     }
   }
 
