@@ -17,7 +17,7 @@ public class ConcreteGuiViewPanel extends JPanel {
   private final Controller<Note> controller;
   private final Timer timer;
   private Color color;
-  private Mode state;
+  private String state;
 
   public ConcreteGuiViewPanel(Controller<Note> controller) {
     this.controller = controller;
@@ -27,9 +27,34 @@ public class ConcreteGuiViewPanel extends JPanel {
     this.requestFocusInWindow();
     this.setFocusable(true);
     this.color = Color.MAGENTA;
-    this.state = Mode.NORMAL;
+    this.state = "normal";
   }
 
+  public void changeMode() {
+    switch (this.controller.getMode()) {
+      case "play":
+        this.state = "play";
+        this.color = Color.MAGENTA;
+        break;
+      case "add":
+        this.state = "add";
+        this.color = Color.GREEN;
+        break;
+      case "delete":
+        this.state = "delete";
+        this.color = Color.RED;
+        break;
+      case "normal":
+        this.state = "normal";
+        this.color = Color.MAGENTA;
+        break;
+      default:
+        throw new IllegalArgumentException("Illegal state");
+    }
+
+  }
+
+  /*
   public void setState(Mode newState) {
       switch (newState) {
         case NORMAL:
@@ -44,9 +69,13 @@ public class ConcreteGuiViewPanel extends JPanel {
           this.state = Mode.ADD;
           this.color = Color.GREEN;
           break;
+        case PLAY:
+          this.state = Mode.PLAY;
+          this.color = Color.MAGENTA;
       }
     this.repaint();
   }
+  */
 
   @Override
   public void paintComponent(Graphics g) {
@@ -149,7 +178,9 @@ public class ConcreteGuiViewPanel extends JPanel {
     g2d.drawLine(LEFT_OFFSET + movement, CELL_SIZE, LEFT_OFFSET + movement,
             LEFT_OFFSET + CELL_SIZE * (controller.getNoteRange().size() - 1));
     this.repaint();
-    this.scrollRectToVisible(new Rectangle(movement, 1, movement, 1));
+    if (this.state.equals("play")) {
+      this.scrollRectToVisible(new Rectangle(movement, 1, movement, 1));
+    }
   }
 
   @Override
@@ -161,9 +192,5 @@ public class ConcreteGuiViewPanel extends JPanel {
     } else {
       return super.getPreferredSize();
     }
-  }
-
-  protected enum Mode {
-    NORMAL, DELETE, ADD
   }
 }

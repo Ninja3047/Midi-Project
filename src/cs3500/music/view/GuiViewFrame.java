@@ -125,20 +125,8 @@ public class GuiViewFrame extends JFrame implements GuiView {
   }
 
   @Override
-  public void setState(String state) {
+  public void changeMode() {
     ConcreteGuiViewPanel tmpPanel = (ConcreteGuiViewPanel) this.notesPanel;
-    switch (state) {
-      case "add":
-        tmpPanel.setState(ConcreteGuiViewPanel.Mode.ADD);
-        break;
-      case "delete":
-        tmpPanel.setState(ConcreteGuiViewPanel.Mode.DELETE);
-        break;
-      case "normal":
-        tmpPanel.setState(ConcreteGuiViewPanel.Mode.NORMAL);
-        break;
-      default:
-        throw new IllegalArgumentException("Illegal state");
-    }
+    tmpPanel.changeMode();
   }
 }

@@ -84,4 +84,6 @@ public interface Controller<T> {
   void deleteFromTrack(int pitch, int start, int stop);
 
   double getTime();
+
+  String getMode();
 }

@@ -81,8 +81,8 @@ public class MusicEditorView implements GuiView {
   }
 
   @Override
-  public void setState(String state) {
-    this.gui.setState(state);
+  public void changeMode() {
+    this.gui.changeMode();
   }
 
   @Override
@@ -96,4 +96,6 @@ public class MusicEditorView implements GuiView {
     return this.gui.getState();
   }
   */
+
+
 }

@@ -16,6 +16,7 @@ import cs3500.music.view.View;
 public class ControllerImpl implements Controller<Note> {
   private final Model<Note> curModel;
   private View curView;
+  private Mode mode;
 
   /**
    * Constructor for the controller
@@ -24,6 +25,7 @@ public class ControllerImpl implements Controller<Note> {
    */
   public ControllerImpl(Model<Note> m) {
     this.curModel = m;
+    this.mode = Mode.NORMAL;
   }
 
   private void configureKeyBoardListener() {
@@ -35,24 +37,34 @@ public class ControllerImpl implements Controller<Note> {
 
     keyTypes.put('p', () -> {
       System.out.println("Now Playing/Pausing");
+      if (this.mode == Mode.PLAY) {
+        this.mode = Mode.NORMAL;
+      } else {
+        this.mode = Mode.PLAY;
+      }
       editorview.togglePlay();
+      editorview.removeMouseListeners();
+      editorview.changeMode();
     });
     keyPresses.put(KeyEvent.VK_P, keyTypes.get('p'));
 
     keyPresses.put(KeyEvent.VK_ESCAPE, () -> {
-      editorview.setState("normal");
+      this.mode = Mode.NORMAL;
+      editorview.changeMode();
       editorview.removeMouseListeners();
     });
 
     keyTypes.put('a', () -> {
-      editorview.setState("add");
+      this.mode = Mode.ADD;
+      editorview.changeMode();
       editorview.removeMouseListeners();
       editorview.addMouseListener(new MouseAddHandler(this));
     });
     keyPresses.put(KeyEvent.VK_A, keyTypes.get('a'));
 
     keyTypes.put('d', () -> {
-      editorview.setState("delete");
+      this.mode = Mode.DELETE;
+      editorview.changeMode();
       editorview.removeMouseListeners();
       editorview.addMouseListener(new MouseDelHandler(this));
     });
@@ -149,6 +161,25 @@ public class ControllerImpl implements Controller<Note> {
       return this.curView.getTime();
     } else {
       return 0;
+    }
+  }
+
+  @Override
+  public String getMode() {
+    return this.mode.getValue();
+  }
+
+  protected enum Mode {
+    NORMAL("normal"), DELETE("delete"), ADD("add"), PLAY("play");
+
+    String value;
+
+    Mode(String value) {
+      this.value = value;
+    }
+
+    String getValue() {
+      return this.value;
     }
   }
 }
