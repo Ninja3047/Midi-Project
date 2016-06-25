@@ -71,12 +71,19 @@ public class MusicEditorView implements GuiView {
   }
 
   @Override
-  public void addMouseListener(MouseListener listener) {
-    gui.addMouseListener(listener);
+  public void setupMouseListener(MouseListener listener) {
+    this.gui.setupMouseListener(listener);
   }
 
   @Override
   public void setState(String state) {
     this.gui.setState(state);
   }
+
+  /*
+  @Override
+  public String getState() {
+    return this.gui.getState();
+  }
+  */
 }

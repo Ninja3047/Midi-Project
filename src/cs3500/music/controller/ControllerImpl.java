@@ -42,6 +42,7 @@ public class ControllerImpl implements Controller<Note> {
 
     keyTypes.put('a', () -> {
       editorview.setState("add");
+      editorview.setupMouseListener(new MouseHandler(this));
       System.out.println("Adding a note");
       // TODO when a is pressed, add a mouse handler to the view to add a note
       // and then remove it after
@@ -69,7 +70,6 @@ public class ControllerImpl implements Controller<Note> {
     kbd.setKeyPressedMap(keyPresses);
     kbd.setKeyReleasedMap(keyReleases);
 
-    editorview.addMouseListener(new MouseHandler(this));
     editorview.addKeyListener(kbd);
   }
 

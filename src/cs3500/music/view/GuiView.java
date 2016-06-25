@@ -20,7 +20,7 @@ public interface GuiView extends View {
    */
   void addActionListener(ActionListener listener);
 
-  void addMouseListener(MouseListener listener);
+  void setupMouseListener(MouseListener listener);
 
   void setState(String c);
 }
