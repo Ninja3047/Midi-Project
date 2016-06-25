@@ -141,6 +141,16 @@ public class ControllerImpl implements Controller<Note> {
   }
 
   @Override
+  public void expandNoteRange(int note) {
+    this.curModel.expandNoteRange(note);
+  }
+
+  @Override
+  public void expandBeatRange(int beat) {
+    this.curModel.expandBeatRange(beat);
+  }
+
+  @Override
   public List<String> getNoteRange() {
     return this.curModel.getNoteRange();
   }

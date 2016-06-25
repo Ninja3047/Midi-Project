@@ -93,7 +93,7 @@ public class MusicModel implements Model<Note> {
       }
       return lnb + longestDuration;
     } else {
-      return 0;
+      return lnb;
     }
 
   }
@@ -120,6 +120,16 @@ public class MusicModel implements Model<Note> {
   @Override
   public void deleteNoteFromInt(int note, int start, int end) {
     this.deleteNote(new MusicNote(note, start, end));
+  }
+
+  @Override
+  public void expandNoteRange(int note) throws IllegalArgumentException {
+    notes.expandNoteRange(new MusicNote(note, 0, 0));
+  }
+
+  @Override
+  public void expandBeatRange(int beat) throws IllegalArgumentException {
+    notes.expandBeatRange(beat);
   }
 
   /**

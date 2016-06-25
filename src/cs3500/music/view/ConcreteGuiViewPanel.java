@@ -22,7 +22,6 @@ public class ConcreteGuiViewPanel extends JPanel {
   public ConcreteGuiViewPanel(Controller<Note> controller) {
     this.controller = controller;
     this.timer = new Timer(100, actionEvent -> drawTime(this.getGraphics()));
-    this.timer.start();
     this.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
     this.requestFocusInWindow();
     this.setFocusable(true);
@@ -35,6 +34,7 @@ public class ConcreteGuiViewPanel extends JPanel {
       case "play":
         this.state = "play";
         this.color = Color.MAGENTA;
+        this.timer.start();
         break;
       case "add":
         this.state = "add";
@@ -47,35 +47,13 @@ public class ConcreteGuiViewPanel extends JPanel {
       case "normal":
         this.state = "normal";
         this.color = Color.MAGENTA;
+        this.timer.stop();
         break;
       default:
         throw new IllegalArgumentException("Illegal state");
     }
-
-  }
-
-  /*
-  public void setState(Mode newState) {
-      switch (newState) {
-        case NORMAL:
-          this.state = Mode.NORMAL;
-          this.color = Color.MAGENTA;
-          break;
-        case DELETE:
-          this.state = Mode.DELETE;
-          this.color = Color.RED;
-          break;
-        case ADD:
-          this.state = Mode.ADD;
-          this.color = Color.GREEN;
-          break;
-        case PLAY:
-          this.state = Mode.PLAY;
-          this.color = Color.MAGENTA;
-      }
     this.repaint();
   }
-  */
 
   @Override
   public void paintComponent(Graphics g) {
@@ -85,6 +63,7 @@ public class ConcreteGuiViewPanel extends JPanel {
       drawNotes(g, controller.getNotesAtBeat(i), controller.getHighestNote(), this.color);
     }
     drawMeasures(g, controller.getHighestNote(), controller.getLowestNote(), controller.getSize());
+    drawTime(g);
   }
 
   /**
@@ -124,16 +103,18 @@ public class ConcreteGuiViewPanel extends JPanel {
               CELL_SIZE * (i + 1) + (int) getFont().getSize2D());
     }
 
-    int measures = (int) Math.ceil(lastBeat / 4.0);
-
     // draw vertical measure lines and label every four at the top
-    for (int i = 0; i <= measures; i++) {
-      if (i % 4 == 0) {
-        g2d.drawString(Integer.toString(i * 4), LEFT_OFFSET + 4 * CELL_SIZE * i, CELL_SIZE - 4);
+    for (int i = 0; i < lastBeat; i++) {
+      if (i % 16 == 0) {
+        g2d.drawString(Integer.toString(i), LEFT_OFFSET + CELL_SIZE * i, CELL_SIZE - 4);
       }
-      g2d.drawLine(LEFT_OFFSET + 4 * CELL_SIZE * i, CELL_SIZE,
-              LEFT_OFFSET + 4 * CELL_SIZE * i, CELL_SIZE * (pitches + 1));
+      if (i % 4 == 0) {
+        g2d.drawLine(LEFT_OFFSET + CELL_SIZE * i, CELL_SIZE,
+                LEFT_OFFSET + CELL_SIZE * i, CELL_SIZE * (pitches + 1));
+      }
     }
+    g2d.drawLine(LEFT_OFFSET + CELL_SIZE * lastBeat, CELL_SIZE,
+            LEFT_OFFSET + CELL_SIZE * lastBeat, CELL_SIZE * (pitches + 1));
   }
 
   /**
@@ -177,8 +158,8 @@ public class ConcreteGuiViewPanel extends JPanel {
     int movement = (int) (controller.getSize() * CELL_SIZE * controller.getTime());
     g2d.drawLine(LEFT_OFFSET + movement, CELL_SIZE, LEFT_OFFSET + movement,
             LEFT_OFFSET + CELL_SIZE * (controller.getNoteRange().size() - 1));
-    this.repaint();
     if (this.state.equals("play")) {
+      this.repaint();
       this.scrollRectToVisible(new Rectangle(movement, 1, movement, 1));
     }
   }

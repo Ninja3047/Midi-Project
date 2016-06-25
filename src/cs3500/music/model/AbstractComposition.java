@@ -173,6 +173,24 @@ public abstract class AbstractComposition<T> implements Composition<T> {
   public abstract void appendComposition(Composition<T> c);
 
   @Override
+  public void expandNoteRange(T note) throws IllegalArgumentException {
+    if (!composition.containsKey(note)) {
+      List<Integer> list = new ArrayList<>();
+      System.out.println("Putting " + note.toString());
+      composition.put(note, list);
+    }
+  }
+
+  @Override
+  public void expandBeatRange(int beat) throws IllegalArgumentException {
+    if (!beats.containsKey(beat)) {
+      List<T> list = new ArrayList<>();
+      System.out.println("Expanding " + beat);
+      beats.put(beat, list);
+    }
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;

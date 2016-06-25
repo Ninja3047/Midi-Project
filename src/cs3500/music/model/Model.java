@@ -92,4 +92,20 @@ public interface Model<K> {
   void addNoteFromInt(int note, int start, int end);
 
   void deleteNoteFromInt(int note, int start, int end);
+
+  /**
+   * Expands the note range to the given note
+   *
+   * @param note a note (0 - 127)
+   * @throws IllegalArgumentException if the note is out of range
+   */
+  void expandNoteRange(int note) throws IllegalArgumentException;
+
+  /**
+   * Expand the beat range to the given beat
+   *
+   * @param beat a beat (any positive number)
+   * @throws IllegalArgumentException if the note is not positive
+   */
+  void expandBeatRange(int beat) throws IllegalArgumentException;
 }

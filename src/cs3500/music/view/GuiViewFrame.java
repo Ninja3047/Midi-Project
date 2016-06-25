@@ -24,7 +24,7 @@ public class GuiViewFrame extends JFrame implements GuiView {
   private final JButton expandUp;
   private final JButton expandDown;
 
-  private final JPanel notesPanel;
+  private final ConcreteGuiViewPanel notesPanel;
 
   /**
    * Creates new GuiView
@@ -37,9 +37,24 @@ public class GuiViewFrame extends JFrame implements GuiView {
     this.play = new JButton("▶");
     this.play.setFocusable(false);
 
-    this.expandRight = new BasicArrowButton(SwingConstants.EAST);
-    this.expandUp = new BasicArrowButton(SwingConstants.NORTH);
-    this.expandDown = new BasicArrowButton(SwingConstants.SOUTH);
+    this.expandRight = new JButton(">");
+    this.expandRight.addActionListener(actionEvent -> {
+      controller.expandBeatRange(controller.getSize() + 1);
+      this.repaint();
+    });
+    this.expandRight.setFocusable(false);
+    this.expandUp = new JButton("^");
+    this.expandUp.addActionListener(actionEvent -> {
+      controller.expandNoteRange(controller.getHighestNote().toInt() + 1);
+      this.repaint();
+    });
+    this.expandUp.setFocusable(false);
+    this.expandDown = new JButton("v");
+    this.expandDown.addActionListener(actionEvent -> {
+      controller.expandNoteRange(controller.getLowestNote().toInt() - 1);
+      this.repaint();
+    });
+    this.expandDown.setFocusable(false);
 
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     this.setTitle("Music Player");

@@ -1,6 +1,5 @@
 package cs3500.music.view;
 
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -85,13 +84,4 @@ public class MusicEditorView implements GuiView {
   public void removeMouseListeners() {
     this.gui.removeMouseListeners();
   }
-
-  /*
-  @Override
-  public String getState() {
-    return this.gui.getState();
-  }
-  */
-
-
 }
