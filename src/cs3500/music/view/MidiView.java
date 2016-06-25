@@ -153,28 +153,6 @@ public class MidiView implements View {
   public void updateTrack() {
     long time = this.sequencer.getTickPosition();
     this.initSequencerData();
-    /*
-    int tempo = this.controller.getTempo();
-    List<Note> notes = this.controller.getNotes();
-    Sequence forSequencer = new Sequence(Sequence.PPQ, 96);
-    Track toPlay = forSequencer.createTrack();
-
-    //tempo as a byte array
-    byte[] data = new byte[3];
-    data[0] = (byte) ((tempo >> 16) & 0xFF);
-    data[1] = (byte) ((tempo >> 8) & 0xFF);
-    data[2] = (byte) (tempo & 0xFF);
-
-    //Set tempo
-    MetaMessage mm = new MetaMessage();
-    mm.setMessage(81, data, 3);
-    MidiEvent pls = new MidiEvent(mm, -1);
-    toPlay.add(pls);
-
-    //Create rest of track
-    this.createMidiTrack(toPlay, notes);
-    sequencer.setSequence(forSequencer);
-    */
     sequencer.setTickPosition(time);
   }
 

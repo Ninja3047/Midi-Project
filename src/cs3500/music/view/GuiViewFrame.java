@@ -17,9 +17,6 @@ import cs3500.music.model.Note;
 public class GuiViewFrame extends JFrame implements GuiView {
 
   private final JScrollPane displayPanel;
-
-  private final JButton play;
-
   private final ConcreteGuiViewPanel notesPanel;
 
   /**
@@ -30,24 +27,10 @@ public class GuiViewFrame extends JFrame implements GuiView {
     this.notesPanel.setFocusable(true);
     this.displayPanel = new JScrollPane(notesPanel);
 
-    this.play = new JButton("▶");
-    this.play.setFocusable(false);
-
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     this.setTitle("Music Player");
 
-    GroupLayout layout = new GroupLayout(this.getContentPane());
-    this.setLayout(layout);
-
-    layout.setHorizontalGroup(layout.createParallelGroup()
-            .addComponent(displayPanel)
-            .addGroup(layout.createSequentialGroup()
-                    .addComponent(play)));
-
-    layout.setVerticalGroup(layout.createSequentialGroup()
-            .addComponent(displayPanel)
-            .addGroup(layout.createParallelGroup()
-                    .addComponent(play)));
+    this.getContentPane().add(displayPanel, BorderLayout.CENTER);
 
     this.pack();
   }
@@ -88,11 +71,6 @@ public class GuiViewFrame extends JFrame implements GuiView {
     for (MouseListener listener : listeners) {
       this.notesPanel.removeMouseListener(listener);
     }
-  }
-
-  @Override
-  public void addActionListener(ActionListener listener) {
-    play.addActionListener(listener);
   }
 
   @Override

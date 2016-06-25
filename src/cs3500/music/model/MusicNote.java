@@ -275,25 +275,5 @@ public class MusicNote implements Comparable<Note>, Note {
     public static String toString(Pitch p, Octave o) {
       return p.toString() + o.toString();
     }
-
-    public static String toString(int n) {
-      int octaveInt = n / 12 - 1;
-      int pitchInt = n % 12;
-      Pitch curPitch = Pitch.C;
-      for (Pitch p : Pitch.values()) {
-        if (p.getValue() == pitchInt) {
-          curPitch = p;
-          break;
-        }
-      }
-      Octave curOctave = Octave.MINUSONE;
-      for (Octave o : Octave.values()) {
-        if (o.getValue() == octaveInt) {
-          curOctave = o;
-          break;
-        }
-      }
-      return toString(curPitch, curOctave);
-    }
   }
 }

@@ -16,12 +16,6 @@ public interface GuiView extends View {
 
   void removeMouseListeners();
 
-  /**
-   * Adds the given action listener to the view
-   * @param listener an action listener
-   */
-  void addActionListener(ActionListener listener);
-
   void addMouseListener(MouseListener listener);
 
   //void setState(String c);

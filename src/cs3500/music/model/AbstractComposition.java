@@ -190,6 +190,10 @@ public abstract class AbstractComposition<T> implements Composition<T> {
 
   @Override
   public void contractRange() {
+    while (composition.get(composition.firstKey()).size() == 0) {
+      composition.remove(composition.firstKey());
+    }
+
     while (composition.get(composition.lastKey()).size() == 0) {
       composition.remove(composition.lastKey());
     }
