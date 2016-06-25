@@ -132,6 +132,11 @@ public class MusicModel implements Model<Note> {
     notes.expandBeatRange(beat);
   }
 
+  @Override
+  public void contractRange() {
+    notes.contractRange();
+  }
+
   /**
    * Builds the Music Model
    */

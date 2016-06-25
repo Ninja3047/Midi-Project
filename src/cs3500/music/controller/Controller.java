@@ -56,6 +56,8 @@ public interface Controller<T> {
 
   void expandBeatRange(int beat);
 
+  void contractRange();
+
   /**
    * Returns a list of strings representing the range of the notes of the model The order of the
    * string is lowest note to highest note

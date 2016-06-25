@@ -18,10 +18,16 @@ public class ConcreteGuiViewPanel extends JPanel {
   private final Timer timer;
   private Color color;
   private String state;
+  private double time;
 
   public ConcreteGuiViewPanel(Controller<Note> controller) {
     this.controller = controller;
-    this.timer = new Timer(100, actionEvent -> drawTime(this.getGraphics()));
+    this.time = 0;
+    this.timer = new Timer(10, actionEvent -> {
+      drawTime(this.getGraphics());
+      this.repaint();
+      this.time = controller.getTime() * controller.getSize();
+    });
     this.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
     this.requestFocusInWindow();
     this.setFocusable(true);
@@ -151,15 +157,19 @@ public class ConcreteGuiViewPanel extends JPanel {
     }
   }
 
+  /**
+   * Draws the line at the time specified in the controller
+   *
+   * @param g graphics
+   */
   public void drawTime(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
 
     g2d.setColor(Color.RED);
-    int movement = (int) (controller.getSize() * CELL_SIZE * controller.getTime());
+    int movement = (int) (time * CELL_SIZE);
     g2d.drawLine(LEFT_OFFSET + movement, CELL_SIZE, LEFT_OFFSET + movement,
             LEFT_OFFSET + CELL_SIZE * (controller.getNoteRange().size() - 1));
     if (this.state.equals("play")) {
-      this.repaint();
       this.scrollRectToVisible(new Rectangle(movement, 1, movement, 1));
     }
   }

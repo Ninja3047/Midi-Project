@@ -20,10 +20,6 @@ public class GuiViewFrame extends JFrame implements GuiView {
 
   private final JButton play;
 
-  private final JButton expandRight;
-  private final JButton expandUp;
-  private final JButton expandDown;
-
   private final ConcreteGuiViewPanel notesPanel;
 
   /**
@@ -37,25 +33,6 @@ public class GuiViewFrame extends JFrame implements GuiView {
     this.play = new JButton("▶");
     this.play.setFocusable(false);
 
-    this.expandRight = new JButton(">");
-    this.expandRight.addActionListener(actionEvent -> {
-      controller.expandBeatRange(controller.getSize() + 1);
-      this.repaint();
-    });
-    this.expandRight.setFocusable(false);
-    this.expandUp = new JButton("^");
-    this.expandUp.addActionListener(actionEvent -> {
-      controller.expandNoteRange(controller.getHighestNote().toInt() + 1);
-      this.repaint();
-    });
-    this.expandUp.setFocusable(false);
-    this.expandDown = new JButton("v");
-    this.expandDown.addActionListener(actionEvent -> {
-      controller.expandNoteRange(controller.getLowestNote().toInt() - 1);
-      this.repaint();
-    });
-    this.expandDown.setFocusable(false);
-
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     this.setTitle("Music Player");
 
@@ -65,18 +42,12 @@ public class GuiViewFrame extends JFrame implements GuiView {
     layout.setHorizontalGroup(layout.createParallelGroup()
             .addComponent(displayPanel)
             .addGroup(layout.createSequentialGroup()
-                    .addComponent(play)
-                    .addComponent(expandUp)
-                    .addComponent(expandDown)
-                    .addComponent(expandRight)));
+                    .addComponent(play)));
 
     layout.setVerticalGroup(layout.createSequentialGroup()
             .addComponent(displayPanel)
             .addGroup(layout.createParallelGroup()
-                    .addComponent(play)
-                    .addComponent(expandUp)
-                    .addComponent(expandDown)
-                    .addComponent(expandRight)));
+                    .addComponent(play)));
 
     this.pack();
   }

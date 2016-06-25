@@ -76,7 +76,6 @@ public class ControllerImpl implements Controller<Note> {
     MouseHandler mh = new MouseHandler();
 
     keyPresses.put(KeyEvent.VK_SPACE, () -> {
-      //System.out.println("Now Playing/Pausing");
       if (this.mode == Mode.PLAY) {
         this.mode = Mode.NORMAL;
       } else {
@@ -99,11 +98,33 @@ public class ControllerImpl implements Controller<Note> {
         editorView.togglePlay();
       }
       if (this.mode == Mode.ADD) {
+        this.contractRange();
         this.mode = Mode.NORMAL;
       } else {
         this.mode = Mode.ADD;
 
         editorView.addMouseListener(this.configureMouseAddListener());
+      }
+      editorView.changeMode();
+    });
+
+    keyPresses.put(KeyEvent.VK_J, () -> {
+      if (this.mode == Mode.ADD) {
+        this.expandNoteRange(this.getHighestNote().toInt() + 1);
+      }
+      editorView.changeMode();
+    });
+
+    keyPresses.put(KeyEvent.VK_K, () -> {
+      if (this.mode == Mode.ADD) {
+        this.expandNoteRange(this.getLowestNote().toInt() - 1);
+      }
+      editorView.changeMode();
+    });
+
+    keyPresses.put(KeyEvent.VK_L, () -> {
+      if (this.mode == Mode.ADD) {
+        this.expandBeatRange(this.getSize() + 1);
       }
       editorView.changeMode();
     });
@@ -177,6 +198,11 @@ public class ControllerImpl implements Controller<Note> {
   @Override
   public void expandBeatRange(int beat) {
     this.curModel.expandBeatRange(beat);
+  }
+
+  @Override
+  public void contractRange() {
+    this.curModel.contractRange();
   }
 
   @Override

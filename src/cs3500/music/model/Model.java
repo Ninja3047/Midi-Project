@@ -108,4 +108,9 @@ public interface Model<K> {
    * @throws IllegalArgumentException if the note is not positive
    */
   void expandBeatRange(int beat) throws IllegalArgumentException;
+
+  /**
+   * Contracts the range to valid notes
+   */
+  void contractRange();
 }
