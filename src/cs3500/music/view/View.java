@@ -1,5 +1,7 @@
 package cs3500.music.view;
 
+import java.awt.*;
+
 import cs3500.music.model.Note;
 
 /**

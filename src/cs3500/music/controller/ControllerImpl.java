@@ -1,5 +1,6 @@
 package cs3500.music.controller;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,7 @@ public class ControllerImpl implements Controller<Note> {
     keyPresses.put(KeyEvent.VK_P, keyTypes.get('p'));
 
     keyTypes.put('a', () -> {
+      editorview.setState("add");
       System.out.println("Adding a note");
       // TODO when a is pressed, add a mouse handler to the view to add a note
       // and then remove it after

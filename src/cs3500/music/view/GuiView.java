@@ -21,4 +21,6 @@ public interface GuiView extends View {
   void addActionListener(ActionListener listener);
 
   void addMouseListener(MouseListener listener);
+
+  void setState(String c);
 }

@@ -15,12 +15,40 @@ public class ConcreteGuiViewPanel extends JPanel {
   private static final int CELL_SIZE = 20;
   private static final int LEFT_OFFSET = 40;
   private final Controller<Note> controller;
+  private Color color;
+  private Mode state;
 
   public ConcreteGuiViewPanel(Controller<Note> controller) {
     this.controller = controller;
     this.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
     this.requestFocusInWindow();
     this.setFocusable(true);
+    this.color = Color.MAGENTA;
+    this.state = Mode.NORMAL;
+  }
+
+  public void setState(Mode newState) {
+    System.out.println(this.state + " " + newState);
+    if (newState == this.state) {
+      this.state = Mode.NORMAL;
+      this.color = Color.MAGENTA;
+    } else {
+      switch (newState) {
+        case NORMAL:
+          this.state = Mode.NORMAL;
+          this.color = Color.MAGENTA;
+          break;
+        case DELETE:
+          this.state = Mode.DELETE;
+          this.color = Color.RED;
+          break;
+        case ADD:
+          this.state = Mode.ADD;
+          this.color = Color.GREEN;
+          break;
+      }
+    }
+    this.repaint();
   }
 
   @Override
@@ -28,7 +56,7 @@ public class ConcreteGuiViewPanel extends JPanel {
     // Handle the default painting
     super.paintComponent(g);
     for (int i = 0; i < controller.getSize() + 1; i++) {
-      drawNotes(g, controller.getNotesAtBeat(i), controller.getHighestNote());
+      drawNotes(g, controller.getNotesAtBeat(i), controller.getHighestNote(), this.color);
     }
     drawMeasures(g, controller.getHighestNote(), controller.getLowestNote(), controller.getSize());
     drawTime(g);
@@ -90,9 +118,9 @@ public class ConcreteGuiViewPanel extends JPanel {
    * @param notes     list of notes to draw
    * @param highPitch highest pitch note in the composition
    */
-  private void drawNotes(Graphics g, List<Note> notes, Note highPitch) {
+  private void drawNotes(Graphics g, List<Note> notes, Note highPitch, Color c) {
     for (Note n : notes) {
-      drawNote(g, n, highPitch);
+      drawNote(g, n, highPitch, c);
     }
   }
 
@@ -103,14 +131,14 @@ public class ConcreteGuiViewPanel extends JPanel {
    * @param n         list of notes to draw
    * @param highPitch highest pitch note in the composition
    */
-  private void drawNote(Graphics g, Note n, Note highPitch) {
+  private void drawNote(Graphics g, Note n, Note highPitch, Color c) {
     Graphics2D g2d = (Graphics2D) g;
     int pos = n.getStart() * CELL_SIZE;
     int pitch = highPitch.toInt() - n.toInt();
     g2d.setColor(Color.BLACK);
     g2d.fillRect(pos + LEFT_OFFSET, pitch * CELL_SIZE + CELL_SIZE,
             CELL_SIZE, CELL_SIZE); // draw head
-    g2d.setColor(Color.MAGENTA);
+    g2d.setColor(c);
     for (int i = 1; i < n.getDuration(); i++) { // draw tail
       g2d.fillRect(pos + i * CELL_SIZE + LEFT_OFFSET, pitch * CELL_SIZE
               + CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -138,5 +166,9 @@ public class ConcreteGuiViewPanel extends JPanel {
     } else {
       return super.getPreferredSize();
     }
+  }
+
+  protected enum Mode {
+    NORMAL, DELETE, ADD
   }
 }
