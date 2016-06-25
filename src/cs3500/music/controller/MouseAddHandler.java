@@ -20,7 +20,7 @@ public class MouseAddHandler implements MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent mouseEvent) {
-    //System.out.println("test");
+
   }
 
   @Override
@@ -37,7 +37,7 @@ public class MouseAddHandler implements MouseListener {
             this.start >= 0 && stop - this.start > 0 && stop <= this.controller.getSize()) {
       this.controller.addNoteFromInt(this.pitch, this.start, stop);
       mouseEvent.getComponent().repaint();
-      this.controller.addToTrack(this.pitch, this.start, stop);
+      //this.controller.addToTrack(this.pitch, this.start, stop);
     }
   }
 

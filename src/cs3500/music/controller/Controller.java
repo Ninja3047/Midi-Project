@@ -1,6 +1,5 @@
 package cs3500.music.controller;
 
-import java.awt.*;
 import java.util.List;
 
 import cs3500.music.model.Note;
@@ -75,15 +74,28 @@ public interface Controller<T> {
    */
   int getSize();
 
+  /**
+   * Adds a note to the model from an integer
+   * @param pitch the pitch
+   * @param start the start
+   * @param end the end
+   */
   void addNoteFromInt(int pitch, int start, int end);
-
-  void addToTrack(int pitch, int start, int stop);
-
+  /**
+   * Delete note from model
+   * @param n note to delete
+   */
   void deleteNote(Note n);
 
-  void deleteFromTrack(int pitch, int start, int stop);
-
+  /**
+   * Gets the location relative to time of play
+   * @return 0 - 100.  0 being the beginning 100 being the end
+   */
   double getTime();
 
+  /**
+   * Gets the mode of the controller
+   * @return the mode
+   */
   String getMode();
 }

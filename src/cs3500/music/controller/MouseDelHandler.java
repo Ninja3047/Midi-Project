@@ -20,7 +20,6 @@ public class MouseDelHandler implements MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent mouseEvent) {
-    //System.out.println("test");
   }
 
   @Override
@@ -29,7 +28,6 @@ public class MouseDelHandler implements MouseListener {
     this.pitch = (this.controller.getHighestNote().toInt() - (mouseEvent.getY() / 20 - 1));
     for (Note n : this.controller.getNotesAtBeat(start)) {
       if (n.toInt() == this.pitch) {
-        this.controller.deleteFromTrack(this.pitch, this.start, 0);
         this.controller.deleteNote(n);
         mouseEvent.getComponent().repaint();
       }
@@ -38,11 +36,6 @@ public class MouseDelHandler implements MouseListener {
 
   @Override
   public void mouseReleased(MouseEvent mouseEvent) {
-    /*
-    this.controller.deleteNoteFromInt(this.pitch, this.start, stop);
-      mouseEvent.getComponent().repaint();
-      this.controller.deleteFromTrack(this.pitch, this.start, stop);
-      */
   }
 
   @Override

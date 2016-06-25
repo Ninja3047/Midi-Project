@@ -19,8 +19,4 @@ public interface View {
    * @return the time ratio
    */
   double getTime();
-
-  void addToTrack(int pitch, int start, int stop);
-
-  void deleteFromTrack(int pitch, int start, int stop);
 }

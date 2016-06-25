@@ -150,45 +150,37 @@ public class MidiView implements View {
     }
   }
 
+  public void updateTrack() {
+    long time = this.sequencer.getTickPosition();
+    this.initSequencerData();
+    /*
+    int tempo = this.controller.getTempo();
+    List<Note> notes = this.controller.getNotes();
+    Sequence forSequencer = new Sequence(Sequence.PPQ, 96);
+    Track toPlay = forSequencer.createTrack();
+
+    //tempo as a byte array
+    byte[] data = new byte[3];
+    data[0] = (byte) ((tempo >> 16) & 0xFF);
+    data[1] = (byte) ((tempo >> 8) & 0xFF);
+    data[2] = (byte) (tempo & 0xFF);
+
+    //Set tempo
+    MetaMessage mm = new MetaMessage();
+    mm.setMessage(81, data, 3);
+    MidiEvent pls = new MidiEvent(mm, -1);
+    toPlay.add(pls);
+
+    //Create rest of track
+    this.createMidiTrack(toPlay, notes);
+    sequencer.setSequence(forSequencer);
+    */
+    sequencer.setTickPosition(time);
+  }
+
   @Override
   public double getTime() {
     double time = (double) sequencer.getTickPosition() / sequencer.getTickLength();
     return time;
-  }
-
-  @Override
-  public void addToTrack(int pitch, int start, int end) {
-    Track t = this.sequencer.getSequence().getTracks()[0];
-
-    try {
-      MidiMessage startMess = new ShortMessage(ShortMessage.NOTE_ON, 1, pitch, 64);
-      MidiMessage endMess = new ShortMessage(ShortMessage.NOTE_OFF, 1, pitch, 64);
-      t.add(new MidiEvent(startMess, 96 * start));
-      t.add(new MidiEvent(endMess, 96 * end));
-    } catch (InvalidMidiDataException e) {
-      e.printStackTrace();
-    }
-  }
-
-  @Override
-  public void deleteFromTrack(int pitch, int start, int end) {
-    Track t = this.sequencer.getSequence().getTracks()[0];
-      for (int i = 0; i < t.size(); i += 1) {
-
-        MidiEvent me = t.get(i);
-        long meStart = me.getTick();
-        if (me.getMessage().getStatus() == ShortMessage.NOTE_ON) {
-          //System.out.println("wew");
-          ShortMessage tmpMess = (ShortMessage) me.getMessage();
-          int mePitch = tmpMess.getData1();
-          System.out.println(mePitch + " " + pitch);
-          if (mePitch == pitch && meStart == start * 96) {
-            System.out.println("test");
-            t.remove(t.get(i));
-            t.remove(t.get(i + 1));
-            return;
-          }
-        }
-      }
   }
 }

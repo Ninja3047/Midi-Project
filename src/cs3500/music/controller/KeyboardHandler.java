@@ -9,22 +9,10 @@ import java.util.Map;
  * Handles keyboard input
  */
 public class KeyboardHandler implements KeyListener {
-  private Map<Character, Runnable> keytyped;
-  private Map<Integer, Runnable> keypressed, keyreleased;
+  private Map<Integer, Runnable> keypressed;
 
   public KeyboardHandler() {
-    keytyped = new HashMap<>();
     keypressed = new HashMap<>();
-    keyreleased = new HashMap<>();
-  }
-
-  /**
-   * Sets the map for key typed events
-   *
-   * @param map a map
-   */
-  public void setKeyTypedMap(Map<Character, Runnable> map) {
-    this.keytyped = map;
   }
 
   /**
@@ -36,20 +24,9 @@ public class KeyboardHandler implements KeyListener {
     this.keypressed = map;
   }
 
-  /**
-   * Sets the map for key released events
-   *
-   * @param map a map
-   */
-  public void setKeyReleasedMap(Map<Integer, Runnable> map) {
-    this.keyreleased = map;
-  }
-
   @Override
   public void keyTyped(KeyEvent keyEvent) {
-    if (keytyped.containsKey(keyEvent.getKeyCode())) {
-      keytyped.get(keyEvent.getKeyCode()).run();
-    }
+
   }
 
   @Override
@@ -61,8 +38,6 @@ public class KeyboardHandler implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent keyEvent) {
-    if (keyreleased.containsKey(keyEvent.getKeyCode())) {
-      keyreleased.get(keyEvent.getKeyCode()).run();
-    }
+
   }
 }

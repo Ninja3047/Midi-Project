@@ -28,71 +28,83 @@ public class ControllerImpl implements Controller<Note> {
     this.mode = Mode.NORMAL;
   }
 
-  private void configureKeyBoardListener() {
-    Map<Character, Runnable> keyTypes = new HashMap<>();
-    Map<Integer, Runnable> keyPresses = new HashMap<>();
-    Map<Integer, Runnable> keyReleases = new HashMap<>();
-    MusicEditorView editorview = (MusicEditorView) this.curView;
-    KeyboardHandler kbd = new KeyboardHandler();
+  private MouseHandler configureMouseDeleteListener() {
+    MusicEditorView editorView = (MusicEditorView) this.curView;
+    Map<String, Runnable> mouseActions = new HashMap<>();
+    MouseHandler m = new MouseHandler();
+    mouseActions.put("pressed", () -> {
+      int truePitch = this.getHighestNote().toInt() - (m.getY() / 20 - 1);
+      for (Note n : this.getNotesAtBeat((m.getX() - 40) / 20)) {
+        if (n.toInt() == truePitch) {
+          System.out.println("hello?");
+          this.deleteNote(n);
+        }
+      }
+      editorView.updateTrack();
+    });
+    m.setMouseAction(mouseActions);
+    return m;
+  }
 
-    keyTypes.put('p', () -> {
-      System.out.println("Now Playing/Pausing");
+  private void configureKeyBoardListener() {
+    Map<Integer, Runnable> keyPresses = new HashMap<>();
+    MusicEditorView editorView = (MusicEditorView) this.curView;
+    KeyboardHandler kbd = new KeyboardHandler();
+    MouseHandler mh = new MouseHandler();
+
+    keyPresses.put(KeyEvent.VK_P, () -> {
+      //System.out.println("Now Playing/Pausing");
       if (this.mode == Mode.PLAY) {
         this.mode = Mode.NORMAL;
       } else {
         this.mode = Mode.PLAY;
       }
-      editorview.togglePlay();
-      editorview.removeMouseListeners();
-      editorview.changeMode();
+      editorView.togglePlay();
+      editorView.removeMouseListeners();
+      editorView.changeMode();
     });
-    keyPresses.put(KeyEvent.VK_P, keyTypes.get('p'));
 
     keyPresses.put(KeyEvent.VK_ESCAPE, () -> {
       this.mode = Mode.NORMAL;
-      editorview.changeMode();
-      editorview.removeMouseListeners();
+      editorView.changeMode();
+      editorView.removeMouseListeners();
     });
 
-    keyTypes.put('a', () -> {
-      editorview.removeMouseListeners();
+    keyPresses.put(KeyEvent.VK_A, () -> {
+      editorView.removeMouseListeners();
       if (this.mode == Mode.ADD) {
         this.mode = Mode.NORMAL;
       } else {
         this.mode = Mode.ADD;
-        editorview.addMouseListener(new MouseAddHandler(this));
-      }
-      editorview.changeMode();
-    });
-    keyPresses.put(KeyEvent.VK_A, keyTypes.get('a'));
 
-    keyTypes.put('d', () -> {
-      editorview.removeMouseListeners();
+        editorView.addMouseListener(new MouseAddHandler(this));
+      }
+      editorView.changeMode();
+    });
+
+    keyPresses.put(KeyEvent.VK_D, () -> {
+      editorView.removeMouseListeners();
       if (this.mode == Mode.DELETE) {
         this.mode = Mode.NORMAL;
       } else {
         this.mode = Mode.DELETE;
-        editorview.addMouseListener(new MouseDelHandler(this));
+        editorView.addMouseListener(this.configureMouseDeleteListener());
       }
-      editorview.changeMode();
+      editorView.changeMode();
     });
-    keyPresses.put(KeyEvent.VK_D, keyTypes.get('d'));
 
     keyPresses.put(KeyEvent.VK_HOME, () -> {
       System.out.println("Moving to the beginning of the composition");
-      editorview.moveToBeginning();
+      editorView.moveToBeginning();
     });
 
     keyPresses.put(KeyEvent.VK_END, () -> {
       System.out.println("Moving to the end of the composition");
-      editorview.moveToEnd();
+      editorView.moveToEnd();
     });
 
-    kbd.setKeyTypedMap(keyTypes);
     kbd.setKeyPressedMap(keyPresses);
-    kbd.setKeyReleasedMap(keyReleases);
-
-    editorview.addKeyListener(kbd);
+    editorView.addKeyListener(kbd);
   }
 
   @Override
@@ -149,18 +161,8 @@ public class ControllerImpl implements Controller<Note> {
   }
 
   @Override
-  public void addToTrack(int pitch, int start, int stop) {
-    this.curView.addToTrack(pitch, start, stop);
-  }
-
-  @Override
   public void deleteNote(Note n) {
     this.curModel.deleteNote(n);
-  }
-
-  @Override
-  public void deleteFromTrack(int pitch, int start, int stop) {
-    this.curView.deleteFromTrack(pitch, start, stop);
   }
 
   @Override
@@ -177,6 +179,9 @@ public class ControllerImpl implements Controller<Note> {
     return this.mode.getValue();
   }
 
+  /**
+   * Enum representing the mode of the controller
+   */
   protected enum Mode {
     NORMAL("normal"), DELETE("delete"), ADD("add"), PLAY("play");
 

@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
+import javax.sound.midi.InvalidMidiDataException;
+
 import cs3500.music.controller.Controller;
 import cs3500.music.model.Note;
 
@@ -34,14 +36,8 @@ public class MusicEditorView implements GuiView {
     return midi.getTime();
   }
 
-  @Override
-  public void addToTrack(int pitch, int start, int end) {
-    this.midi.addToTrack(pitch, start, end);
-  }
-
-  @Override
-  public void deleteFromTrack(int pitch, int start, int end) {
-    this.midi.deleteFromTrack(pitch, start, end);
+  public void updateTrack() {
+    this.midi.updateTrack();
   }
 
   /**
