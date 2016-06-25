@@ -71,8 +71,8 @@ public class MouseHandler implements MouseListener {
 
   @Override
   public void mouseReleased(MouseEvent mouseEvent) {
-    this.updateData(mouseEvent);
     if (this.mouseAction.containsKey("released")) {
+      this.updateData(mouseEvent);
       this.mouseAction.get("released").run();
       mouseEvent.getComponent().repaint();
     }

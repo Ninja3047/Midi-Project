@@ -36,7 +36,6 @@ public class ControllerImpl implements Controller<Note> {
       int truePitch = this.getHighestNote().toInt() - (m.getY() / 20 - 1);
       for (Note n : this.getNotesAtBeat((m.getX() - 40) / 20)) {
         if (n.toInt() == truePitch) {
-          System.out.println("hello?");
           this.deleteNote(n);
         }
       }
@@ -76,7 +75,7 @@ public class ControllerImpl implements Controller<Note> {
     KeyboardHandler kbd = new KeyboardHandler();
     MouseHandler mh = new MouseHandler();
 
-    keyPresses.put(KeyEvent.VK_P, () -> {
+    keyPresses.put(KeyEvent.VK_SPACE, () -> {
       //System.out.println("Now Playing/Pausing");
       if (this.mode == Mode.PLAY) {
         this.mode = Mode.NORMAL;
@@ -96,6 +95,9 @@ public class ControllerImpl implements Controller<Note> {
 
     keyPresses.put(KeyEvent.VK_A, () -> {
       editorView.removeMouseListeners();
+      if (this.mode == Mode.PLAY) {
+        editorView.togglePlay();
+      }
       if (this.mode == Mode.ADD) {
         this.mode = Mode.NORMAL;
       } else {
@@ -108,6 +110,9 @@ public class ControllerImpl implements Controller<Note> {
 
     keyPresses.put(KeyEvent.VK_D, () -> {
       editorView.removeMouseListeners();
+      if (this.mode == Mode.PLAY) {
+        editorView.togglePlay();
+      }
       if (this.mode == Mode.DELETE) {
         this.mode = Mode.NORMAL;
       } else {

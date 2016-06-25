@@ -131,7 +131,7 @@ public class GuiViewFrame extends JFrame implements GuiView {
 
   @Override
   public void changeMode() {
-    ConcreteGuiViewPanel tmpPanel = (ConcreteGuiViewPanel) this.notesPanel;
+    ConcreteGuiViewPanel tmpPanel = this.notesPanel;
     tmpPanel.changeMode();
   }
 }
