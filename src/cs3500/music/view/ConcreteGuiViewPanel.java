@@ -153,6 +153,7 @@ public class ConcreteGuiViewPanel extends JPanel {
     int movement = (int) (controller.getSize() * CELL_SIZE * controller.getTime());
     g2d.drawLine(LEFT_OFFSET + movement, CELL_SIZE, LEFT_OFFSET + movement,
             LEFT_OFFSET + CELL_SIZE * (controller.getNoteRange().size() - 1));
+    this.repaint();
     this.scrollRectToVisible(new Rectangle(movement, 1, movement, 1));
   }
 
