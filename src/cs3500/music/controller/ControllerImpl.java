@@ -46,6 +46,30 @@ public class ControllerImpl implements Controller<Note> {
     return m;
   }
 
+  private MouseHandler configureMouseAddListener() {
+    MusicEditorView editorView = (MusicEditorView) this.curView;
+    Map<String, Runnable> mouseActions = new HashMap<>();
+    MouseHandler m = new MouseHandler();
+    mouseActions.put("pressed", () -> {
+      int start = (m.getX() - 40) / 20;
+      int pitch = (this.getHighestNote().toInt() - (m.getY() / 20 - 1));
+      m.setStart(start);
+      m.setPitch(pitch);
+    });
+
+    mouseActions.put("released", () -> {
+          int stop = (m.getX() - 40) / 20 + 1;
+    if (m.getPitch() <= this.getHighestNote().toInt() &&
+            m.getPitch() >= this.getLowestNote().toInt() &&
+            m.getStart() >= 0 && stop - m.getStart() > 0 && stop <= this.getSize()) {
+      this.addNoteFromInt(m.getPitch(), m.getStart(), stop);
+      editorView.updateTrack();
+    }});
+
+    m.setMouseAction(mouseActions);
+    return m;
+  }
+
   private void configureKeyBoardListener() {
     Map<Integer, Runnable> keyPresses = new HashMap<>();
     MusicEditorView editorView = (MusicEditorView) this.curView;
@@ -77,7 +101,7 @@ public class ControllerImpl implements Controller<Note> {
       } else {
         this.mode = Mode.ADD;
 
-        editorView.addMouseListener(new MouseAddHandler(this));
+        editorView.addMouseListener(this.configureMouseAddListener());
       }
       editorView.changeMode();
     });

@@ -15,9 +15,27 @@ public class MouseHandler implements MouseListener {
   private Map<String, Runnable> mouseAction;
   private int x;
   private int y;
+  private int start;
+  private int pitch;
 
   public MouseHandler() {
     this.mouseAction = new HashMap<>();
+  }
+
+  public int getPitch() {
+    return this.pitch;
+  }
+
+  public int getStart() {
+    return this.start;
+  }
+
+  public void setStart(int start) {
+    this.start = start;
+  }
+
+  public void setPitch(int pitch) {
+    this.pitch = pitch;
   }
 
   public int getX() {
