@@ -39,15 +39,22 @@ public class ControllerImpl implements Controller<Note> {
     });
     keyPresses.put(KeyEvent.VK_P, keyTypes.get('p'));
 
+    keyPresses.put(KeyEvent.VK_ESCAPE, () -> {
+      editorview.setState("normal");
+      editorview.removeMouseListeners();
+    });
+
     keyTypes.put('a', () -> {
       editorview.setState("add");
-      editorview.setupMouseListener(new MouseAddHandler(this));
+      editorview.removeMouseListeners();
+      editorview.addMouseListener(new MouseAddHandler(this));
     });
     keyPresses.put(KeyEvent.VK_A, keyTypes.get('a'));
 
     keyTypes.put('d', () -> {
       editorview.setState("delete");
-      editorview.setupMouseListener(new MouseDelHandler(this));
+      editorview.removeMouseListeners();
+      editorview.addMouseListener(new MouseDelHandler(this));
     });
     keyPresses.put(KeyEvent.VK_D, keyTypes.get('d'));
 

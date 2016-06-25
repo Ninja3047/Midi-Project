@@ -31,10 +31,6 @@ public class ConcreteGuiViewPanel extends JPanel {
   }
 
   public void setState(Mode newState) {
-    if (newState == this.state) {
-      this.state = Mode.NORMAL;
-      this.color = Color.MAGENTA;
-    } else {
       switch (newState) {
         case NORMAL:
           this.state = Mode.NORMAL;
@@ -49,7 +45,6 @@ public class ConcreteGuiViewPanel extends JPanel {
           this.color = Color.GREEN;
           break;
       }
-    }
     this.repaint();
   }
 

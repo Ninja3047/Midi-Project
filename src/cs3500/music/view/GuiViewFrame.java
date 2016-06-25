@@ -102,12 +102,15 @@ public class GuiViewFrame extends JFrame implements GuiView {
   }
 
   @Override
-  public void setupMouseListener(MouseListener listener) {
-    MouseListener[] listeners = this.notesPanel.getMouseListeners();
-    if (listeners.length > 0) {
-      this.notesPanel.removeMouseListener(listeners[0]);
-    } else {
+  public void addMouseListener(MouseListener listener) {
       this.notesPanel.addMouseListener(listener);
+  }
+
+  @Override
+  public void removeMouseListeners() {
+    MouseListener[] listeners = this.notesPanel.getMouseListeners();
+    for (MouseListener listener : listeners) {
+      this.notesPanel.removeMouseListener(listener);
     }
   }
 

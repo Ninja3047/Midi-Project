@@ -14,13 +14,15 @@ public interface GuiView extends View {
    */
   void addKeyListener(KeyListener listener);
 
+  void removeMouseListeners();
+
   /**
    * Adds the given action listener to the view
    * @param listener an action listener
    */
   void addActionListener(ActionListener listener);
 
-  void setupMouseListener(MouseListener listener);
+  void addMouseListener(MouseListener listener);
 
   void setState(String c);
 }
