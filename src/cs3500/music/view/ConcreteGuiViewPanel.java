@@ -15,11 +15,14 @@ public class ConcreteGuiViewPanel extends JPanel {
   private static final int CELL_SIZE = 20;
   private static final int LEFT_OFFSET = 40;
   private final Controller<Note> controller;
+  private final Timer timer;
   private Color color;
   private Mode state;
 
   public ConcreteGuiViewPanel(Controller<Note> controller) {
     this.controller = controller;
+    this.timer = new Timer(100, actionEvent -> drawTime(this.getGraphics()));
+    this.timer.start();
     this.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
     this.requestFocusInWindow();
     this.setFocusable(true);
@@ -59,7 +62,6 @@ public class ConcreteGuiViewPanel extends JPanel {
       drawNotes(g, controller.getNotesAtBeat(i), controller.getHighestNote(), this.color);
     }
     drawMeasures(g, controller.getHighestNote(), controller.getLowestNote(), controller.getSize());
-    drawTime(g);
   }
 
   /**
@@ -152,8 +154,6 @@ public class ConcreteGuiViewPanel extends JPanel {
     int movement = (int) (controller.getSize() * CELL_SIZE * controller.getTime());
     g2d.drawLine(LEFT_OFFSET + movement, CELL_SIZE, LEFT_OFFSET + movement,
             LEFT_OFFSET + CELL_SIZE * (controller.getNoteRange().size() - 1));
-    this.repaint();
-    this.revalidate();
     this.scrollRectToVisible(new Rectangle(movement, 1, movement, 1));
   }
 

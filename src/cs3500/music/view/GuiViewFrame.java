@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicArrowButton;
 
 import cs3500.music.controller.Controller;
 import cs3500.music.model.Note;
@@ -16,7 +17,13 @@ import cs3500.music.model.Note;
 public class GuiViewFrame extends JFrame implements GuiView {
 
   private final JScrollPane displayPanel;
+
   private final JButton play;
+
+  private final JButton expandRight;
+  private final JButton expandUp;
+  private final JButton expandDown;
+
   private final JPanel notesPanel;
 
   /**
@@ -26,13 +33,36 @@ public class GuiViewFrame extends JFrame implements GuiView {
     this.notesPanel = new ConcreteGuiViewPanel(controller);
     this.notesPanel.setFocusable(true);
     this.displayPanel = new JScrollPane(notesPanel);
+
     this.play = new JButton("▶");
     this.play.setFocusable(false);
+
+    this.expandRight = new BasicArrowButton(SwingConstants.EAST);
+    this.expandUp = new BasicArrowButton(SwingConstants.NORTH);
+    this.expandDown = new BasicArrowButton(SwingConstants.SOUTH);
+
     this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     this.setTitle("Music Player");
-    this.setLayout(new BorderLayout());
-    this.getContentPane().add(displayPanel, BorderLayout.CENTER);
-    this.getContentPane().add(play, BorderLayout.SOUTH);
+
+    GroupLayout layout = new GroupLayout(this.getContentPane());
+    this.setLayout(layout);
+
+    layout.setHorizontalGroup(layout.createParallelGroup()
+            .addComponent(displayPanel)
+            .addGroup(layout.createSequentialGroup()
+                    .addComponent(play)
+                    .addComponent(expandUp)
+                    .addComponent(expandDown)
+                    .addComponent(expandRight)));
+
+    layout.setVerticalGroup(layout.createSequentialGroup()
+            .addComponent(displayPanel)
+            .addGroup(layout.createParallelGroup()
+                    .addComponent(play)
+                    .addComponent(expandUp)
+                    .addComponent(expandDown)
+                    .addComponent(expandRight)));
+
     this.pack();
   }
 
