@@ -138,6 +138,10 @@ public class ControllerImpl implements Controller<Note> {
 
   @Override
   public double getTime() {
-    return this.curView.getTime();
+    if (curView != null) {
+      return this.curView.getTime();
+    } else {
+      return 0;
+    }
   }
 }
