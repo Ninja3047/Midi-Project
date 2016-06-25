@@ -117,6 +117,11 @@ public class MusicModel implements Model<Note> {
     this.addNote(new MusicNote(note, start, end));
   }
 
+  @Override
+  public void deleteNoteFromInt(int note, int start, int end) {
+    this.deleteNote(new MusicNote(note, start, end));
+  }
+
   /**
    * Builds the Music Model
    */

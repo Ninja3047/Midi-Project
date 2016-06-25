@@ -8,13 +8,13 @@ import cs3500.music.model.Note;
 /**
  * Handles mouse events
  */
-public class MouseHandler implements MouseListener {
+public class MouseDelHandler implements MouseListener {
 
   private int start;
   private int pitch;
   private Controller<Note> controller;
 
-  MouseHandler(Controller<Note> c) {
+  MouseDelHandler(Controller<Note> c) {
     this.controller = c;
   }
 
@@ -27,18 +27,22 @@ public class MouseHandler implements MouseListener {
   public void mousePressed(MouseEvent mouseEvent) {
     this.start = (mouseEvent.getX() - 40) / 20;
     this.pitch = (this.controller.getHighestNote().toInt() - (mouseEvent.getY() / 20 - 1));
+    for (Note n : this.controller.getNotesAtBeat(start)) {
+      if (n.toInt() == this.pitch) {
+        this.controller.deleteFromTrack(this.pitch, this.start, 0);
+        this.controller.deleteNote(n);
+        mouseEvent.getComponent().repaint();
+      }
+    }
   }
 
   @Override
   public void mouseReleased(MouseEvent mouseEvent) {
-    int stop = (mouseEvent.getX() - 40) / 20 + 1;
-    if (this.pitch <= this.controller.getHighestNote().toInt() &&
-            this.pitch >= this.controller.getLowestNote().toInt() &&
-            this.start >= 0 && stop - this.start > 0 && stop <= this.controller.getSize()) {
-      this.controller.addNoteFromInt(this.pitch, this.start, stop);
+    /*
+    this.controller.deleteNoteFromInt(this.pitch, this.start, stop);
       mouseEvent.getComponent().repaint();
-      this.controller.addToTrack(this.pitch, this.start, stop);
-    }
+      this.controller.deleteFromTrack(this.pitch, this.start, stop);
+      */
   }
 
   @Override

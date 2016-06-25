@@ -28,7 +28,6 @@ public class ConcreteGuiViewPanel extends JPanel {
   }
 
   public void setState(Mode newState) {
-    System.out.println(this.state + " " + newState);
     if (newState == this.state) {
       this.state = Mode.NORMAL;
       this.color = Color.MAGENTA;

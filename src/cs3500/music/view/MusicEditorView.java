@@ -39,6 +39,11 @@ public class MusicEditorView implements GuiView {
     this.midi.addToTrack(pitch, start, end);
   }
 
+  @Override
+  public void deleteFromTrack(int pitch, int start, int end) {
+    this.midi.deleteFromTrack(pitch, start, end);
+  }
+
   /**
    * Toggles the play state of the midi
    */

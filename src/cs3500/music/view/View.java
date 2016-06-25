@@ -21,4 +21,6 @@ public interface View {
   double getTime();
 
   void addToTrack(int pitch, int start, int stop);
+
+  void deleteFromTrack(int pitch, int start, int stop);
 }

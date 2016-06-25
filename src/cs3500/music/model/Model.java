@@ -90,4 +90,6 @@ public interface Model<K> {
   int getSize();
 
   void addNoteFromInt(int note, int start, int end);
+
+  void deleteNoteFromInt(int note, int start, int end);
 }

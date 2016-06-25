@@ -169,4 +169,26 @@ public class MidiView implements View {
       e.printStackTrace();
     }
   }
+
+  @Override
+  public void deleteFromTrack(int pitch, int start, int end) {
+    Track t = this.sequencer.getSequence().getTracks()[0];
+      for (int i = 0; i < t.size(); i += 1) {
+
+        MidiEvent me = t.get(i);
+        long meStart = me.getTick();
+        if (me.getMessage().getStatus() == ShortMessage.NOTE_ON) {
+          //System.out.println("wew");
+          ShortMessage tmpMess = (ShortMessage) me.getMessage();
+          int mePitch = tmpMess.getData1();
+          System.out.println(mePitch + " " + pitch);
+          if (mePitch == pitch && meStart == start * 96) {
+            System.out.println("test");
+            t.remove(t.get(i));
+            t.remove(t.get(i + 1));
+            return;
+          }
+        }
+      }
+  }
 }

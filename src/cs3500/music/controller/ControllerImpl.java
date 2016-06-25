@@ -1,6 +1,5 @@
 package cs3500.music.controller;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
@@ -42,17 +41,13 @@ public class ControllerImpl implements Controller<Note> {
 
     keyTypes.put('a', () -> {
       editorview.setState("add");
-      editorview.setupMouseListener(new MouseHandler(this));
-      System.out.println("Adding a note");
-      // TODO when a is pressed, add a mouse handler to the view to add a note
-      // and then remove it after
+      editorview.setupMouseListener(new MouseAddHandler(this));
     });
     keyPresses.put(KeyEvent.VK_A, keyTypes.get('a'));
 
     keyTypes.put('d', () -> {
-      System.out.println("Deleting a note");
-      // TODO when d is pressed, add a mouse handler to the view to delete a note
-      // and then remove it after
+      editorview.setState("delete");
+      editorview.setupMouseListener(new MouseDelHandler(this));
     });
     keyPresses.put(KeyEvent.VK_D, keyTypes.get('d'));
 
@@ -129,6 +124,16 @@ public class ControllerImpl implements Controller<Note> {
   @Override
   public void addToTrack(int pitch, int start, int stop) {
     this.curView.addToTrack(pitch, start, stop);
+  }
+
+  @Override
+  public void deleteNote(Note n) {
+    this.curModel.deleteNote(n);
+  }
+
+  @Override
+  public void deleteFromTrack(int pitch, int start, int stop) {
+    this.curView.deleteFromTrack(pitch, start, stop);
   }
 
   @Override

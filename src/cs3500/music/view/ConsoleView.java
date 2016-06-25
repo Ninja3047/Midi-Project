@@ -51,6 +51,11 @@ public class ConsoleView implements View {
 
   }
 
+  @Override
+  public void deleteFromTrack(int pitch, int start, int end) {
+
+  }
+
   /**
    * Prints out the notes given
    *

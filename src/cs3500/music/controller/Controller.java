@@ -3,6 +3,7 @@ package cs3500.music.controller;
 import java.awt.*;
 import java.util.List;
 
+import cs3500.music.model.Note;
 import cs3500.music.view.View;
 
 /**
@@ -77,6 +78,10 @@ public interface Controller<T> {
   void addNoteFromInt(int pitch, int start, int end);
 
   void addToTrack(int pitch, int start, int stop);
+
+  void deleteNote(Note n);
+
+  void deleteFromTrack(int pitch, int start, int stop);
 
   double getTime();
 }
