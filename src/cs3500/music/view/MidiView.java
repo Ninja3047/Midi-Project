@@ -139,7 +139,6 @@ public class MidiView implements View {
    * @return the current time
    */
   public double getTime() {
-    double time = (double) sequencer.getTickPosition() / sequencer.getTickLength();
-    return time;
+    return sequencer.getTickPosition() / sequencer.getTickLength();
   }
 }

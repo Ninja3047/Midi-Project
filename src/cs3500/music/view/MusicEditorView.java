@@ -28,8 +28,7 @@ public class MusicEditorView implements GuiView {
     this.observer = observer;
     this.gui = gui;
     this.midi = midi;
-    this.timer = new Timer(20,
-            actionEvent -> this.gui.setTime(this.midi.getTime()));
+    this.timer = new Timer(20, actionEvent -> this.gui.setTime(this.midi.getTime()));
   }
 
   @Override
