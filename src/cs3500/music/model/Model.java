@@ -1,12 +1,11 @@
 package cs3500.music.model;
 
-import java.util.List;
-import java.util.NoSuchElementException;
+import cs3500.music.model.MusicModel.Mode;
 
 /**
  * Interface representing MIDI editors
  */
-public interface Model<K> extends ModelObserver {
+public interface Model<K> extends ModelObserver<K> {
 
   /**
    * Adds the given note into the existing notes
@@ -58,4 +57,16 @@ public interface Model<K> extends ModelObserver {
    * Contracts the range to valid notes
    */
   void contractRange();
+
+  /**
+   * Gets the current mode of the model
+   */
+  Mode getMode();
+
+  /**
+   * Sets the mode of the model
+   *
+   * @param mode a mode
+   */
+  void setMode(Mode mode);
 }

@@ -11,6 +11,7 @@ import cs3500.music.model.Model;
 import cs3500.music.model.MusicModel;
 import cs3500.music.model.Note;
 import cs3500.music.util.MusicReader;
+import cs3500.music.view.GuiView;
 import cs3500.music.view.View;
 import cs3500.music.view.ViewFactory;
 
@@ -22,8 +23,11 @@ public class MusicEditor {
     Model<Note> model = MusicReader.parseFile(new FileReader(args[0]),
             new MusicModel.Builder());
     Controller<Note> con = new ControllerImpl(model);
-    View view = ViewFactory.createView("player", con);
-    con.setView(view);
+    String editortype = args[1];
+    View view = ViewFactory.createView(editortype, con);
+    if (editortype == "player") {
+      con.setView((GuiView) view);
+    }
     con.start();
   }
 }

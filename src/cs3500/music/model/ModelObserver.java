@@ -1,10 +1,12 @@
 package cs3500.music.model;
 
+import cs3500.music.model.MusicModel.Mode;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Created by chris on 6/25/16.
+ * Read only access to the model
  */
 public interface ModelObserver<K> {
   /**

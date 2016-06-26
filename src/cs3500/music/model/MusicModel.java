@@ -12,10 +12,12 @@ import cs3500.music.util.CompositionBuilder;
  */
 public class MusicModel implements Model<Note> {
   private final Composition<Note> notes;
+  private Mode mode;
   private final int tempo;
 
   private MusicModel(Builder b) {
     this.notes = b.notes;
+    this.mode = Mode.NORMAL;
     this.tempo = b.tempo;
   }
 
@@ -164,5 +166,19 @@ public class MusicModel implements Model<Note> {
     public Model<Note> build() {
       return new MusicModel(this);
     }
+  }
+
+  public enum Mode {
+    NORMAL, ADD, DELETE, PLAY;
+  }
+
+  @Override
+  public Mode getMode() {
+    return this.mode;
+  }
+
+  @Override
+  public void setMode(Mode mode) {
+    this.mode = mode;
   }
 }

@@ -1,14 +1,12 @@
 package cs3500.music.controller;
 
-import java.util.List;
-
 import cs3500.music.model.Note;
-import cs3500.music.view.View;
+import cs3500.music.view.GuiView;
 
 /**
  * Interface that represents a Controller that interacts with the model & view
  */
-public interface Controller<T> {
+public interface Controller {
 
   /**
    * Starts the process
@@ -20,65 +18,26 @@ public interface Controller<T> {
    *
    * @param v a view
    */
-  void setView(View v);
+  void setView(GuiView v);
 
   /**
-   * Get notes from model
-   *
-   * @return the list of notes sorted by low to high pitch
+   * Expands the range of the composition to the given note (0 - 127)
+   * @param note a note as an integer (0 - 127)
+   * @throws IllegalArgumentException when the note is out of range
    */
-  List<T> getNotes();
+  void expandNoteRange(int note) throws IllegalArgumentException;
 
   /**
-   * Get the list of notes at the given beat from the model
-   *
-   * @param beat a beat
-   * @return the list of notes at the beat
-   * @throws IllegalArgumentException when the beat number is less than zero
+   * Expands the range of the composition to the given beat number (must be positive)
+   * @param beat a positive number
+   * @throws IllegalArgumentException when the beat is 0 or negative
    */
-  List<T> getNotesAtBeat(int beat) throws IllegalArgumentException;
+  void expandBeatRange(int beat) throws IllegalArgumentException;
 
   /**
-   * Returns the lowest note from the model
-   *
-   * @return a note
+   * Contracts the range of the composition to valid notes
    */
-  T getLowestNote();
-
-  /**
-   * Return the highest note from the model
-   *
-   * @return a note
-   */
-  T getHighestNote();
-
-  void expandNoteRange(int note);
-
-  void expandBeatRange(int beat);
-
   void contractRange();
-
-  /**
-   * Returns a list of strings representing the range of the notes of the model The order of the
-   * string is lowest note to highest note
-   *
-   * @return a list of strings representing the range of notes used in the model
-   */
-  List<String> getNoteRange();
-
-  /**
-   * Gets the tempo from the model
-   *
-   * @return the tempo
-   */
-  int getTempo();
-
-  /**
-   * Gets number of beats in the current piece from the model
-   *
-   * @return the number of beats
-   */
-  int getSize();
 
   /**
    * Adds a note to the model from an integer
@@ -97,11 +56,11 @@ public interface Controller<T> {
    * Gets the location relative to time of play
    * @return 0 - 100.  0 being the beginning 100 being the end
    */
-  double getTime();
+  //double getTime();
 
   /**
    * Gets the mode of the controller
    * @return the mode
    */
-  String getMode();
+  //String getMode();
 }

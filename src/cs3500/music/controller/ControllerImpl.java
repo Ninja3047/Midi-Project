@@ -2,21 +2,21 @@ package cs3500.music.controller;
 
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import cs3500.music.model.Model;
+import cs3500.music.model.MusicModel.Mode;
 import cs3500.music.model.Note;
+import cs3500.music.view.GuiView;
 import cs3500.music.view.MusicEditorView;
 import cs3500.music.view.View;
 
 /**
  * Implementation of the controller interface
  */
-public class ControllerImpl implements Controller<Note> {
+public class ControllerImpl implements Controller {
   private final Model<Note> curModel;
   private View curView;
-  private Mode mode;
 
   /**
    * Constructor for the controller
@@ -25,7 +25,6 @@ public class ControllerImpl implements Controller<Note> {
    */
   public ControllerImpl(Model<Note> m) {
     this.curModel = m;
-    this.mode = Mode.NORMAL;
   }
 
   private MouseHandler configureMouseDeleteListener() {
@@ -33,8 +32,8 @@ public class ControllerImpl implements Controller<Note> {
     Map<String, Runnable> mouseActions = new HashMap<>();
     MouseHandler m = new MouseHandler();
     mouseActions.put("pressed", () -> {
-      int truePitch = this.getHighestNote().toInt() - (m.getY() / 20 - 1);
-      for (Note n : this.getNotesAtBeat((m.getX() - 40) / 20)) {
+      int truePitch = curModel.getHighestNote().toInt() - (m.getY() / 20 - 1);
+      for (Note n : curModel.getNotesAtBeat((m.getX() - 40) / 20)) {
         if (n.toInt() == truePitch) {
           this.deleteNote(n);
         }
@@ -51,16 +50,16 @@ public class ControllerImpl implements Controller<Note> {
     MouseHandler m = new MouseHandler();
     mouseActions.put("pressed", () -> {
       int start = (m.getX() - 40) / 20;
-      int pitch = (this.getHighestNote().toInt() - (m.getY() / 20 - 1));
+      int pitch = (curModel.getHighestNote().toInt() - (m.getY() / 20 - 1));
       m.setStart(start);
       m.setPitch(pitch);
     });
 
     mouseActions.put("released", () -> {
           int stop = (m.getX() - 40) / 20 + 1;
-    if (m.getPitch() <= this.getHighestNote().toInt() &&
-            m.getPitch() >= this.getLowestNote().toInt() &&
-            m.getStart() >= 0 && stop - m.getStart() > 0 && stop <= this.getSize()) {
+      if (m.getPitch() <= curModel.getHighestNote().toInt() &&
+              m.getPitch() >= curModel.getLowestNote().toInt() &&
+              m.getStart() >= 0 && stop - m.getStart() > 0 && stop <= curModel.getSize()) {
       this.addNoteFromInt(m.getPitch(), m.getStart(), stop);
       editorView.updateTrack();
     }});
@@ -75,10 +74,10 @@ public class ControllerImpl implements Controller<Note> {
     KeyboardHandler kbd = new KeyboardHandler();
 
     keyPresses.put(KeyEvent.VK_SPACE, () -> {
-      if (this.mode == Mode.PLAY) {
-        this.mode = Mode.NORMAL;
+      if (curModel.getMode() == Mode.PLAY) {
+        curModel.setMode(Mode.NORMAL);
       } else {
-        this.mode = Mode.PLAY;
+        curModel.setMode(Mode.PLAY);
       }
       editorView.togglePlay();
       editorView.removeMouseListeners();
@@ -86,21 +85,21 @@ public class ControllerImpl implements Controller<Note> {
     });
 
     keyPresses.put(KeyEvent.VK_ESCAPE, () -> {
-      this.mode = Mode.NORMAL;
+      curModel.setMode(Mode.NORMAL);
       editorView.changeMode();
       editorView.removeMouseListeners();
     });
 
     keyPresses.put(KeyEvent.VK_A, () -> {
       editorView.removeMouseListeners();
-      if (this.mode == Mode.PLAY) {
+      if (curModel.getMode() == Mode.PLAY) {
         editorView.togglePlay();
       }
-      if (this.mode == Mode.ADD) {
+      if (curModel.getMode() == Mode.ADD) {
         this.contractRange();
-        this.mode = Mode.NORMAL;
+        curModel.setMode(Mode.NORMAL);
       } else {
-        this.mode = Mode.ADD;
+        curModel.setMode(Mode.ADD);
 
         editorView.addMouseListener(this.configureMouseAddListener());
       }
@@ -108,47 +107,45 @@ public class ControllerImpl implements Controller<Note> {
     });
 
     keyPresses.put(KeyEvent.VK_J, () -> {
-      if (this.mode == Mode.ADD) {
-        this.expandNoteRange(this.getHighestNote().toInt() + 1);
+      if (curModel.getMode() == Mode.ADD) {
+        this.expandNoteRange(curModel.getHighestNote().toInt() + 1);
       }
       editorView.changeMode();
     });
 
     keyPresses.put(KeyEvent.VK_K, () -> {
-      if (this.mode == Mode.ADD) {
-        this.expandNoteRange(this.getLowestNote().toInt() - 1);
+      if (curModel.getMode() == Mode.ADD) {
+        this.expandNoteRange(curModel.getLowestNote().toInt() - 1);
       }
       editorView.changeMode();
     });
 
     keyPresses.put(KeyEvent.VK_L, () -> {
-      if (this.mode == Mode.ADD) {
-        this.expandBeatRange(this.getSize() + 1);
+      if (curModel.getMode() == Mode.ADD) {
+        this.expandBeatRange(curModel.getSize() + 1);
       }
       editorView.changeMode();
     });
 
     keyPresses.put(KeyEvent.VK_D, () -> {
       editorView.removeMouseListeners();
-      if (this.mode == Mode.PLAY) {
+      if (curModel.getMode() == Mode.PLAY) {
         editorView.togglePlay();
       }
-      if (this.mode == Mode.DELETE) {
-        this.mode = Mode.NORMAL;
+      if (curModel.getMode() == Mode.DELETE) {
+        curModel.setMode(Mode.NORMAL);
       } else {
-        this.mode = Mode.DELETE;
+        curModel.setMode(Mode.DELETE);
         editorView.addMouseListener(this.configureMouseDeleteListener());
       }
       editorView.changeMode();
     });
 
     keyPresses.put(KeyEvent.VK_HOME, () -> {
-      System.out.println("Moving to the beginning of the composition");
       editorView.moveToBeginning();
     });
 
     keyPresses.put(KeyEvent.VK_END, () -> {
-      System.out.println("Moving to the end of the composition");
       editorView.moveToEnd();
     });
 
@@ -157,11 +154,9 @@ public class ControllerImpl implements Controller<Note> {
   }
 
   @Override
-  public void setView(View v) {
+  public void setView(GuiView v) {
     this.curView = v;
-    if (this.curView instanceof MusicEditorView) {
-      this.configureKeyBoardListener();
-    }
+    this.configureKeyBoardListener();
   }
 
   /**
@@ -182,26 +177,6 @@ public class ControllerImpl implements Controller<Note> {
   }
 
   @Override
-  public List<Note> getNotes() {
-    return this.curModel.getAllNotes();
-  }
-
-  @Override
-  public List<Note> getNotesAtBeat(int beat) {
-    return this.curModel.getNotesAtBeat(beat);
-  }
-
-  @Override
-  public Note getHighestNote() {
-    return this.curModel.getHighestNote();
-  }
-
-  @Override
-  public Note getLowestNote() {
-    return this.curModel.getLowestNote();
-  }
-
-  @Override
   public void expandNoteRange(int note) {
     this.curModel.expandNoteRange(note);
   }
@@ -217,21 +192,6 @@ public class ControllerImpl implements Controller<Note> {
   }
 
   @Override
-  public List<String> getNoteRange() {
-    return this.curModel.getNoteRange();
-  }
-
-  @Override
-  public int getTempo() {
-    return this.curModel.getTempo();
-  }
-
-  @Override
-  public int getSize() {
-    return this.curModel.getSize();
-  }
-
-  @Override
   public void addNoteFromInt(int pitch, int start, int end) {
     this.curModel.addNoteFromInt(pitch, start, end);
   }
@@ -239,36 +199,5 @@ public class ControllerImpl implements Controller<Note> {
   @Override
   public void deleteNote(Note n) {
     this.curModel.deleteNote(n);
-  }
-
-  @Override
-  public double getTime() {
-    if (curView != null) {
-      return this.curView.getTime();
-    } else {
-      return 0;
-    }
-  }
-
-  @Override
-  public String getMode() {
-    return this.mode.getValue();
-  }
-
-  /**
-   * Enum representing the mode of the controller
-   */
-  protected enum Mode {
-    NORMAL("normal"), DELETE("delete"), ADD("add"), PLAY("play");
-
-    String value;
-
-    Mode(String value) {
-      this.value = value;
-    }
-
-    String getValue() {
-      return this.value;
-    }
   }
 }

@@ -59,6 +59,7 @@ public class ConcreteGuiViewPanel extends JPanel {
       default:
         throw new IllegalArgumentException("Illegal state");
     }
+    this.revalidate();
     this.repaint();
   }
 
