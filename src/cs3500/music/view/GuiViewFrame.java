@@ -89,6 +89,11 @@ public class GuiViewFrame extends JFrame implements GuiView {
 
   }
 
+  /**
+   * Sets the time in the view
+   *
+   * @param time used to set time
+   */
   public void setTime(double time) {
     notesPanel.setTime(time);
   }

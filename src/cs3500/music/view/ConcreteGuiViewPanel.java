@@ -56,6 +56,11 @@ public class ConcreteGuiViewPanel extends JPanel {
     this.repaint();
   }
 
+  /**
+   * Sets the time in the view
+   *
+   * @param time used to set time
+   */
   protected void setTime(double time) {
     this.time = time;
     drawTime(this.getGraphics());
