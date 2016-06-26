@@ -2,31 +2,44 @@ package cs3500.music.tests;
 
 import org.junit.Test;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.StringReader;
 import java.util.HashMap;
+import java.util.Map;
 
-import cs3500.music.model.ModelObserver;
-import cs3500.music.model.MusicModel;
-import cs3500.music.model.Note;
-import cs3500.music.util.MusicReader;
-import cs3500.music.view.MusicEditorView;
-import cs3500.music.view.ViewFactory;
+import cs3500.music.controller.KeyboardHandler;
+
+import static org.junit.Assert.assertEquals;
 
 /**
- * Created by chris on 6/25/16.
+ * Class to test the KeyboardHandler class
  */
 public class KeyboardHandlerTest {
-  ModelObserver<Note> testModel = MusicReader.parseFile(new StringReader(""), new MusicModel.Builder());
-  MusicEditorView mev = (MusicEditorView) ViewFactory.createView("player", testModel);
-  HashMap<Integer, Runnable> commands = new HashMap<>();
-  Runnable testCommand = new MockRunnable();
+  private int key;
 
   @Test
   public void testKeyboard() {
-    commands.put(KeyEvent.VK_D, testCommand);
-    //testController.setView(mev, commands);
+    Map<Integer, Runnable> keyPresses = new HashMap<>();
+    KeyboardHandler kbd = new KeyboardHandler();
 
+    keyPresses.put(KeyEvent.VK_SPACE, () -> {
+      this.key = KeyEvent.VK_SPACE;
+    });
+
+    keyPresses.put(KeyEvent.VK_A, () -> {
+      this.key = KeyEvent.VK_A;
+    });
+
+    kbd.setKeyPressedMap(keyPresses);
+
+    kbd.keyPressed(new KeyEvent(new Label(), 0, 0, 0, KeyEvent.VK_SPACE, ' '));
+    assertEquals(KeyEvent.VK_SPACE, this.key);
+
+    kbd.keyPressed(new KeyEvent(new Label(), 0, 0, 0, KeyEvent.VK_B, 'b'));
+    assertEquals(KeyEvent.VK_SPACE, this.key);
+
+    kbd.keyPressed(new KeyEvent(new Label(), 0, 0, 0, KeyEvent.VK_A, 'a'));
+    assertEquals(KeyEvent.VK_A, this.key);
 
   }
 }
