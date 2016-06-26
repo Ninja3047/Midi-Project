@@ -22,6 +22,7 @@ public class MouseHandlerTest {
     Map<String, Runnable> mouseActions = new HashMap<>();
     MouseHandler mouseHandler = new MouseHandler();
 
+    //The lambda methods are mocks
     mouseActions.put("pressed", () -> {
       this.key = "mouse press";
     });
