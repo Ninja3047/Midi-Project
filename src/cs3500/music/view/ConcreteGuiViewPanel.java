@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import cs3500.music.controller.Controller;
 import cs3500.music.model.ModelObserver;
+import cs3500.music.model.MusicModel;
 import cs3500.music.model.Note;
 
 /**
@@ -17,7 +18,7 @@ public class ConcreteGuiViewPanel extends JPanel {
   private static final int LEFT_OFFSET = 40;
   private final Timer timer;
   private Color color;
-  private String state;
+  private MusicModel.Mode state;
   private double time;
   private final ModelObserver<Note> observer;
 
@@ -33,26 +34,26 @@ public class ConcreteGuiViewPanel extends JPanel {
     this.requestFocusInWindow();
     this.setFocusable(true);
     this.color = Color.MAGENTA;
-    this.state = "normal";
+    this.state = MusicModel.Mode.NORMAL;
   }
 
   public void changeMode() {
     switch (this.observer.getMode()) {
-      case "play":
-        this.state = "play";
+      case PLAY:
+        this.state = MusicModel.Mode.PLAY;
         this.color = Color.MAGENTA;
         this.timer.start();
         break;
-      case "add":
-        this.state = "add";
+      case ADD:
+        this.state = MusicModel.Mode.ADD;
         this.color = Color.GREEN;
         break;
-      case "delete":
-        this.state = "delete";
+      case DELETE:
+        this.state = MusicModel.Mode.DELETE;
         this.color = Color.RED;
         break;
-      case "normal":
-        this.state = "normal";
+      case NORMAL:
+        this.state = MusicModel.Mode.NORMAL;
         this.color = Color.MAGENTA;
         this.timer.stop();
         break;
