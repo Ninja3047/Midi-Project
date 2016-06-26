@@ -22,6 +22,7 @@ public class KeyboardHandlerTest {
     Map<Integer, Runnable> keyPresses = new HashMap<>();
     KeyboardHandler kbd = new KeyboardHandler();
 
+    //The lambda methods are mocks
     keyPresses.put(KeyEvent.VK_SPACE, () -> {
       this.key = KeyEvent.VK_SPACE;
     });
