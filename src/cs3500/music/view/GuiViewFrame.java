@@ -79,4 +79,14 @@ public class GuiViewFrame extends JFrame implements GuiView {
     ConcreteGuiViewPanel tmpPanel = this.notesPanel;
     tmpPanel.changeMode();
   }
+
+  @Override
+  public void togglePlay() {
+
+  }
+
+  @Override
+  public void updateTrack() {
+
+  }
 }

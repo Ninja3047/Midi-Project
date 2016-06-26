@@ -25,7 +25,7 @@ public class MusicEditor {
     Controller con = new ControllerImpl(model);
     String editortype = args[0];
     View view = ViewFactory.createView(editortype, model);
-    if (editortype == "player") {
+    if (editortype.equals("player")) {
       con.setView((GuiView) view);
     }
     view.display();

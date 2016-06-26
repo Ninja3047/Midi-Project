@@ -20,6 +20,7 @@ public class MusicEditorView implements GuiView {
     gui.display();
   }
 
+  @Override
   public void updateTrack() {
     this.midi.updateTrack();
   }
@@ -27,6 +28,7 @@ public class MusicEditorView implements GuiView {
   /**
    * Toggles the play state of the midi
    */
+  @Override
   public void togglePlay() {
     midi.togglePlay();
   }
@@ -34,6 +36,7 @@ public class MusicEditorView implements GuiView {
   /**
    * Moves the view to the beginning
    */
+  @Override
   public void moveToBeginning() {
     gui.moveToBeginning();
   }
@@ -41,6 +44,7 @@ public class MusicEditorView implements GuiView {
   /**
    * Moves the view to the end
    */
+  @Override
   public void moveToEnd() {
     gui.moveToEnd();
   }

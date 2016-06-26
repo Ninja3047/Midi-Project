@@ -8,6 +8,14 @@ import java.awt.event.MouseListener;
  * Represents a GUI View
  */
 public interface GuiView extends View {
+  void updateTrack();
+
+  void togglePlay();
+
+  void moveToBeginning();
+
+  void moveToEnd();
+
   /**
    * Adds the given keyboard listener to the view
    * @param listener a keyboard listener

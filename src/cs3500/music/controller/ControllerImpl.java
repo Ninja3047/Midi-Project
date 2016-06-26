@@ -27,7 +27,7 @@ public class ControllerImpl implements Controller {
   }
 
   private MouseHandler configureMouseDeleteListener() {
-    MusicEditorView editorView = (MusicEditorView) this.curView;
+    MusicEditorView curView = (MusicEditorView) this.curView;
     Map<String, Runnable> mouseActions = new HashMap<>();
     MouseHandler m = new MouseHandler();
     mouseActions.put("pressed", () -> {
@@ -37,14 +37,14 @@ public class ControllerImpl implements Controller {
           this.deleteNote(n);
         }
       }
-      editorView.updateTrack();
+      curView.updateTrack();
     });
     m.setMouseAction(mouseActions);
     return m;
   }
 
   private MouseHandler configureMouseAddListener() {
-    MusicEditorView editorView = (MusicEditorView) this.curView;
+    MusicEditorView curView = (MusicEditorView) this.curView;
     Map<String, Runnable> mouseActions = new HashMap<>();
     MouseHandler m = new MouseHandler();
     mouseActions.put("pressed", () -> {
@@ -60,7 +60,7 @@ public class ControllerImpl implements Controller {
               m.getPitch() >= curModel.getLowestNote().toInt() &&
               m.getStart() >= 0 && stop - m.getStart() > 0 && stop <= curModel.getSize()) {
       this.addNoteFromInt(m.getPitch(), m.getStart(), stop);
-      editorView.updateTrack();
+      curView.updateTrack();
     }});
 
     m.setMouseAction(mouseActions);
@@ -77,21 +77,21 @@ public class ControllerImpl implements Controller {
       } else {
         curModel.setMode(Mode.PLAY);
       }
-      editorView.togglePlay();
-      editorView.removeMouseListeners();
-      editorView.changeMode();
+      curView.togglePlay();
+      curView.removeMouseListeners();
+      curView.changeMode();
     });
 
     keyPresses.put(KeyEvent.VK_ESCAPE, () -> {
       curModel.setMode(Mode.NORMAL);
-      editorView.changeMode();
-      editorView.removeMouseListeners();
+      curView.changeMode();
+      curView.removeMouseListeners();
     });
 
     keyPresses.put(KeyEvent.VK_A, () -> {
-      editorView.removeMouseListeners();
+      curView.removeMouseListeners();
       if (curModel.getMode() == Mode.PLAY) {
-        editorView.togglePlay();
+        curView.togglePlay();
       }
       if (curModel.getMode() == Mode.ADD) {
         this.contractRange();
@@ -99,56 +99,56 @@ public class ControllerImpl implements Controller {
       } else {
         curModel.setMode(Mode.ADD);
 
-        editorView.addMouseListener(this.configureMouseAddListener());
+        curView.addMouseListener(this.configureMouseAddListener());
       }
-      editorView.changeMode();
+      curView.changeMode();
     });
 
     keyPresses.put(KeyEvent.VK_J, () -> {
       if (curModel.getMode() == Mode.ADD) {
         this.expandNoteRange(curModel.getHighestNote().toInt() + 1);
       }
-      editorView.changeMode();
+      curView.changeMode();
     });
 
     keyPresses.put(KeyEvent.VK_K, () -> {
       if (curModel.getMode() == Mode.ADD) {
         this.expandNoteRange(curModel.getLowestNote().toInt() - 1);
       }
-      editorView.changeMode();
+      curView.changeMode();
     });
 
     keyPresses.put(KeyEvent.VK_L, () -> {
       if (curModel.getMode() == Mode.ADD) {
         this.expandBeatRange(curModel.getSize() + 1);
       }
-      editorView.changeMode();
+      curView.changeMode();
     });
 
     keyPresses.put(KeyEvent.VK_D, () -> {
-      editorView.removeMouseListeners();
+      curView.removeMouseListeners();
       if (curModel.getMode() == Mode.PLAY) {
-        editorView.togglePlay();
+        curView.togglePlay();
       }
       if (curModel.getMode() == Mode.DELETE) {
         curModel.setMode(Mode.NORMAL);
       } else {
         curModel.setMode(Mode.DELETE);
-        editorView.addMouseListener(this.configureMouseDeleteListener());
+        curView.addMouseListener(this.configureMouseDeleteListener());
       }
-      editorView.changeMode();
+      curView.changeMode();
     });
 
     keyPresses.put(KeyEvent.VK_HOME, () -> {
-      editorView.moveToBeginning();
+      curView.moveToBeginning();
     });
 
     keyPresses.put(KeyEvent.VK_END, () -> {
-      editorView.moveToEnd();
+      curView.moveToEnd();
     });
 
     kbd.setKeyPressedMap(keyPresses);
-    editorView.addKeyListener(kbd);
+    curView.addKeyListener(kbd);
   }
 
   @Override
