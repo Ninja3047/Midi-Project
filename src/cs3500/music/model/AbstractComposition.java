@@ -182,6 +182,9 @@ public abstract class AbstractComposition<T> implements Composition<T> {
 
   @Override
   public void expandBeatRange(int beat) throws IllegalArgumentException {
+    if (beat <= 0) {
+      throw new IllegalArgumentException();
+    }
     if (!beats.containsKey(beat)) {
       List<T> list = new ArrayList<>();
       beats.put(beat, list);

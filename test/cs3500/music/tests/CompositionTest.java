@@ -227,4 +227,50 @@ public class CompositionTest {
     assertEquals(n2.toInt(), comp.getNotes(0).get(0).toInt());
     assertEquals(n.toInt(), comp.getNotes(2).get(0).toInt());
   }
+
+  @Test
+  public void testExpandBeatRange() {
+    Composition<Note> comp = new MusicComposition();
+    comp.addNote(n, 4);
+    comp.addNote(n, 2);
+    comp.addNote(n2, 3);
+    assertEquals(4, comp.getLastNoteBeat());
+    comp.expandBeatRange(100);
+    assertEquals(100, comp.getLastNoteBeat());
+    try {
+      comp.expandBeatRange(-1);
+      fail();
+    } catch (IllegalArgumentException e) {
+
+    }
+  }
+
+  @Test
+  public void testExpandNoteRange() {
+    Composition<Note> comp = new MusicComposition();
+    comp.addNote(n, 4);
+    comp.addNote(n, 2);
+    assertEquals(n, comp.getLowestNote());
+    assertEquals(n, comp.getHighestNote());
+    comp.expandNoteRange(n2);
+    assertEquals(n, comp.getLowestNote());
+    assertEquals(n2, comp.getHighestNote());
+  }
+
+  @Test
+  public void testContractRange() {
+    Composition<Note> comp = new MusicComposition();
+    comp.addNote(n, 4);
+    comp.addNote(n, 2);
+    assertEquals(4, comp.getLastNoteBeat());
+    assertEquals(n, comp.getLowestNote());
+    assertEquals(n, comp.getHighestNote());
+    comp.expandNoteRange(n2);
+    comp.expandBeatRange(10);
+    comp.expandBeatRange(20);
+    comp.contractRange();
+    assertEquals(4, comp.getLastNoteBeat());
+    assertEquals(n, comp.getLowestNote());
+    assertEquals(n, comp.getHighestNote());
+  }
 }
