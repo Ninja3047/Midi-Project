@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
  */
 public class ControllerTest {
 
-  Model<Note> model = MusicReader.parseFile(new StringReader("tempo 200000\n" +
+  private Model<Note> model = MusicReader.parseFile(new StringReader("tempo 200000\n" +
           "note 0 2 1 64 72\n" +
           "note 0 7 1 55 70\n" +
           "note 2 4 1 62 72\n" +
