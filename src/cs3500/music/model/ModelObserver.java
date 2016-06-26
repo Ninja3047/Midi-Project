@@ -64,7 +64,15 @@ public interface ModelObserver<K> {
 
   /**
    * Gets the mode of the model
-   * @return
+   * @return the mode
    */
   Mode getMode();
+
+  /**
+   * Gets the time from the model
+   *
+   * @return returns a double from 0 to 1 indicating how far the piece has progressed 0 being not
+   * started 1 being completed
+   */
+  double getTime();
 }

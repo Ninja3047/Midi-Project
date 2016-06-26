@@ -14,11 +14,13 @@ public class MusicModel implements Model<Note> {
   private final Composition<Note> notes;
   private Mode mode;
   private final int tempo;
+  private final double time;
 
   private MusicModel(Builder b) {
     this.notes = b.notes;
     this.mode = Mode.NORMAL;
     this.tempo = b.tempo;
+    this.time = 0;
   }
 
   @Override
@@ -180,5 +182,11 @@ public class MusicModel implements Model<Note> {
   @Override
   public void setMode(Mode mode) {
     this.mode = mode;
+  }
+
+  // TODO update time with the midi view
+  @Override
+  public double getTime() {
+    return this.time;
   }
 }

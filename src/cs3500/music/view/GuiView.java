@@ -18,7 +18,5 @@ public interface GuiView extends View {
 
   void addMouseListener(MouseListener listener);
 
-  //void setState(String c);
-
   void changeMode();
 }

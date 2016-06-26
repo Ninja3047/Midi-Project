@@ -146,8 +146,8 @@ public class MidiView implements View {
     sequencer.setTickPosition(time);
   }
 
-  @Override
-  public double getTime() {
+  // TODO
+  protected double getTime() {
     double time = (double) sequencer.getTickPosition() / sequencer.getTickLength();
     return time;
   }

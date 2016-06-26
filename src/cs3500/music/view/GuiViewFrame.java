@@ -75,11 +75,6 @@ public class GuiViewFrame extends JFrame implements GuiView {
   }
 
   @Override
-  public double getTime() {
-    return 0;
-  }
-
-  @Override
   public void changeMode() {
     ConcreteGuiViewPanel tmpPanel = this.notesPanel;
     tmpPanel.changeMode();

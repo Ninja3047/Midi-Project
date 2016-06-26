@@ -3,9 +3,6 @@ package cs3500.music.view;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
-import cs3500.music.controller.Controller;
-import cs3500.music.model.Note;
-
 /**
  * Combined view that has both the midi view and the gui view
  */
@@ -21,11 +18,6 @@ public class MusicEditorView implements GuiView {
   @Override
   public void display() {
     gui.display();
-  }
-
-  @Override
-  public double getTime() {
-    return midi.getTime();
   }
 
   public void updateTrack() {
