@@ -12,12 +12,10 @@ import cs3500.music.model.Note;
 public class MusicEditorView implements GuiView {
   private final GuiViewFrame gui;
   private final MidiView midi;
-  private final Controller<Note> controller;
 
-  public MusicEditorView(Controller<Note> controller, GuiViewFrame gui, MidiView midi) {
+  public MusicEditorView(GuiViewFrame gui, MidiView midi) {
     this.gui = gui;
     this.midi = midi;
-    this.controller = controller;
   }
 
   @Override

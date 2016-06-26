@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.*;
 
 import cs3500.music.controller.Controller;
+import cs3500.music.model.ModelObserver;
 import cs3500.music.model.Note;
 
 /**
@@ -14,19 +15,19 @@ import cs3500.music.model.Note;
 public class ConcreteGuiViewPanel extends JPanel {
   private static final int CELL_SIZE = 20;
   private static final int LEFT_OFFSET = 40;
-  private final Controller<Note> controller;
   private final Timer timer;
   private Color color;
   private String state;
   private double time;
+  private final ModelObserver<Note> observer;
 
-  public ConcreteGuiViewPanel(Controller<Note> controller) {
-    this.controller = controller;
+  public ConcreteGuiViewPanel(ModelObserver<Note> observer) {
+    this.observer = observer;
     this.time = 0;
     this.timer = new Timer(10, actionEvent -> {
       drawTime(this.getGraphics());
       this.repaint();
-      this.time = controller.getTime() * controller.getSize();
+      this.time = observer.getTime() * observer.getSize();
     });
     this.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
     this.requestFocusInWindow();
@@ -36,7 +37,7 @@ public class ConcreteGuiViewPanel extends JPanel {
   }
 
   public void changeMode() {
-    switch (this.controller.getMode()) {
+    switch (this.observer.getMode()) {
       case "play":
         this.state = "play";
         this.color = Color.MAGENTA;
@@ -65,10 +66,10 @@ public class ConcreteGuiViewPanel extends JPanel {
   public void paintComponent(Graphics g) {
     // Handle the default painting
     super.paintComponent(g);
-    for (int i = 0; i < controller.getSize() + 1; i++) {
-      drawNotes(g, controller.getNotesAtBeat(i), controller.getHighestNote(), this.color);
+    for (int i = 0; i < observer.getSize() + 1; i++) {
+      drawNotes(g, observer.getNotesAtBeat(i), observer.getHighestNote(), this.color);
     }
-    drawMeasures(g, controller.getHighestNote(), controller.getLowestNote(), controller.getSize());
+    drawMeasures(g, observer.getHighestNote(), observer.getLowestNote(), observer.getSize());
     drawTime(g);
   }
 
@@ -102,7 +103,7 @@ public class ConcreteGuiViewPanel extends JPanel {
               LEFT_OFFSET + CELL_SIZE * lastBeat, CELL_SIZE * (i + 1));
     }
 
-    List<String> range = controller.getNoteRange();
+    List<String> range = observer.getNoteRange();
 
     for (int i = 0; i < range.size(); i++) {
       g2d.drawString(range.get(range.size() - i - 1), 0,
@@ -168,7 +169,7 @@ public class ConcreteGuiViewPanel extends JPanel {
     g2d.setColor(Color.RED);
     int movement = (int) (time * CELL_SIZE);
     g2d.drawLine(LEFT_OFFSET + movement, CELL_SIZE, LEFT_OFFSET + movement,
-            LEFT_OFFSET + CELL_SIZE * (controller.getNoteRange().size() - 1));
+            LEFT_OFFSET + CELL_SIZE * (observer.getNoteRange().size() - 1));
     if (this.state.equals("play")) {
       this.scrollRectToVisible(new Rectangle(movement, 1, movement, 1));
     }
@@ -176,10 +177,10 @@ public class ConcreteGuiViewPanel extends JPanel {
 
   @Override
   public Dimension getPreferredSize() {
-    if (controller.getSize() > 0) {
-      return new Dimension((controller.getSize() + 3) * CELL_SIZE,
-              CELL_SIZE * (controller.getHighestNote().toInt()
-                      - controller.getLowestNote().toInt() + 3));
+    if (observer.getSize() > 0) {
+      return new Dimension((observer.getSize() + 3) * CELL_SIZE,
+              CELL_SIZE * (observer.getHighestNote().toInt()
+                      - observer.getLowestNote().toInt() + 3));
     } else {
       return super.getPreferredSize();
     }

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cs3500.music.controller.Controller;
+import cs3500.music.model.ModelObserver;
 import cs3500.music.model.Note;
 
 /**
@@ -12,33 +13,22 @@ import cs3500.music.model.Note;
  */
 public class ConsoleView implements View {
 
-  private final Controller<Note> con;
+  private ModelObserver<Note> observer;
   private Appendable output;
 
-  /**
-   * Default constructor
-   *
-   * @param con the controller to use
-   */
-  public ConsoleView(Controller<Note> con) {
-    this.con = con;
+  public ConsoleView(ModelObserver<Note> observer) {
+    this.observer = observer;
     this.output = System.out;
   }
 
-  /**
-   * Constructor to explicitly state output
-   *
-   * @param con    the controller to use
-   * @param output the output to print to
-   */
-  public ConsoleView(Controller<Note> con, Appendable output) {
-    this.con = con;
+  public ConsoleView(ModelObserver<Note> observer, Appendable output) {
+    this.observer = observer;
     this.output = output;
   }
 
   @Override
   public void display() {
-    String formatNotes = this.printNotes(this.con.getNotes());
+    String formatNotes = this.printNotes(this.observer.getAllNotes());
     try {
       output.append(formatNotes);
     } catch (IOException e) {
@@ -57,12 +47,12 @@ public class ConsoleView implements View {
       return "No notes";
     }
     //Get the lowest and highest note
-    Note low = this.con.getLowestNote();
-    Note high = this.con.getHighestNote();
+    Note low = this.observer.getLowestNote();
+    Note high = this.observer.getHighestNote();
 
     //Info about dimensions
     int totalNotes = high.toInt() - low.toInt() + 1;
-    int numBeat = con.getSize();
+    int numBeat = observer.getSize();
     int numBeatDigits = Integer.toString(numBeat).length();
 
     //Init output StringBuilder
@@ -71,7 +61,7 @@ public class ConsoleView implements View {
     StringBuilder output = new StringBuilder();
     output.append(pad);
 
-    for (String n : con.getNoteRange()) {
+    for (String n : observer.getNoteRange()) {
       StringBuilder textNote = new StringBuilder();
       textNote.append(n);
       if (n.length() < 4) {

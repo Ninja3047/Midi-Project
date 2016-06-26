@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 
 import cs3500.music.controller.Controller;
+import cs3500.music.model.ModelObserver;
 import cs3500.music.model.Note;
 
 /**
@@ -22,8 +23,8 @@ public class GuiViewFrame extends JFrame implements GuiView {
   /**
    * Creates new GuiView
    */
-  public GuiViewFrame(Controller<Note> controller) {
-    this.notesPanel = new ConcreteGuiViewPanel(controller);
+  public GuiViewFrame(ModelObserver<Note> observer) {
+    this.notesPanel = new ConcreteGuiViewPanel(observer);
     this.notesPanel.setFocusable(true);
     this.displayPanel = new JScrollPane(notesPanel);
 

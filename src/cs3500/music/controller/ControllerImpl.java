@@ -73,7 +73,6 @@ public class ControllerImpl implements Controller<Note> {
     Map<Integer, Runnable> keyPresses = new HashMap<>();
     MusicEditorView editorView = (MusicEditorView) this.curView;
     KeyboardHandler kbd = new KeyboardHandler();
-    MouseHandler mh = new MouseHandler();
 
     keyPresses.put(KeyEvent.VK_SPACE, () -> {
       if (this.mode == Mode.PLAY) {
@@ -163,6 +162,18 @@ public class ControllerImpl implements Controller<Note> {
     if (this.curView instanceof MusicEditorView) {
       this.configureKeyBoardListener();
     }
+  }
+
+  /**
+   * Method to manually set the command to a MusicEditorView
+   * @param v the view
+   * @param command the keycommands to run
+   */
+  public void setView(MusicEditorView v, HashMap<Integer, Runnable> command) {
+    this.curView = v;
+    KeyboardHandler kbd = new KeyboardHandler();
+    kbd.setKeyPressedMap(command);
+    v.addKeyListener(kbd);
   }
 
   @Override

@@ -118,11 +118,6 @@ public class MusicModel implements Model<Note> {
   }
 
   @Override
-  public void deleteNoteFromInt(int note, int start, int end) {
-    this.deleteNote(new MusicNote(note, start, end));
-  }
-
-  @Override
   public void expandNoteRange(int note) throws IllegalArgumentException {
     notes.expandNoteRange(new MusicNote(note, 0, 0));
   }

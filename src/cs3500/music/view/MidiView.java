@@ -14,6 +14,7 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
 import cs3500.music.controller.Controller;
+import cs3500.music.model.ModelObserver;
 import cs3500.music.model.Note;
 
 /**
@@ -21,14 +22,9 @@ import cs3500.music.model.Note;
  */
 public class MidiView implements View {
   private final Sequencer sequencer;
-  private final Controller<Note> controller;
+  private final ModelObserver<Note> observer;
 
-  /**
-   * Default constructor
-   *
-   * @param controller controller to use
-   */
-  public MidiView(Controller<Note> controller) {
+  public MidiView(ModelObserver<Note> observer) {
     Sequencer sequencer;
     try {
       //Init sequencer and helper data
@@ -39,26 +35,20 @@ public class MidiView implements View {
       e.printStackTrace();
     }
     this.sequencer = sequencer;
-    this.controller = controller;
+    this.observer = observer;
     this.initSequencerData();
   }
 
-  /**
-   * Constructor for explicit sequencer
-   *
-   * @param controller the controller to use
-   * @param seq        the sequencer to use
-   */
-  public MidiView(Controller<Note> controller, Sequencer seq) throws InvalidMidiDataException {
+  public MidiView(ModelObserver<Note> observer, Sequencer seq) throws InvalidMidiDataException {
     this.sequencer = seq;
-    this.controller = controller;
+    this.observer = observer;
     this.initSequencerData();
   }
 
   private void initSequencerData() {
     try {
-      List<Note> notes = controller.getNotes();
-      int tempo = controller.getTempo();
+      List<Note> notes = observer.getAllNotes();
+      int tempo = observer.getTempo();
       Sequence forSequencer = new Sequence(Sequence.PPQ, 96);
       Track toPlay = forSequencer.createTrack();
 

@@ -1,6 +1,7 @@
 package cs3500.music.view;
 
 import cs3500.music.controller.Controller;
+import cs3500.music.model.ModelObserver;
 import cs3500.music.model.Note;
 
 /**
@@ -14,17 +15,17 @@ public class ViewFactory {
    * @return returns the correct view object based on the given parameter
    * @throws IllegalArgumentException when the view is not one of "console", "visual" or "midi"
    */
-  public static View createView(String view, Controller<Note> con) throws
-          IllegalArgumentException {
+  public static View createView(String view, ModelObserver<Note> observer)
+          throws IllegalArgumentException {
     switch (view) {
       case "console":
-        return new ConsoleView(con);
+        return new ConsoleView(observer);
       case "visual":
-        return new GuiViewFrame(con);
+        return new GuiViewFrame(observer);
       case "midi":
-        return new MidiView(con);
+        return new MidiView(observer);
       case "player":
-        return new MusicEditorView(con, new GuiViewFrame(con), new MidiView(con));
+        return new MusicEditorView(new GuiViewFrame(observer), new MidiView(observer));
       default:
         throw new IllegalArgumentException();
     }
