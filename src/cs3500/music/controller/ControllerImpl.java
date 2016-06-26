@@ -50,6 +50,7 @@ public class ControllerImpl implements Controller {
 
   /**
    * Creates a MouseListener that is used for adding notes
+   *
    * @return the listener
    */
   private MouseHandler configureMouseAddListener() {

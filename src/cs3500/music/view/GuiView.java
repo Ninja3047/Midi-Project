@@ -3,8 +3,6 @@ package cs3500.music.view;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
-
 /**
  * Represents a GUI View
  */

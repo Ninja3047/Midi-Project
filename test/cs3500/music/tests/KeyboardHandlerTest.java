@@ -17,7 +17,8 @@ import cs3500.music.view.ViewFactory;
  * Created by chris on 6/25/16.
  */
 public class KeyboardHandlerTest {
-  ModelObserver<Note> testModel = MusicReader.parseFile(new StringReader(""), new MusicModel.Builder());
+  ModelObserver<Note> testModel = MusicReader.parseFile(new StringReader(""), new MusicModel
+          .Builder());
   MusicEditorView mev = (MusicEditorView) ViewFactory.createView("player", testModel);
   HashMap<Integer, Runnable> commands = new HashMap<>();
   Runnable testCommand = new MockRunnable();

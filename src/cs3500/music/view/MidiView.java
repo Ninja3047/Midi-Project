@@ -45,8 +45,9 @@ public class MidiView implements View {
 
   /**
    * Constructor with explicit sequencer
+   *
    * @param observer to read from
-   * @param seq to add notes to
+   * @param seq      to add notes to
    * @throws InvalidMidiDataException if MIDI doesn't work
    */
   public MidiView(ModelObserver<Note> observer, Sequencer seq) throws InvalidMidiDataException {

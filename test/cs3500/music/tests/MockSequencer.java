@@ -56,11 +56,6 @@ public class MockSequencer implements Sequencer {
   }
 
   @Override
-  public void setTempoInMPQ(float v) {
-
-  }
-
-  @Override
   public Sequence getSequence() {
     return null;
   }
@@ -123,6 +118,11 @@ public class MockSequencer implements Sequencer {
   @Override
   public float getTempoInMPQ() {
     return 0;
+  }
+
+  @Override
+  public void setTempoInMPQ(float v) {
+
   }
 
   @Override

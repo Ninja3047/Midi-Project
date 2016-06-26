@@ -10,7 +10,7 @@ public class ViewFactory {
   /**
    * Creates a view based on the given parameter
    *
-   * @param view the view type to create, either "console", "visual", or "midi"
+   * @param view     the view type to create, either "console", "visual", or "midi"
    * @param observer the observer to read from
    * @return returns the correct view object based on the given parameter
    * @throws IllegalArgumentException when the view is not one of "console", "visual" or "midi"

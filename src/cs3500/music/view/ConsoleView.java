@@ -27,8 +27,9 @@ public class ConsoleView implements View {
 
   /**
    * Explicit output constructor
+   *
    * @param observer to read from
-   * @param output to append to
+   * @param output   to append to
    */
   public ConsoleView(ModelObserver<Note> observer, Appendable output) {
     this.observer = observer;
