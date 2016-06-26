@@ -8,7 +8,6 @@ import cs3500.music.model.Model;
 import cs3500.music.model.MusicModel.Mode;
 import cs3500.music.model.Note;
 import cs3500.music.view.GuiView;
-import cs3500.music.view.MusicEditorView;
 
 /**
  * Implementation of the controller interface
@@ -32,7 +31,6 @@ public class ControllerImpl implements Controller {
    * @return the listener
    */
   private MouseHandler configureMouseDeleteListener() {
-    MusicEditorView curView = (MusicEditorView) this.curView;
     Map<String, Runnable> mouseActions = new HashMap<>();
     MouseHandler m = new MouseHandler();
     mouseActions.put("pressed", () -> {
@@ -54,7 +52,6 @@ public class ControllerImpl implements Controller {
    * @return the listener
    */
   private MouseHandler configureMouseAddListener() {
-    MusicEditorView curView = (MusicEditorView) this.curView;
     Map<String, Runnable> mouseActions = new HashMap<>();
     MouseHandler m = new MouseHandler();
     mouseActions.put("pressed", () -> {
