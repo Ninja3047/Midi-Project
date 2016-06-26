@@ -172,11 +172,6 @@ public class ControllerImpl implements Controller {
   }
 
   @Override
-  public void start() {
-    this.curView.display();
-  }
-
-  @Override
   public void expandNoteRange(int note) {
     this.curModel.expandNoteRange(note);
   }

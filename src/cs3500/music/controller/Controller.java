@@ -9,11 +9,6 @@ import cs3500.music.view.GuiView;
 public interface Controller {
 
   /**
-   * Starts the process
-   */
-  void start();
-
-  /**
    * Set the view of the controller to the given view
    *
    * @param v a view

@@ -20,14 +20,14 @@ import cs3500.music.view.ViewFactory;
  */
 public class MusicEditor {
   public static void main(String[] args) throws IOException, InvalidMidiDataException {
-    Model<Note> model = MusicReader.parseFile(new FileReader(args[0]),
+    Model<Note> model = MusicReader.parseFile(new FileReader(args[1]),
             new MusicModel.Builder());
     Controller con = new ControllerImpl(model);
-    String editortype = args[1];
+    String editortype = args[0];
     View view = ViewFactory.createView(editortype, model);
     if (editortype == "player") {
       con.setView((GuiView) view);
     }
-    con.start();
+    view.display();
   }
 }
