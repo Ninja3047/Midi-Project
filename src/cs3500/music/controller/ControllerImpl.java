@@ -9,14 +9,13 @@ import cs3500.music.model.MusicModel.Mode;
 import cs3500.music.model.Note;
 import cs3500.music.view.GuiView;
 import cs3500.music.view.MusicEditorView;
-import cs3500.music.view.View;
 
 /**
  * Implementation of the controller interface
  */
 public class ControllerImpl implements Controller {
   private final Model<Note> curModel;
-  private View curView;
+  private GuiView curView;
 
   /**
    * Constructor for the controller
@@ -70,7 +69,6 @@ public class ControllerImpl implements Controller {
 
   private void configureKeyBoardListener() {
     Map<Integer, Runnable> keyPresses = new HashMap<>();
-    MusicEditorView editorView = (MusicEditorView) this.curView;
     KeyboardHandler kbd = new KeyboardHandler();
 
     keyPresses.put(KeyEvent.VK_SPACE, () -> {
@@ -157,18 +155,6 @@ public class ControllerImpl implements Controller {
   public void setView(GuiView v) {
     this.curView = v;
     this.configureKeyBoardListener();
-  }
-
-  /**
-   * Method to manually set the command to a MusicEditorView
-   * @param v the view
-   * @param command the keycommands to run
-   */
-  public void setView(MusicEditorView v, HashMap<Integer, Runnable> command) {
-    this.curView = v;
-    KeyboardHandler kbd = new KeyboardHandler();
-    kbd.setKeyPressedMap(command);
-    v.addKeyListener(kbd);
   }
 
   @Override
