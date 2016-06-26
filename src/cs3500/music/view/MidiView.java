@@ -117,7 +117,6 @@ public class MidiView implements View {
    */
   public void togglePlay() {
     if (this.sequencer.isRunning()) {
-      System.out.println("what?");
       this.sequencer.stop();
     } else {
       this.sequencer.start();
