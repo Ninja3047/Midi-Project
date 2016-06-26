@@ -86,6 +86,7 @@ public class ControllerImpl implements Controller {
 
     keyPresses.put(KeyEvent.VK_SPACE, () -> {
       if (curModel.getMode() == Mode.PLAY) {
+        this.contractRange();
         curModel.setMode(Mode.NORMAL);
       } else {
         curModel.setMode(Mode.PLAY);
@@ -96,6 +97,7 @@ public class ControllerImpl implements Controller {
     });
 
     keyPresses.put(KeyEvent.VK_ESCAPE, () -> {
+      this.contractRange();
       curModel.setMode(Mode.NORMAL);
       curView.changeMode();
       curView.removeMouseListeners();
