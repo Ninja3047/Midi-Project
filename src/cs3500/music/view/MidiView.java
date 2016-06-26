@@ -12,6 +12,7 @@ import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
+import javax.swing.*;
 
 import cs3500.music.model.ModelObserver;
 import cs3500.music.model.Note;
@@ -131,5 +132,10 @@ public class MidiView implements View {
     long time = this.sequencer.getTickPosition();
     this.initSequencerData();
     sequencer.setTickPosition(time);
+  }
+
+  public double getTime() {
+    double time = (double) sequencer.getTickPosition() / sequencer.getTickLength();
+    return time;
   }
 }

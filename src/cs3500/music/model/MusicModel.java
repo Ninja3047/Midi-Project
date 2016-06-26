@@ -12,9 +12,9 @@ import cs3500.music.util.CompositionBuilder;
  */
 public class MusicModel implements Model<Note> {
   private final Composition<Note> notes;
+  private Mode mode;
   private final int tempo;
   private final double time;
-  private Mode mode;
 
   private MusicModel(Builder b) {
     this.notes = b.notes;
@@ -144,12 +144,6 @@ public class MusicModel implements Model<Note> {
   @Override
   public void setMode(Mode mode) {
     this.mode = mode;
-  }
-
-  // TODO update time with the midi view
-  @Override
-  public double getTime() {
-    return this.time;
   }
 
   public enum Mode {

@@ -88,4 +88,8 @@ public class GuiViewFrame extends JFrame implements GuiView {
   public void updateTrack() {
 
   }
+
+  public void setTime(double time) {
+    notesPanel.setTime(time);
+  }
 }

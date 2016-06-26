@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.*;
 
 import cs3500.music.model.ModelObserver;
-import cs3500.music.model.MusicModel;
+import cs3500.music.model.MusicModel.Mode;
 import cs3500.music.model.Note;
 
 /**
@@ -15,10 +15,8 @@ import cs3500.music.model.Note;
 public class ConcreteGuiViewPanel extends JPanel {
   private static final int CELL_SIZE = 20;
   private static final int LEFT_OFFSET = 40;
-  private final Timer timer;
   private final ModelObserver<Note> observer;
   private Color color;
-  private MusicModel.Mode state;
   private double time;
 
   /**
@@ -28,17 +26,10 @@ public class ConcreteGuiViewPanel extends JPanel {
    */
   public ConcreteGuiViewPanel(ModelObserver<Note> observer) {
     this.observer = observer;
-    this.time = 0;
-    this.timer = new Timer(10, actionEvent -> {
-      drawTime(this.getGraphics());
-      this.repaint();
-      this.time = observer.getTime() * observer.getSize();
-    });
     this.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
     this.requestFocusInWindow();
     this.setFocusable(true);
     this.color = Color.MAGENTA;
-    this.state = MusicModel.Mode.NORMAL;
   }
 
   /**
@@ -47,27 +38,27 @@ public class ConcreteGuiViewPanel extends JPanel {
   public void changeMode() {
     switch (this.observer.getMode()) {
       case PLAY:
-        this.state = MusicModel.Mode.PLAY;
         this.color = Color.MAGENTA;
-        this.timer.start();
         break;
       case ADD:
-        this.state = MusicModel.Mode.ADD;
         this.color = Color.GREEN;
         break;
       case DELETE:
-        this.state = MusicModel.Mode.DELETE;
         this.color = Color.RED;
         break;
       case NORMAL:
-        this.state = MusicModel.Mode.NORMAL;
         this.color = Color.MAGENTA;
-        this.timer.stop();
         break;
       default:
         throw new IllegalArgumentException("Illegal state");
     }
     this.revalidate();
+    this.repaint();
+  }
+
+  protected void setTime(double time) {
+    this.time = time;
+    drawTime(this.getGraphics());
     this.repaint();
   }
 
@@ -176,10 +167,10 @@ public class ConcreteGuiViewPanel extends JPanel {
     Graphics2D g2d = (Graphics2D) g;
 
     g2d.setColor(Color.RED);
-    int movement = (int) (time * CELL_SIZE);
+    int movement = (int) (time * observer.getSize() * CELL_SIZE);
     g2d.drawLine(LEFT_OFFSET + movement, CELL_SIZE, LEFT_OFFSET + movement,
             LEFT_OFFSET + CELL_SIZE * (observer.getNoteRange().size() - 1));
-    if (this.state.equals("play")) {
+    if (observer.getMode() == Mode.PLAY) {
       this.scrollRectToVisible(new Rectangle(movement, 1, movement, 1));
     }
   }
