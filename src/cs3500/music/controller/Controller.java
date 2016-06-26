@@ -17,6 +17,7 @@ public interface Controller {
 
   /**
    * Expands the range of the composition to the given note (0 - 127)
+   *
    * @param note a note as an integer (0 - 127)
    * @throws IllegalArgumentException when the note is out of range
    */
@@ -24,6 +25,7 @@ public interface Controller {
 
   /**
    * Expands the range of the composition to the given beat number (must be positive)
+   *
    * @param beat a positive number
    * @throws IllegalArgumentException when the beat is 0 or negative
    */
@@ -36,26 +38,17 @@ public interface Controller {
 
   /**
    * Adds a note to the model from an integer
+   *
    * @param pitch the pitch
    * @param start the start
-   * @param end the end
+   * @param end   the end
    */
   void addNoteFromInt(int pitch, int start, int end);
+
   /**
    * Delete note from model
+   *
    * @param n note to delete
    */
   void deleteNote(Note n);
-
-  /**
-   * Gets the location relative to time of play
-   * @return 0 - 100.  0 being the beginning 100 being the end
-   */
-  //double getTime();
-
-  /**
-   * Gets the mode of the controller
-   * @return the mode
-   */
-  //String getMode();
 }

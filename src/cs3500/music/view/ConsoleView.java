@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import cs3500.music.controller.Controller;
 import cs3500.music.model.ModelObserver;
 import cs3500.music.model.Note;
 
@@ -16,11 +15,21 @@ public class ConsoleView implements View {
   private ModelObserver<Note> observer;
   private Appendable output;
 
+  /**
+   * Constructor
+   *
+   * @param observer to read from
+   */
   public ConsoleView(ModelObserver<Note> observer) {
     this.observer = observer;
     this.output = System.out;
   }
 
+  /**
+   * Explicit output constructor
+   * @param observer to read from
+   * @param output to append to
+   */
   public ConsoleView(ModelObserver<Note> observer, Appendable output) {
     this.observer = observer;
     this.output = output;

@@ -1,14 +1,11 @@
 package cs3500.music.view;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicArrowButton;
 
-import cs3500.music.controller.Controller;
 import cs3500.music.model.ModelObserver;
 import cs3500.music.model.Note;
 
@@ -41,11 +38,13 @@ public class GuiViewFrame extends JFrame implements GuiView {
     this.setVisible(true);
   }
 
+  @Override
   public void moveToBeginning() {
     JScrollBar sb = this.displayPanel.getHorizontalScrollBar();
     sb.setValue(0);
   }
 
+  @Override
   public void moveToEnd() {
     JScrollBar sb = this.displayPanel.getHorizontalScrollBar();
     sb.setValue(sb.getMaximum());
@@ -63,7 +62,7 @@ public class GuiViewFrame extends JFrame implements GuiView {
 
   @Override
   public void addMouseListener(MouseListener listener) {
-      this.notesPanel.addMouseListener(listener);
+    this.notesPanel.addMouseListener(listener);
   }
 
   @Override

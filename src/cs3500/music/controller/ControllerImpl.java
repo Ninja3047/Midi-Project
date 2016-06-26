@@ -26,6 +26,11 @@ public class ControllerImpl implements Controller {
     this.curModel = m;
   }
 
+  /**
+   * Creates a MouseListener that is used for deleting notes
+   *
+   * @return the listener
+   */
   private MouseHandler configureMouseDeleteListener() {
     MusicEditorView curView = (MusicEditorView) this.curView;
     Map<String, Runnable> mouseActions = new HashMap<>();
@@ -43,6 +48,10 @@ public class ControllerImpl implements Controller {
     return m;
   }
 
+  /**
+   * Creates a MouseListener that is used for adding notes
+   * @return the listener
+   */
   private MouseHandler configureMouseAddListener() {
     MusicEditorView curView = (MusicEditorView) this.curView;
     Map<String, Runnable> mouseActions = new HashMap<>();
@@ -55,18 +64,22 @@ public class ControllerImpl implements Controller {
     });
 
     mouseActions.put("released", () -> {
-          int stop = (m.getX() - 40) / 20 + 1;
+      int stop = (m.getX() - 40) / 20 + 1;
       if (m.getPitch() <= curModel.getHighestNote().toInt() &&
               m.getPitch() >= curModel.getLowestNote().toInt() &&
               m.getStart() >= 0 && stop - m.getStart() > 0 && stop <= curModel.getSize()) {
-      this.addNoteFromInt(m.getPitch(), m.getStart(), stop);
-      curView.updateTrack();
-    }});
+        this.addNoteFromInt(m.getPitch(), m.getStart(), stop);
+        curView.updateTrack();
+      }
+    });
 
     m.setMouseAction(mouseActions);
     return m;
   }
 
+  /**
+   * Creates a KeyBoardListener that is used to control the view
+   */
   private void configureKeyBoardListener() {
     Map<Integer, Runnable> keyPresses = new HashMap<>();
     KeyboardHandler kbd = new KeyboardHandler();

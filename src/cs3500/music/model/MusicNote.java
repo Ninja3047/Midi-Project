@@ -184,6 +184,7 @@ public class MusicNote implements Comparable<Note>, Note {
 
     /**
      * Returns the value of the pitch, with C being 0
+     *
      * @return the value of the pitch
      */
     public int getValue() {
@@ -238,6 +239,7 @@ public class MusicNote implements Comparable<Note>, Note {
 
     /**
      * Returns the value of this octave
+     *
      * @return the value
      */
     public int getValue() {
@@ -268,6 +270,7 @@ public class MusicNote implements Comparable<Note>, Note {
 
     /**
      * Returns the string representation of the given pitch and octave
+     *
      * @param p a pitch
      * @param o an octave
      * @return the integer representation

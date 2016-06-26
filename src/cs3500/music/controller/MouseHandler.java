@@ -5,10 +5,8 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sound.midi.MidiEvent;
-
 /**
- * Created by chris on 6/25/16.
+ * Configurable MouseHandler for the controller
  */
 public class MouseHandler implements MouseListener {
 
@@ -18,12 +16,19 @@ public class MouseHandler implements MouseListener {
   private int start;
   private int pitch;
 
+  /**
+   * Constructor
+   */
   public MouseHandler() {
     this.mouseAction = new HashMap<>();
   }
 
   public int getPitch() {
     return this.pitch;
+  }
+
+  public void setPitch(int pitch) {
+    this.pitch = pitch;
   }
 
   public int getStart() {
@@ -34,10 +39,6 @@ public class MouseHandler implements MouseListener {
     this.start = start;
   }
 
-  public void setPitch(int pitch) {
-    this.pitch = pitch;
-  }
-
   public int getX() {
     return this.x;
   }
@@ -46,6 +47,9 @@ public class MouseHandler implements MouseListener {
     return this.y;
   }
 
+  /**
+   * Sets the x and y from mouseEvent
+   */
   private void updateData(MouseEvent mouseEvent) {
     this.x = mouseEvent.getX();
     this.y = mouseEvent.getY();

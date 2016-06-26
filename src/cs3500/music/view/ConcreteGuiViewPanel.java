@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.swing.*;
 
-import cs3500.music.controller.Controller;
 import cs3500.music.model.ModelObserver;
 import cs3500.music.model.MusicModel;
 import cs3500.music.model.Note;
@@ -17,11 +16,16 @@ public class ConcreteGuiViewPanel extends JPanel {
   private static final int CELL_SIZE = 20;
   private static final int LEFT_OFFSET = 40;
   private final Timer timer;
+  private final ModelObserver<Note> observer;
   private Color color;
   private MusicModel.Mode state;
   private double time;
-  private final ModelObserver<Note> observer;
 
+  /**
+   * Constructor
+   *
+   * @param observer observer to read from
+   */
   public ConcreteGuiViewPanel(ModelObserver<Note> observer) {
     this.observer = observer;
     this.time = 0;
@@ -37,6 +41,9 @@ public class ConcreteGuiViewPanel extends JPanel {
     this.state = MusicModel.Mode.NORMAL;
   }
 
+  /**
+   * Change the mode of the model
+   */
   public void changeMode() {
     switch (this.observer.getMode()) {
       case PLAY:

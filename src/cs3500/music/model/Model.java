@@ -35,7 +35,14 @@ public interface Model<K> extends ModelObserver<K> {
    */
   void deleteNote(K n);
 
-  void addNoteFromInt(int note, int start, int end);
+  /**
+   * Takes in an int and turns it into a Note
+   *
+   * @param pitch the pitch
+   * @param start start beat
+   * @param end   end beat
+   */
+  void addNoteFromInt(int pitch, int start, int end);
 
   /**
    * Expands the note range to the given note

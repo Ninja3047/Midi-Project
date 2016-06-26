@@ -1,9 +1,9 @@
 package cs3500.music.model;
 
-import cs3500.music.model.MusicModel.Mode;
-
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import cs3500.music.model.MusicModel.Mode;
 
 /**
  * Read only access to the model
@@ -64,6 +64,7 @@ public interface ModelObserver<K> {
 
   /**
    * Gets the mode of the model
+   *
    * @return the mode
    */
   Mode getMode();

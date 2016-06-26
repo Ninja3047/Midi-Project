@@ -13,7 +13,6 @@ import javax.sound.midi.Sequencer;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
-import cs3500.music.controller.Controller;
 import cs3500.music.model.ModelObserver;
 import cs3500.music.model.Note;
 
@@ -24,6 +23,11 @@ public class MidiView implements View {
   private final Sequencer sequencer;
   private final ModelObserver<Note> observer;
 
+  /**
+   * Constructor
+   *
+   * @param observer to read from
+   */
   public MidiView(ModelObserver<Note> observer) {
     Sequencer sequencer;
     try {
@@ -39,12 +43,21 @@ public class MidiView implements View {
     this.initSequencerData();
   }
 
+  /**
+   * Constructor with explicit sequencer
+   * @param observer to read from
+   * @param seq to add notes to
+   * @throws InvalidMidiDataException if MIDI doesn't work
+   */
   public MidiView(ModelObserver<Note> observer, Sequencer seq) throws InvalidMidiDataException {
     this.sequencer = seq;
     this.observer = observer;
     this.initSequencerData();
   }
 
+  /**
+   * Sets up the sequencer from notes
+   */
   private void initSequencerData() {
     try {
       List<Note> notes = observer.getAllNotes();
@@ -61,12 +74,34 @@ public class MidiView implements View {
       //Set tempo
       MetaMessage mm = new MetaMessage();
       mm.setMessage(81, data, 3);
-      MidiEvent pls = new MidiEvent(mm, -1);
-      toPlay.add(pls);
+      toPlay.add(new MidiEvent(mm, -1));
 
       //Create rest of track
-      this.createMidiTrack(toPlay, notes);
       sequencer.setSequence(forSequencer);
+      HashMap<Integer, Integer> instruments = new HashMap<>();
+      int instChannel = 0;
+      for (Note n : notes) {
+        int curInstrument = n.getInstrument();
+        if (!(instruments.containsKey(curInstrument))) {
+          if (instChannel != 10) {
+            instruments.put(curInstrument, instChannel);
+          } else {
+            instruments.put(curInstrument, ++instChannel);
+          }
+          MidiMessage iMessage = new ShortMessage(ShortMessage.PROGRAM_CHANGE,
+                  instChannel, curInstrument, 0);
+          toPlay.add(new MidiEvent(iMessage, 0));
+          instChannel += 1;
+        }
+        int pitch = n.toInt();
+        int noteEnd = n.getStart() + n.getDuration();
+        int channel = instruments.get(curInstrument);
+        int volume = n.getVolume();
+        MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, channel, pitch, volume);
+        MidiMessage end = new ShortMessage(ShortMessage.NOTE_OFF, channel, pitch, volume);
+        toPlay.add(new MidiEvent(start, 96 * n.getStart()));
+        toPlay.add(new MidiEvent(end, 96 * noteEnd));
+      }
     } catch (InvalidMidiDataException e) {
       e.printStackTrace();
     }
@@ -90,65 +125,11 @@ public class MidiView implements View {
   }
 
   /**
-   * Returns the current position in the midi in microseconds
-   *
-   * @return a time as a long in microseconds
+   * Updates the sequencer's track
    */
-  public long getCurrentTime() {
-    return this.sequencer.getMicrosecondPosition();
-  }
-
-  /**
-   * Returns the total length of the current midi in microseconds
-   *
-   * @return a time as a long in microseconds
-   */
-  public long getTotalTime() {
-    return this.sequencer.getMicrosecondLength();
-  }
-
-  /**
-   * Turns a list of notes into a MidiSequence
-   *
-   * @param toPlay the track to play
-   * @param toAdd  the list of notes to add to the track
-   */
-  private void createMidiTrack(Track toPlay, List<Note> toAdd) throws InvalidMidiDataException {
-    HashMap<Integer, Integer> instruments = new HashMap<>();
-    int instChannel = 0;
-    for (Note n : toAdd) {
-      int curInstrument = n.getInstrument();
-      if (!(instruments.containsKey(curInstrument))) {
-        if (instChannel != 10) {
-          instruments.put(curInstrument, instChannel);
-        } else {
-          instruments.put(curInstrument, ++instChannel);
-        }
-        MidiMessage iMessage = new ShortMessage(ShortMessage.PROGRAM_CHANGE,
-                instChannel, curInstrument, 0);
-        toPlay.add(new MidiEvent(iMessage, 0));
-        instChannel += 1;
-      }
-      int pitch = n.toInt();
-      int noteEnd = n.getStart() + n.getDuration();
-      int channel = instruments.get(curInstrument);
-      int volume = n.getVolume();
-      MidiMessage start = new ShortMessage(ShortMessage.NOTE_ON, channel, pitch, volume);
-      MidiMessage end = new ShortMessage(ShortMessage.NOTE_OFF, channel, pitch, volume);
-      toPlay.add(new MidiEvent(start, 96 * n.getStart()));
-      toPlay.add(new MidiEvent(end, 96 * noteEnd));
-    }
-  }
-
   public void updateTrack() {
     long time = this.sequencer.getTickPosition();
     this.initSequencerData();
     sequencer.setTickPosition(time);
-  }
-
-  // TODO
-  protected double getTime() {
-    double time = (double) sequencer.getTickPosition() / sequencer.getTickLength();
-    return time;
   }
 }

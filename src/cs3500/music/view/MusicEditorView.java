@@ -10,6 +10,12 @@ public class MusicEditorView implements GuiView {
   private final GuiViewFrame gui;
   private final MidiView midi;
 
+  /**
+   * Constructor
+   *
+   * @param gui  the graphical view
+   * @param midi the sound view
+   */
   public MusicEditorView(GuiViewFrame gui, MidiView midi) {
     this.gui = gui;
     this.midi = midi;
@@ -25,25 +31,16 @@ public class MusicEditorView implements GuiView {
     this.midi.updateTrack();
   }
 
-  /**
-   * Toggles the play state of the midi
-   */
   @Override
   public void togglePlay() {
     midi.togglePlay();
   }
 
-  /**
-   * Moves the view to the beginning
-   */
   @Override
   public void moveToBeginning() {
     gui.moveToBeginning();
   }
 
-  /**
-   * Moves the view to the end
-   */
   @Override
   public void moveToEnd() {
     gui.moveToEnd();
